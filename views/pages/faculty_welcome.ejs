@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>checkit-attendance </title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="assets/vendor/admin_welcome.css" rel="stylesheet">
+  
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center ">
+    <div class="container d-flex justify-content-between align-items-center">
+
+      <div class="logo">
+        <h1 class="text-light"><a href="#"><span>CheckIt</span></a></h1>
+        
+         
+      
+
+
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="active" href="#">Home</a></li>
+          
+          
+          
+          <li><a href="contact">Contact</a></li>
+          
+
+          <li class="dropdown" ><a href="#"><span>
+            <%= name%>
+          </span></a>
+            <ul>
+              <li>
+                <%= name%>
+               </li>
+              
+              
+           
+                
+               <li><button type="button" class="btn btn-danger">Log out</button></li> 
+                    
+                     
+                                                                                 
+            
+              
+            </ul>
+          </li>
+
+
+
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+
+    </div>
+  </header><!-- End Header -->
+
+
+
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex justify-cntent-center align-items-center">
+    <div id="heroCarousel" class="container carousel carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+
+      <!-- Slide 1 -->
+      <div class="carousel-item active">
+        <div class="carousel-container">
+          <h2 class="animate__animated animate__fadeInDown">
+            Welcome  
+           
+            <span>
+              <%= name%>
+
+            </span>
+          </h2>
+          <p class="animate__animated animate__fadeInUp"></p>
+          <a  onclick="scroll_window(200,1400)" href="#" class="btn-get-started animate__animated animate__fadeInUp">Get started</a>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="carousel-item">
+        <div class="carousel-container">
+          <h2 class="animate__animated animate__fadeInDown">See all Classes</h2>
+          <p class="animate__animated animate__fadeInUp">check  list of assigned classes here...</p>
+          <a onclick="scroll_window(200,700)" href="#" class="btn-get-started animate__animated animate__fadeInUp">Check</a>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <!-- <div class="carousel-item">
+        <div class="carousel-container">
+          <h2 class="animate__animated animate__fadeInDown">Code and Compile </h2>
+          <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+          <a href="" class="btn-get-started animate__animated animate__fadeInUp">Get started</a>
+        </div>
+      </div> -->
+
+      <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon bx bx-chevron-left" aria-hidden="true"></span>
+      </a>
+
+      <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon bx bx-chevron-right" aria-hidden="true"></span>
+      </a>
+
+    </div>
+  </section><!-- End Hero -->
+
+    <main id="main">
+
+      <section class="features">
+        <div class="container">
+  
+          <div class="text-box">
+                
+                <div class="animate-text">
+                  <div>
+                    <span>CHECKIT</span>
+                    <span>ATTENDANCE</span>
+                    <span>TIMETABLE</span>
+                  </div>	
+                </div>
+
+            
+
+              </div>
+          
+        </div>
+      </section><!-- End Features Section -->
+      
+
+    <!-- ======= Services Section ======= -->
+    <section class="services">
+      <div class="container">
+
+        <div class="row">
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up">
+            <div class="icon-box icon-box-pink">
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4 class="title"><a href="#" class="venobox play-btn mb-4">
+                <%= section1%>
+              </a></h4>
+              <p class="description">
+                <%= aspect1 %>
+               </p>
+               <p class="description"><%= starttime1%> - <%= endtime1%></p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+            <div class="icon-box icon-box-cyan">
+              <div class="icon"><i class="bx bx-file"></i></div>
+              <h4 class="title"><a href="">
+              <%= section2 %>
+
+            </a></h4>
+              <p class="description">
+                <%= aspect2%>
+              </p>
+              <p class="description"><%= starttime2%> - <%= endtime2%></p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+            <div class="icon-box icon-box-green">
+              <div class="icon"><i class="bx bx-tachometer"></i></div>
+              <h4 class="title"><a href="compiler"><%= section3 %></a></h4>
+              <p class="description"><%= aspect3 %></p>
+              <p class="description"><%= starttime3%> - <%= endtime3%></p>
+            </div>
+          </div>
+
+          <div  onclick="demo()" class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+            <div class="icon-box icon-box-blue">
+              <div class="icon"><i class="bx bx-world"></i></div>
+              <h4 class="title"><a href="ebook"><%= section4 %></a></h4>
+              <p class="description"><%= aspect4 %></p>
+              <p class="description"><%= starttime4%> - <%= endtime4%></p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Services Section -->
+
+    <style>
+      img {
+        opacity: 0.5;
+      }
+
+      img:hover {
+        opacity: 1.0;
+      }
+    </style>
+ <br>
+ <br>
+<section class="features">
+  <div class="container">
+
+    <div class="text-box2">
+          
+          <div class="animate-text2">
+            <div>
+              <div class="fixed-text">
+              <span>
+                <%= current_subject %>
+              </span>
+              <br>
+              <span>  <%= current_section %></span>
+              <br>
+              <span>from <%= current_start_time %> to <%= current_end_time %></span>
+            </div>	
+          </div>
+      
+      
+
+        </div>
+    
+  </div>
+</section><!-- End Features Section -->
+
+
+    <section class="why-us section-bg" data-aos="fade-up" date-aos-delay="200">
+      <div class="container">
+
+        <div class="row">
+          <div class="col-lg-6 video-box">
+            <img src="assets/img/qr_gif.gif" class="img-fluid" alt="">
+            <!-- <a onclick="showqr()" href="#" class="venobox play-btn mb-4"  ></a> -->
+          </div>
+
+          <div class="col-lg-6 d-flex flex-column justify-content-center p-5">
+
+            <div class="icon-box">
+              <div class="icon"><i class="fas fa-book"></i></div>
+              <h4 class="title"><a href=""> Current Class </a></h4>
+              <h5 class="title" ><%= current_subject %></h2>
+              <p class="description"><%= current_section %> <br> From  <%= current_start_time %> to <%= current_end_time %></p>
+            </div>
+
+            <div class="icon-box">
+              <div class="icon"><i class="fas fa-hourglass-half"></i></div>
+              <h4 class="title"><a href="#">Next Class</a></h4>
+              <p class="description">BMSCE is the first private sector initiative in engineering education in India. BMSCE has completed 70+ years of dedicated service in the field of Engineering​ ...</p>
+            </div>
+            
+             
+            
+
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Why Us Section -->
+
+    <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
+      <div class="toast" style="position: absolute; top: 0; right: 0;">
+        <div class="toast-header">
+          <img src="..." class="rounded mr-2" alt="...">
+          <strong class="mr-auto">Bootstrap</strong>
+          <small>11 mins ago</small>
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="toast-body">
+          Hello, world! This is a toast message.
+        </div>
+      </div>
+    </div>
+    <script>  $('.toast').toast(true)</script>
+  
+
+    <!-- ======= Features Section ======= -->
+    <section class="features">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Features</h2>
+          <p>Assembly language is very important for understanding the computer architecture and programs for the programmers. The programmers mainly used many other programming languages for application development and software, but assembly language is also important.</p>
+        </div>
+
+        <div class="row" data-aos="fade-up">
+          <div class="col-md-5">
+            <img src="assets/img/features-1.svg" class="img-fluid" alt="">
+          </div>
+          <div class="col-md-7 pt-4">
+            
+            <p class="fst-italic">
+               Machine language is difficult to understand and read as it is just a series of numbers. Assembly language helps in providing full control of what tasks a computer is performing.
+            </p>
+            <ul>
+              <li><i class="bi bi-check"></i> It allows complex jobs to run in a simpler way.</li>
+              <li><i class="bi bi-check"></i> It is memory efficient, as it requires less memory.</li>
+            </ul>
+          </div>
+        </div>
+
+       
+
+        
+      </div>
+    </section><!-- End Features Section -->
+
+  </main><!-- End #main -->
+
+   <!-- ======= Footer ======= -->
+
+   <%- include('../partials/footer') %>
+   <!--  end of  footer-->
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/purecounter/purecounter.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+  <!-- <script src="assets/js/script.js"></script> -->
+  <script src="assets/js/script_sign.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+</body>
+
+</html>

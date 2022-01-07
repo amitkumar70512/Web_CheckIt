@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Admin- edit</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/logo.jpeg" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="assets/vendor/admin_welcome.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+ 
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  
+ 
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center ">
+    <div class="container d-flex justify-content-between align-items-center">
+
+      <div class="logo">
+        <h1 class="text-light"><a href="#"><span>
+            admin
+        </span></a></h1>
+      
+        <!-- <a href="index"><img src="assets/img/logo.png" alt="" class="img-fluid"></a> -->
+      </div>
+
+      <nav id="navbar" class="navbar">
+      
+          
+            <ul>
+               
+                <li><a class="" href="admin">Home</a></li>
+                
+
+                <li class="dropdown"><a class='active' href="#"><span>Actions</span> <i class="bi bi-chevron-right"></i></a>
+                    <ul>
+                      <li><a onclick="feedback()" href="#"   title="monitor feedback">Check Feedbacks</a></li>
+                      <li><a onclick="check_faculties()" href="#"  title="list faculties details">Check Faculty list</a></li>
+                      <li><a onclick="check_students()" href="#"  title="list Students details">Check Students</a></li>
+                     
+                      <li><button onclick="check_db()" type="submit" class="btn btn-success btn-block"> Check DB </button></li>
+                    </ul>
+                  </li>
+                
+               
+              </ul>
+              <i class="bi bi-list mobile-nav-toggle"></i>
+          
+         
+        
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+    
+    <!-- ======= Contact Section ======= -->
+    <section class="breadcrumbs">
+         
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2></h2>
+          <ol>
+              <li>
+            <form  action="/search" method = "post" class="form-inline">
+                
+                <input class="form-control mr-sm-2" type="search" placeholder="Search keywords" name="id" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                
+            </form>
+           
+          </ol>
+          <ol>
+             
+            
+                
+            <li>
+              <a href="#" data-toggle="popover"  data-placement="bottom" title="Administrator" data-content="Some content inside the popover"><%= admin_name %></a>
+            </li>
+                <li>Administrator</li>
+          </ol>
+        </div>
+        <script>
+          $(document).ready(function(){
+            $('[data-toggle="popover"]').popover();
+          });
+          </script>
+      </div>
+    </section><!-- End Contact Section -->
+ 
+    <section class="features">
+        <div class="container2">
+            <span class="text1">Welcome </span>
+            <span class="text2">
+                <%= admin_name %>
+            </span>
+          </div>
+    </section>
+      
+    
+    
+      
+      
+      <% if(typeof alert != 'undefined') { %>
+        <% alert.forEach(function(error) { %>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <%= error.msg %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                 
+                </button>
+              </div>
+        <% }) %>
+    <% } %>
+
+    <!-- ======= Contact Section ======= -->
+  
+      
+          
+
+
+        
+         <div class="container-fluid">
+           <%= faculties %>
+            
+          </div>
+
+   
+    <br>
+    <br>
+    <br><br>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/purecounter/purecounter.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/admin-handler.js"></script>
+
+</body>
+
+</html>

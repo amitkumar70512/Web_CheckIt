@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Sign In - CHECKIT</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/logo.jpeg" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+ 
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  
+ 
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center ">
+    <div class="container d-flex justify-content-between align-items-center">
+
+      <div class="logo">
+        <h1 class="text-light"><a href="index"><span> CHECKIT</span></a></h1>
+      
+        <!-- <a href="index"><img src="assets/img/logo.png" alt="" class="img-fluid"></a> -->
+      </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+         
+           <li><a href="contact">Contact</a></li>
+          <li><a href="team">Team</a></li>
+         
+         
+          <li><a class="active" id="log" href="register">Sign In</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= Contact Section ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Log in</i></h2>
+          <ol>
+            <li><a href="#">Home</a></li>
+            <li>Sign up</li>
+          </ol>
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+ 
+    <section class="features">
+        <div class="container">
+  
+          <div class="section-title">
+            <h2 style="color:rgb(37, 58, 104); font-size: 40px;"><i class="fas fa-users"></i></h2>
+            
+        </div>
+      </section><!-- End Features Section -->
+  
+    <!-- ======= Contact Section ======= -->
+    <section class="contact" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+      <div class="container">
+
+        
+
+          <div class="col-lg-6">
+            
+            <h4 class="card-title mt-3 text-center">Log in to your Account <i class='fas fa-user'></i></h4>
+
+            <% if(typeof alert != 'undefined') { %>
+              <% alert.forEach(function(error) { %>
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                      <%= error.msg %>
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                       
+                      </button>
+                    </div>
+              <% }) %>
+          <% } %>
+            
+          
+            <form action="/login" method="post">
+           
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                     </div>
+                    <input name="uid" class="form-control" placeholder="UID" type="text">
+                </div> <!-- form-group// -->
+                
+               
+                    
+                 <!-- form-group end.// -->
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                    </div>
+                    <input class="form-control" placeholder="password" type="password" name="passkey">
+                </div> <!-- form-group// -->
+                               
+                
+                <div class="form-group">
+                    <button onclick="" type="submit" class="btn btn-primary btn-block"> Sign in  </button>
+                    
+                  </div> <!-- form-group// -->    
+                
+                <p class="text-center">Not have an account yet? <a href="register">Sign up</a> </p>  
+                <p class="text-center">If  you are admin ,click<a href="admin"> here</a></p>                                                                 
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End  Section -->
+   
+   
+    <br>
+    <br>
+    <br><br>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <%- include('../partials/footer') %>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/purecounter/purecounter.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/script_sign.js"></script>
+
+</body>
+
+</html>
