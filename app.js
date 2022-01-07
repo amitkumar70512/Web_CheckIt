@@ -1,22 +1,3 @@
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-////////
-const firebaseConfig = {
-    apiKey: "AIzaSyB9vf35PvTY5fB6ESiHrJFTdU9M649xUy4",
-    authDomain: "checkit-bc113.firebaseapp.com",
-    projectId: "checkit-bc113",
-    storageBucket: "checkit-bc113.appspot.com",
-    messagingSenderId: "378432004868",
-    appId: "1:378432004868:web:d5cac753009000c728a651",
-    measurementId: "G-1FYDLBV2D4"
-  };
-  
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-
-
-///////
 
 const mysql = require('mysql');  
 const express = require('express');
