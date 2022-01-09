@@ -1,4 +1,10 @@
+const admin = require('firebase-admin');
+const functions = require('firebase-functions');
 
+var serviceAccount = require("./fir-auth-192c5-firebase-adminsdk-l63k0-6240fba284.json");
+
+
+////
 const mysql = require('mysql');  
 const express = require('express');
 
@@ -143,16 +149,7 @@ app.get("/contact", function(req,res){
 app.get("/register", function(req,res){
     res.render('pages/register')
 });
-app.get("/attendance", function(req,res){
-    let data = {
-        name:"Employee Name",
-        age:27,
-        department:"Police",
-        id:"aisuoiqu3234738jdhf100223"
-    }
-    let stringdata = JSON.stringify(data)
-    res.render('pages/attendance')
-});
+
 
 app.get("/services", function(req,res){
     res.render('pages/services')
@@ -296,7 +293,7 @@ app.post('/submit', [
 
 
 
-app.post('/login',async function(req,res,next){
+app.post('/login2',async function(req,res,next){
     var uid=String(req.body.uid)
     const password=String(req.body.passkey)
 
@@ -642,10 +639,44 @@ app.get('/faculty/:uid',(req,res)=>{
        });  
 
 
+///////firestore////
+
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+    
+  });
+
+/// getting data
+async function getFirestore(){
+    const firestore_con  = await admin.firestore();
+    const writeResult = firestore_con.collection('faculty').doc('faculty_doc').get().then(doc => {
+    if (!doc.exists) { console.log('No such document!'); }
+    else {return doc.data();}})
+    .catch(err => { console.log('Error getting document', err);});
+    return writeResult
+    }
+
+///  inserting data
+async function insertFormData(request){
+    const writeResult = await admin.firestore().collection('faculty').add({
+    name: request.body.name,
+    email: request.body.email,
+    uid: request.body.uid,
+    password: request.body.passkey
+    })
+    .then(function() {console.log("Document successfully written!");})
+    .catch(function(error) {console.error("Error writing document: ", error);});
+    }
 
 
-const nameuser="amit"
+app.post('/register',async (request,response) =>{
+    var insert = await insertFormData(request);
+    var alert = await getFirestore();
+    console.log("reading from firestore" +alert)
+    //response.render('pages/login',{alert});
+    response.sendStatus(200);
+    });
 
 // module exports
 
-module.exports= {check_database, wow ,nameuser};
+module.exports= {check_database};
