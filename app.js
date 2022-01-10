@@ -366,4 +366,3 @@ app.post('/register2',async (request,response) =>{
 
 // module exports
 
-module.exports= {check_database};
