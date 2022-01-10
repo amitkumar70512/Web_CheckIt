@@ -187,7 +187,7 @@ app.get("/team",function(req,res){
  
 
 // for register.ejs
-app.post('/submit', [
+app.post('/register', [
     check('name', 'Please enter valid username without space..')
         .exists()
         .isLength({ min: 3 })
@@ -203,11 +203,12 @@ app.post('/submit', [
            
     check(
             "passkey",
-            " Minimum eight characters, at least one letter and one number. ",
+            " password must have  at least one  number and minumum length 5. ",
           )
-      .isLength({ min: 6 })
+      .isLength({ min: 5 })
       .matches(
-        /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/,
+        
+        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,20}$/,
               ),
  check('confirmpasskey', 'Passwords do not match').custom((value, {req}) => (value === req.body.passkey)),
             
@@ -225,12 +226,7 @@ app.post('/submit', [
     }
 
     else{// if no errors
-        var email=String(req.body.email);
-        var Name=String(req.body.name);
        
-        var  uid = String(req.body.uid);
-        var passkey=String(req.body.passkey)
-        var confirmpasskey = String(req.body.confirmpasskey);
     
         console.log(req.body.name);
         console.log(req.body.email);
@@ -238,52 +234,42 @@ app.post('/submit', [
         console.log(req.body.passkey);
        
     
-        const encryptkey = await bcrypt.hash(passkey, saltRounds)
+        const encryptkey = await bcrypt.hash(req.body.passkey, saltRounds)
+        ////
+
         
-        mysqlConnection.query("SELECT COUNT(*) AS cnt FROM sign_in_faculty WHERE uid = ? " , uid , function(err , data)
-        {
-            
-                if(err){
-                    console.log(err);
-                       }   
-             else{
-                    if(data[0].cnt > 0)
-                    {  
-                        // Already exist 
-                        console.log("User already exist")
+
+
+
+        const writeResult = await admin.firestore().collection('faculty').doc(req.body.uid).set({
+            name: req.body.name,
+            email: req.body.email,
+            uid: req.body.uid,
+            password: encryptkey
+            })
+            .then(function() 
+            {
+                console.log("Document successfully written!");
+                res.render('pages/login')
+            })
+            .catch(function(error) {
+                console.error("Error writing document: ", error);
+                // Already exist 
+                        console.log("error in inserting")
                         const errors=[
-                             {msg:'Request Denied !! User Account already exists..'}
+                             {msg:'Request Denied !! Uable to registet.'}
                          ]
                          const alert = errors
                          res.render('pages/register', {
                                 alert
                             })
-                            
-                    }
-                    else{
-                        var sql = "INSERT INTO `sign_in_faculty`(`uid`,`email`,`password`,`name`,`status`) VALUES ('"+uid+"','"+email+"','"+encryptkey+"','"+Name+"','"+0+"')";
-                       mysqlConnection.query(sql, function(err, result) 
-                            {
-                            if(err) throw err;
-                            console.log("values inserted succesfully using node");
-                            const errors=[
-                                {msg:'Horray !  Logged in successfully...'}
-                            ]
-                            const success = errors
-                            
-                               
-                                setTimeout(function() {
-                                   
-                                }, 2000 * 4);
-                                res.render('pages/login')
+              
+            
+            });
+            
 
-                            })
+
                         
-                            
-                        }
-              }
-        })
-    
 
      }
      
@@ -493,7 +479,7 @@ app.post('/feedback',  [
 
 
 ]
-    , function(req, res) {
+    , async function(req, res) {
         const errors = validationResult(req)
    
     if(!errors.isEmpty()) {
@@ -505,41 +491,52 @@ app.post('/feedback',  [
     }
     else
     {
-        var mail=String(req.body.email);
-        var fullname=String(req.body.name);
-        var subject=String(req.body.subject)
-        
-        var message=String(req.body.message)
-   
       
-        var sql = "INSERT INTO `feedback`(`username`,`email`,`subject`,`message`) VALUES ('"+fullname+"','"+mail+"','"+subject+"','"+message+"')";
-                    mysqlConnection.query(sql, function(err, result) 
-                            {
-                            if(err){
-                            
-                            const errors=[
-                                {msg:'Failed! Error ..'}
-                            ]
-                            const alert = errors
-                            res.render('pages/contact', {
-                                alert
-                            }) 
-                            throw err;
-                            
-                            }
-                            else{
-                            console.log("feedback inserted succesfully using node");
-                            const errors=[
-                                
-                                {msg:"Thank you '" + fullname.toUpperCase() + "'  for contacting us...."}
-                            ]
-                            const message = errors
-                            res.render('pages/contact', {
-                                message
-                            }) 
-                            }
+        
+      
+    
+       
 
+
+
+        const writeResult = await admin.firestore().collection('feedback').doc(req.body.email).set({
+            name: req.body.name,
+            email: req.body.email,
+            subject: req.body.subject,
+            message: req.body.message
+            })
+            .then(function() 
+            {
+                console.log("feedback inserted succesfully using node");
+                const errors=[
+                    
+                    {msg:"Thank you '" + req.body.name.toUpperCase() + "'  for contacting us...."}
+                ]
+                const message = errors
+                res.render('pages/contact', {
+                    message
+                }) 
+            })
+            .catch(function(error) {
+                console.error("Error writing document: ", error);
+                // Already exist 
+                        console.log("error in inserting")
+                        const errors=[
+                            {msg:'  Failed ! Error .. '}
+                         ]
+                         const alert = errors
+                         res.render('pages/contact', {
+                                alert
                             })
+              
+            
+            });
+            
+
+
+                        
+
+      
         
     }
 })
@@ -656,6 +653,8 @@ async function getFirestore(){
     return writeResult
     }
 
+
+
 ///  inserting data
 async function insertFormData(request){
     const writeResult = await admin.firestore().collection('faculty').add({
@@ -669,7 +668,7 @@ async function insertFormData(request){
     }
 
 
-app.post('/register',async (request,response) =>{
+app.post('/register2',async (request,response) =>{
     var insert = await insertFormData(request);
     var alert = await getFirestore();
     console.log("reading from firestore" +alert)
