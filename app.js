@@ -73,16 +73,6 @@ let date,month,year,current_day,c_time;// global
 
 
 
-function wow()
-{
-    console.log("inside wow")
-}
-
-
-
-
-
-
 
 
 
