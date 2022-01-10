@@ -79,16 +79,6 @@ let date,month,year,current_day,c_time;// global
 
 
 
-
-
-
-
-
-
-
-
-
-
 app.get("/admin",function(req,res){
     res.render('pages/admin')
 });
