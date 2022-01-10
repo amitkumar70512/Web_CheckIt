@@ -73,18 +73,6 @@ let date,month,year,current_day,c_time;// global
 
 
 
-<<<<<<< HEAD
-function wow()
-{
-    console.log("inside wow")
-}
-
-
-
-=======
->>>>>>> 79d86dbdef81ef49a394cd593f93ab6a12fb9505
-
-
 
 
 
@@ -365,7 +353,3 @@ app.post('/register2',async (request,response) =>{
     });
 
 // module exports
-<<<<<<< HEAD
-=======
-
->>>>>>> 79d86dbdef81ef49a394cd593f93ab6a12fb9505
