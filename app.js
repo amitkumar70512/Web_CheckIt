@@ -3,9 +3,7 @@ const functions = require('firebase-functions');
 
 var serviceAccount = require("./fir-auth-192c5-firebase-adminsdk-l63k0-6240fba284.json");
 
-
-////
-const mysql = require('mysql');  
+ 
 const express = require('express');
 
 const port = process.env.PORT || 3000;
@@ -39,28 +37,11 @@ app.use(express.static('public'));
   
 app.set('view engine', 'ejs');
 
-// Connection String to Database  
-var mysqlConnection = mysql.createConnection({  
-    host: 'localhost',  
-    user : 'root',  
-    password : '7051251928',   
-    database : 'appdev',  
-    multipleStatements : true  
-});  
 
 
 
 
-// To check whether the connection is succeed for Failed while running the project in console.  
-mysqlConnection.connect((err) => {  
-    if(!err) {  
-        console.log("Db Connection Succeed");  
-    }  
-    else{  
-        console.log("Db connect Failed \n Error :" + JSON.stringify(err,undefined,2));  
-    }  
-});  
-  
+
 
 // To Run the server with Port Number  
 app.listen(port,()=> console.log(`Express server is running at port no :${port}`));  
@@ -88,27 +69,8 @@ let date,month,year,current_day,c_time;// global
     console.log("printing time  "+c_time);
 };
 
- // get registered details 
- app.get('/checkdatabase',(req,res)=>{
-    
-    mysqlConnection.query('select * from sign_in_faculty',(err,rows,fields)=>{
-        if(!err)
-        res.send(rows);
-        else 
-        console.log(err);
-    })
-    
-});
 
-function check_database()
-{
-    mysqlConnection.query('select * from sign_in_faculty',(err,rows,fields)=>{
-        if(!err)
-        res.send(rows);
-        else 
-        console.log(err);
-    })
-}
+
 
 
 function wow()
