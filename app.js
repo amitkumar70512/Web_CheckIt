@@ -86,19 +86,6 @@ function wow()
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 app.get("/admin",function(req,res){
     res.render('pages/admin')
 });
@@ -639,5 +626,3 @@ app.post('/register2',async (request,response) =>{
     });
 
 // module exports
-
-module.exports= {check_database};
