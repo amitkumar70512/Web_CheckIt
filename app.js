@@ -199,7 +199,7 @@ app.post('/login',async function(req,res,next){
                     //                 }
                     //                 else{}
                     
-                   const name=req.body.name;
+                   const name=doc.data().name;
                     res.render('pages/faculty_welcome',{
                         name,
                         section1 : '4a',
