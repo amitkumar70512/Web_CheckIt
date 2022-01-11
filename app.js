@@ -108,21 +108,158 @@ app.get("/team",function(req,res){
 
 
 
+// for login
 
 
-//   delete the registration data based on  email
-// app.get('/:id',(req,res)=>{
-//     // mysqlConnection.query('delete from Registration where email_id=?',[req.params.id],(err,rows,fields)=>{
-//     //     if(!err)
-//     //     res.send("deletion successful where email_id=?",[req.params.id]);
-//     //     else
-//     //     console.log(err);
-//     // })
-//     res.render('pages/req.params.id');
-//    });  
-//  app.get('/:id',(req,res)=>{
-//      res.send('pages/?',req.params.id)
-//  })
+app.post('/login',async function(req,res,next){
+    const uid=String(req.body.uid)
+    const password=String(req.body.passkey)
+
+    console.log(req.body.uid);
+    console.log(password)
+    
+   
+    
+    const firestore_con  = await admin.firestore();
+    const writeResult = firestore_con.collection('faculty').doc(req.body.uid).get()
+    .then(doc => {
+        if (!doc.exists) // entered uid doesnt registered
+        { 
+            console.log('No such document!');
+            const errors=[
+                {msg:' Failed!  Invalid Crudentials..'}
+            ]
+            const alert = errors
+            res.render('pages/login', {
+                alert
+            })
+
+        }
+        else { // block for password matching and others
+              db_pass=doc.data().password;
+              //console.log(doc.data());
+             
+             console.log(db_pass)  
+             bcrypt.compare(password, db_pass, function(err, result) {
+                if (!result) {// password mismatch
+                   
+                
+                     
+                    console.log('password not matched')
+                    const errors=[
+                       {msg:'Failed! Invalid crudentials..'}
+                   ]
+                   const alert = errors
+                   res.render('pages/login', {
+                          alert
+                      })
+   
+                 } // end of password mismatch
+                
+               
+              
+
+                else{ // password matched 
+                   
+                    console.log("password matched");
+                    // const message=[
+                    //           {msg:'Horray !  Logged in successfully...'}
+                    //      ]
+                    //      const alert = message
+                    //      res.render('pages/login', {
+                    //        alert
+                    //        })
+                    get_time();
+                    console.log(current_day);
+                           ////////////////////////
+                    
+                    
+                    
+
+
+                    
+
+                    async ()=>{
+                        const firestore_con  = await admin.firestore();
+                        const writeResult = firestore_con.collection('faculty').doc(uid).get().then(doc => {
+                        if (!doc.exists) { console.log('No such document!'); }
+                        else {console.log(doc.data());}})
+                        .catch(err => { console.log('Error getting document', err);});
+                       
+                        }
+
+
+
+                     rows=[{"subject":"dont have class","section":null,"start_time": null,"end_time":null}]
+                    // if(rows.length==0)
+                    //                 {
+                                    
+                    //                
+                    //                 console.log(rows)
+                    //                 }
+                    //                 else{}
+                    
+                    res.render('pages/faculty_welcome',{
+                        name:req.body.name,
+                        section1 : '4a',
+                        aspect1:'cn',
+                        starttime1:'085500',
+                        endtime1:'095000',
+
+                        section2:'5a',
+                        aspect2:'tfcs',
+                        starttime2:'09500',
+                        endtime2:'104500',
+
+                        section3:'4c',
+                        aspect3:'networking',
+                        starttime3:'111500',
+                        endtime3:'121000',
+
+                        section4:'5D',
+                        aspect4:'project work',
+                        starttime4:'121000',
+                        endtime4:'010500',
+
+
+                        current_subject:rows[0].subject,
+                        current_section:rows[0].section,
+                        current_start_time:rows[0].start_time,
+                        current_end_time:rows[0].end_time
+
+                        
+                        })
+
+                }// end of password matched
+
+            });
+
+             }// end of  block for password matching and others
+
+
+
+
+
+        
+     }) // end of then
+
+    .catch(err => {
+         console.log('Error getting document', err);
+         const errors=[
+            {msg:'Failed! '+err}
+        ]
+        const alert = errors
+        res.render('pages/login', {
+               alert
+           })
+     }); // end of catch
+    
+  
+
+    
+});
+
+
 
  
 
@@ -206,10 +343,7 @@ app.post('/register', [
               
             
             });
-            
-
-
-                        
+                             
 
      }
      
@@ -266,7 +400,7 @@ app.post('/feedback',  [
 
 
 
-        const writeResult = await admin.firestore().collection('feedback').doc(req.body.email).set({
+        const writeResult = await admin.firestore().collection('feedback').doc(req.body.name+" "+ req.body.subject).set({
             name: req.body.name,
             email: req.body.email,
             subject: req.body.subject,
@@ -320,13 +454,13 @@ admin.initializeApp({
   });
 
 /// getting data
-async function getFirestore(){
+async function getFirestore(uid){
     const firestore_con  = await admin.firestore();
-    const writeResult = firestore_con.collection('faculty').doc('faculty_doc').get().then(doc => {
+    const writeResult = firestore_con.collection('faculty').doc(uid).get().then(doc => {
     if (!doc.exists) { console.log('No such document!'); }
-    else {return doc.data();}})
+    else {console.log(doc.data());}})
     .catch(err => { console.log('Error getting document', err);});
-    return writeResult
+   
     }
 
 

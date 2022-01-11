@@ -98,18 +98,19 @@
           <div class="col-lg-6">
             
             <h4 class="card-title mt-3 text-center">Log in to your Account <i class='fas fa-user'></i></h4>
-
+            <form action="/login" method="post">
             <% if(typeof alert != 'undefined') { %>
               <% alert.forEach(function(error) { %>
                   <div class="alert alert-warning alert-dismissible fade show" role="alert">
                       <%= error.msg %>
-                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      <button  type="submit" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                        
                       </button>
                     </div>
               <% }) %>
           <% } %>
-            
+        </form>
+          
           
             <form action="/login" method="post">
            
@@ -169,7 +170,7 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-  <script src="assets/js/script_sign.js"></script>
+  
 
 </body>
 
