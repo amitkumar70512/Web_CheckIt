@@ -61,8 +61,10 @@ let date,month,year,current_day,c_time;// global
      date = date_ob.getDate();
      month = date_ob.getMonth() + 1;
      year = date_ob.getFullYear();
-    current_day=date_ob.getDay();
     
+    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    const d = new Date();
+     current_day = weekday[d.getDay()];
     let c_hours=String(date_ob.getHours());
     let c_minutes=String(date_ob.getMinutes());
      c_time=c_hours+""+c_minutes+"00";
@@ -175,18 +177,7 @@ app.post('/login',async function(req,res,next){
                     
                     
                     
-
-
-                    
-
-                    async ()=>{
-                        const firestore_con  = await admin.firestore();
-                        const writeResult = firestore_con.collection('faculty').doc(uid).get().then(doc => {
-                        if (!doc.exists) { console.log('No such document!'); }
-                        else {console.log(doc.data());}})
-                        .catch(err => { console.log('Error getting document', err);});
-                       
-                        }
+                    getFirestore(uid,"monday");
 
 
 
@@ -222,7 +213,7 @@ app.post('/login',async function(req,res,next){
                         starttime4:'121000',
                         endtime4:'010500',
 
-
+                        day:current_day,
                         current_subject:rows[0].subject,
                         current_section:rows[0].section,
                         current_start_time:rows[0].start_time,
@@ -454,15 +445,34 @@ admin.initializeApp({
     
   });
 
-/// getting data
-async function getFirestore(uid){
+/// getting class on unique day
+async function getFirestore(uid,current_day){
     const firestore_con  = await admin.firestore();
-    const writeResult = firestore_con.collection('faculty').doc(uid).get().then(doc => {
+   
+    const writeResult = firestore_con.collection('faculty').doc(uid).collection(current_day).where('start_time',"<",c_time).get().then(doc => {
     if (!doc.exists) { console.log('No such document!'); }
-    else {console.log(doc.data());}})
+    else {
+        console.log(doc.data().start_time);
+        console.log(doc.data().end_time);
+        
+     }
+    })
     .catch(err => { console.log('Error getting document', err);});
    
     }
+
+
+
+/////////
+
+
+
+
+
+
+
+
+
 
 
 
