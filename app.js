@@ -199,8 +199,9 @@ app.post('/login',async function(req,res,next){
                     //                 }
                     //                 else{}
                     
+                   const name=req.body.name;
                     res.render('pages/faculty_welcome',{
-                        name:req.body.name,
+                        name,
                         section1 : '4a',
                         aspect1:'cn',
                         starttime1:'085500',
