@@ -211,10 +211,23 @@ app.post('/login',async function(req,res,next){
                     console.log("inside login start time : "+ start_time)
 
                     
-                  console.log(getFirestore(uid,current_day,start_time))
+                  getFirestore(uid,current_day);
                    
 
-
+                  //////
+                   console.log(current_day)
+                  
+                    // const writeResult =  firestore_con.collection('faculty').doc(uid).get().then(doc => {
+                    // if (!doc.exists) { console.log('No such document!'); }
+                    // else {
+                    //   console.log(doc.data())
+                    //  }
+                    // })
+                    // .catch(err => { console.log('Error getting document', err);});
+                    
+                    
+                
+                  //////
                     
 
                      rows=[{"subject":"dont have class","section":null,"start_time": start_time,"end_time":end_time}]
@@ -480,19 +493,15 @@ admin.initializeApp({
 
 
 /// getting class on unique day
- function getFirestore(uid,current_day,start_time){
+ function getFirestore(uid,current_day){
     const firestore_con  =  admin.firestore();
-    console.log(start_time)
-    const s_time=''+start_time;
-    const writeResult = firestore_con.collection('faculty').doc(uid).collection(current_day).doc(s_time).get().then(doc => {
-    if (!doc.exists) { console.log('No such document!'); }
+    console.log("current day in get firetore " +current_day)
+   // const s_time=''+start_time;
+    const writeResult =  firestore_con.collection('faculty').doc(uid).collection(current_day).doc('121000').get().then(doc => {
+    if (!doc.exists) { console.log('No  document!'); }
     else {
-       console.log( doc.data().section)
-       console.log("inside get firestore")
-       curr_subject=doc.data().class;
-       curr_section=doc.data().section;
-       console.log(curr_section)
-      return curr_section;
+       console.log(doc.data())
+      
      }
     })
     .catch(err => { console.log('Error getting document', err);});
