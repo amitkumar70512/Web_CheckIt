@@ -2,7 +2,7 @@ var {QRGenerator} = require('dynamic-qr-code-generator');
 const admin = require('firebase-admin');
 const functions = require('firebase-functions');
 
-var serviceAccount = require("./fir-auth-192c5-firebase-adminsdk-l63k0-6240fba284.json");
+var serviceAccount = require("./privatekey.json");
 
  
 const express = require('express');
