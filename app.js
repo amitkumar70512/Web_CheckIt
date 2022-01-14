@@ -40,11 +40,6 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
 
-
-
-
-
-
 // To Run the server with Port Number  
 app.listen(port,()=> console.log(`Express server is running at port no :${port}`));  
  
@@ -69,12 +64,10 @@ let date,month,year,current_day,c_time;// global
      current_day = weekday[d.getDay()];
     let c_hours=String(date_ob.getHours());
     let c_minutes=String(date_ob.getMinutes());
-     c_time=c_hours+""+c_minutes+"00";
+    // c_time=c_hours+""+c_minutes+"00";
+     c_time=160500
     console.log("printing time  "+c_time);
 };
-
-
-
 
 
 
@@ -110,13 +103,166 @@ app.get("/team",function(req,res){
 
 
 
-var curr_subject='';
-var curr_section='';
+let curr_subject='';
+let curr_section='';
 
+let start_time=0,end_time=0,s_time=0;
+
+rows=[{"subject":"","section":"","start_time": start_time,"end_time":end_time}]
+
+async function updateCurrClass(uid,name,res)
+{
+    get_time();
+
+    const firestore_con  =  admin.firestore();
+    if(c_time>=085500 && c_time <=095000)
+    {
+        start_time="08:55 am";
+        s_time='085500';
+        end_time='09:50 am';
+
+    }
+    else if(c_time>=095000 && c_time <=104500)
+    {
+        start_time='09:50 am';
+        s_time='095000';
+        end_time='10:45 am';
+    }
+    else if(c_time>=104500 && c_time <=111500)
+    {
+        start_time='10:45 am';
+        s_time='104500';
+        end_time='11:15 am'
+    }
+    else if(c_time >=111500 && c_time<=121000)
+    {
+        start_time='11:15 am';
+        s_time='111500';
+        end_time='12:10 pm';
+    }
+    else if((c_time >=121000 )&&(c_time <=130500))
+    {
+
+        start_time='12:10 pm';
+        s_time='121000';
+        end_time='01:05 pm';
+        
+    }
+    else if(c_time >=010500 &&c_time <=020000 )
+    {
+
+        start_time='01:05 pm';
+        s_time='010500';
+        end_time='02:00 pm';
+        
+    }
+    else if (c_time >=160000)
+    {
+        start_time = '04:00 pm';
+        s_time='160000';
+        end_time=' next day till 08:55 am'
+        rows[0].subject='classes are finished...'
+    }
+    ////
+    console.log("inside updateclass start time : "+ start_time)
+
+    
+ // getFirestore(uid,current_day,s_time);
+   
+
+  //////
+   rows[0].start_time=start_time;
+   rows[0].end_time=end_time;
+   
+            if(c_time <160000)
+          {
+            firestore_con.collection('faculty').doc(uid).collection(current_day).doc(s_time).get().then(function(doc) {
+            rows[0].section=''+doc.data().section
+            rows[0].subject=''+doc.data().class
+
+            console.log(doc.data())
+            console.log(rows[0])
+
+
+///////
+            res.render('pages/faculty_welcome',{
+                name,
+                section1 : '4a',
+                aspect1:'cn',
+                starttime1:'085500',
+                endtime1:'095000',
+
+                section2:'5a',
+                aspect2:'tfcs',
+                starttime2:'09500',
+                endtime2:'104500',
+
+                section3:'4c',
+                aspect3:'networking',
+                starttime3:'111500',
+                endtime3:'121000',
+
+                section4:'5D',
+                aspect4:'project work',
+                starttime4:'121000',
+                endtime4:'010500',
+
+                day:current_day,
+                current_subject:rows[0].subject,
+                current_section:rows[0].section,
+                current_start_time:rows[0].start_time,
+                current_end_time:rows[0].end_time
+
+                
+                })
+
+
+            });// end of firestore_con collection
+            }
+
+            else if (c_time > 160000)
+             {
+                
+                res.render('pages/faculty_welcome',{
+                    name,
+                    section1 : '4a',
+                    aspect1:'cn',
+                    starttime1:'085500',
+                    endtime1:'095000',
+    
+                    section2:'5a',
+                    aspect2:'tfcs',
+                    starttime2:'09500',
+                    endtime2:'104500',
+    
+                    section3:'4c',
+                    aspect3:'networking',
+                    starttime3:'111500',
+                    endtime3:'121000',
+    
+                    section4:'5D',
+                    aspect4:'project work',
+                    starttime4:'121000',
+                    endtime4:'010500',
+    
+                    day:current_day,
+                    current_subject:rows[0].subject,
+                    current_section:rows[0].section,
+                    current_start_time:rows[0].start_time,
+                    current_end_time:rows[0].end_time
+    
+                    
+                    })
+    
+
+            }
+           
+
+}
 // for login
 
 
-app.post('/login',async function(req,res,next){
+app.post('/login', function(req,res,next){
     const uid=String(req.body.uid)
     const password=String(req.body.passkey)
 
@@ -125,7 +271,7 @@ app.post('/login',async function(req,res,next){
     
    
     
-    const firestore_con  = await admin.firestore();
+    const firestore_con  =  admin.firestore();
     const writeResult = firestore_con.collection('faculty').doc(req.body.uid).get()
     .then(doc => {
         if (!doc.exists) // entered uid doesnt registered
@@ -167,106 +313,55 @@ app.post('/login',async function(req,res,next){
                 else{ // password matched 
                    
                     console.log("password matched");
-                    get_time();
-                   
+                    
+                    updateCurrClass(uid,doc.data().name,res);
                            ////////////////////////
-                    let start_time=0,end_time=0;
                     
-                    if(c_time>=085500 && c_time <=095000)
-                    {
-                        start_time="08:55 am";
-                        end_time='09:50 am';
+                            
+                           
+                    // res.render('pages/faculty_welcome',{
+                    //     name,
+                    //     section1 : '4a',
+                    //     aspect1:'cn',
+                    //     starttime1:'085500',
+                    //     endtime1:'095000',
 
-                    }
-                    else if(c_time>=095000 && c_time <=104500)
-                    {
-                        start_time='09:50 am';
-                        end_time='10:45 am';
-                    }
-                    else if(c_time>=104500 && c_time <=111500)
-                    {
-                        start_time='10:45 am';
-                        end_time='11:15 am'
-                    }
-                    else if(c_time >=111500 && c_time<=121000)
-                    {
-                        start_time='11:15 am';
-                        end_time='12:10 pm';
-                    }
-                    else if((c_time >=121000 )&&(c_time <=130500))
-                    {
+                    //     section2:'5a',
+                    //     aspect2:'tfcs',
+                    //     starttime2:'09500',
+                    //     endtime2:'104500',
 
-                        start_time='12:10 pm';
-                        end_time='01:05 pm';
+                    //     section3:'4c',
+                    //     aspect3:'networking',
+                    //     starttime3:'111500',
+                    //     endtime3:'121000',
+
+                    //     section4:'5D',
+                    //     aspect4:'project work',
+                    //     starttime4:'121000',
+                    //     endtime4:'010500',
+
+                    //     day:current_day,
+                    //     current_subject:rows[0].subject,
+                    //     current_section:rows[0].section,
+                    //     current_start_time:rows[0].start_time,
+                    //     current_end_time:rows[0].end_time
+
                         
-                    }
-                    else if((c_time >=010500 ))
-                    {
+                    //     })
 
-                        start_time='12:10 pm';
-                        end_time='01:05 pm';
-                        
-                    }
-                    ////
-                    console.log("inside login start time : "+ start_time)
 
-                    
-                  getFirestore(uid,current_day);
-                   
 
-                  //////
-                   console.log(current_day)
+
                   
-                    // const writeResult =  firestore_con.collection('faculty').doc(uid).get().then(doc => {
-                    // if (!doc.exists) { console.log('No such document!'); }
-                    // else {
-                    //   console.log(doc.data())
-                    //  }
-                    // })
-                    // .catch(err => { console.log('Error getting document', err);});
-                    
-                    
                 
                   //////
                     
 
-                     rows=[{"subject":"dont have class","section":null,"start_time": start_time,"end_time":end_time}]
-                   
+                     
                   
                     
-                   const name=doc.data().name;
-                    res.render('pages/faculty_welcome',{
-                        name,
-                        section1 : '4a',
-                        aspect1:'cn',
-                        starttime1:'085500',
-                        endtime1:'095000',
-
-                        section2:'5a',
-                        aspect2:'tfcs',
-                        starttime2:'09500',
-                        endtime2:'104500',
-
-                        section3:'4c',
-                        aspect3:'networking',
-                        starttime3:'111500',
-                        endtime3:'121000',
-
-                        section4:'5D',
-                        aspect4:'project work',
-                        starttime4:'121000',
-                        endtime4:'010500',
-
-                        day:current_day,
-                        current_subject:curr_subject,
-                        current_section:curr_section,
-                        current_start_time:rows[0].start_time,
-                        current_end_time:rows[0].end_time
-
-                        
-                        })
-
-                }// end of password matched
+                                  }// end of password matched
 
             });
 
@@ -387,14 +482,6 @@ app.post('/register', [
 
 
 
-
-
-
-
-
-// working fine
-
-
 // working fine
 
 app.post('/feedback',  [
@@ -493,11 +580,10 @@ admin.initializeApp({
 
 
 /// getting class on unique day
- function getFirestore(uid,current_day){
+ function getFirestore(uid,current_day,s_time){
     const firestore_con  =  admin.firestore();
-    console.log("current day in get firetore " +current_day)
-   // const s_time=''+start_time;
-    const writeResult =  firestore_con.collection('faculty').doc(uid).collection(current_day).doc('121000').get().then(doc => {
+  
+    const writeResult =  firestore_con.collection('faculty').doc(uid).collection(current_day).doc(s_time).get().then(doc => {
     if (!doc.exists) { console.log('No  document!'); }
     else {
        console.log(doc.data())
