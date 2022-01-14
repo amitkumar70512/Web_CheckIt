@@ -1,3 +1,4 @@
+var {QRGenerator} = require('dynamic-qr-code-generator');
 const admin = require('firebase-admin');
 const functions = require('firebase-functions');
 
@@ -14,7 +15,7 @@ const {check, validationResult}=require('express-validator');
 const { Console } = require('console');
 const ejs = require('ejs');
 
-const qrcode=require('qrcode');
+//const qrcode=require('qrcode');
 // for encryption
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
@@ -24,8 +25,9 @@ var app = express();
 
 const { join } = require('path');
   
-const log_f= require('./public/assets/js/script_sign');
+//const log_f= require('./public/assets/js/script_sign');
 const admin_f=require('./public/assets/js/admin-handler');
+const { start } = require('repl');
 
 app.use(bodyParser.urlencoded({
 	extended:true
@@ -108,7 +110,8 @@ app.get("/team",function(req,res){
 
 
 
-
+var curr_subject='';
+var curr_section='';
 
 // for login
 
@@ -164,31 +167,59 @@ app.post('/login',async function(req,res,next){
                 else{ // password matched 
                    
                     console.log("password matched");
-                    // const message=[
-                    //           {msg:'Horray !  Logged in successfully...'}
-                    //      ]
-                    //      const alert = message
-                    //      res.render('pages/login', {
-                    //        alert
-                    //        })
                     get_time();
-                    console.log(current_day);
+                   
                            ////////////////////////
+                    let start_time=0,end_time=0;
                     
+                    if(c_time>=085500 && c_time <=095000)
+                    {
+                        start_time="08:55 am";
+                        end_time='09:50 am';
+
+                    }
+                    else if(c_time>=095000 && c_time <=104500)
+                    {
+                        start_time='09:50 am';
+                        end_time='10:45 am';
+                    }
+                    else if(c_time>=104500 && c_time <=111500)
+                    {
+                        start_time='10:45 am';
+                        end_time='11:15 am'
+                    }
+                    else if(c_time >=111500 && c_time<=121000)
+                    {
+                        start_time='11:15 am';
+                        end_time='12:10 pm';
+                    }
+                    else if((c_time >=121000 )&&(c_time <=130500))
+                    {
+
+                        start_time='12:10 pm';
+                        end_time='01:05 pm';
+                        
+                    }
+                    else if((c_time >=010500 ))
+                    {
+
+                        start_time='12:10 pm';
+                        end_time='01:05 pm';
+                        
+                    }
+                    ////
+                    console.log("inside login start time : "+ start_time)
+
                     
-                    
-                    getFirestore(uid,"monday");
+                  console.log(getFirestore(uid,current_day,start_time))
+                   
 
 
+                    
 
-                     rows=[{"subject":"dont have class","section":null,"start_time": null,"end_time":null}]
-                    // if(rows.length==0)
-                    //                 {
-                                    
-                    //                
-                    //                 console.log(rows)
-                    //                 }
-                    //                 else{}
+                     rows=[{"subject":"dont have class","section":null,"start_time": start_time,"end_time":end_time}]
+                   
+                  
                     
                    const name=doc.data().name;
                     res.render('pages/faculty_welcome',{
@@ -214,8 +245,8 @@ app.post('/login',async function(req,res,next){
                         endtime4:'010500',
 
                         day:current_day,
-                        current_subject:rows[0].subject,
-                        current_section:rows[0].section,
+                        current_subject:curr_subject,
+                        current_section:curr_section,
                         current_start_time:rows[0].start_time,
                         current_end_time:rows[0].end_time
 
@@ -445,31 +476,32 @@ admin.initializeApp({
     
   });
 
+
+
+
 /// getting class on unique day
-async function getFirestore(uid,current_day){
-    const firestore_con  = await admin.firestore();
-   
-    const writeResult = firestore_con.collection('faculty').doc(uid).collection(current_day).where('start_time',"<",c_time).get().then(doc => {
+ function getFirestore(uid,current_day,start_time){
+    const firestore_con  =  admin.firestore();
+    console.log(start_time)
+    const s_time=''+start_time;
+    const writeResult = firestore_con.collection('faculty').doc(uid).collection(current_day).doc(s_time).get().then(doc => {
     if (!doc.exists) { console.log('No such document!'); }
     else {
-        console.log(doc.data().start_time);
-        console.log(doc.data().end_time);
-        
+       console.log( doc.data().section)
+       console.log("inside get firestore")
+       curr_subject=doc.data().class;
+       curr_section=doc.data().section;
+       console.log(curr_section)
+      return curr_section;
      }
     })
     .catch(err => { console.log('Error getting document', err);});
-   
+    
     }
 
 
 
 /////////
-
-
-
-
-
-
 
 
 
@@ -496,5 +528,15 @@ app.post('/register2',async (request,response) =>{
     //response.render('pages/login',{alert});
     response.sendStatus(200);
     });
+
+
+
+
+
+
+//////
+
+
+
 
 // module exports

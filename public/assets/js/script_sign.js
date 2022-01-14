@@ -24,6 +24,8 @@ function take_attendance()
 function showqr()
 {
    prompt("showing qr")
+   var props={value:'www.facebook.com'};
+   QRGenerator(props)
 }
 
 
@@ -34,6 +36,21 @@ function demo()
    prompt(app_func.nameuser)
    app_func.wow
 }
+
+
+
+
+
+// for qr 
+
+  function showqr() {
+       prompt("inside showqr")
+      
+   }
+
+
+
+
 
 
 module.exports= {signin};

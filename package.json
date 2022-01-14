@@ -13,6 +13,7 @@
     "alert": "^5.0.10",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
+    "dynamic-qr-code-generator": "^0.1.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "express-validator": "^6.12.0",
