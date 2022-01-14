@@ -166,10 +166,11 @@ async function updateCurrClass(uid,name,res)
     ////
     console.log("inside updateclass start time : "+ start_time)
 
-    
- // getFirestore(uid,current_day,s_time);
    
-
+    const liam = await firestore_con.collection('faculty').doc(uid).collection(current_day).get();
+    classes=liam.docs.map(doc => doc.data());
+ 
+    console.log(classes)
   //////
    rows[0].start_time=start_time;
    rows[0].end_time=end_time;
@@ -182,30 +183,27 @@ async function updateCurrClass(uid,name,res)
 
             console.log(doc.data())
             console.log(rows[0])
-
-
+            
+           
+              
 ///////
             res.render('pages/faculty_welcome',{
                 name,
-                section1 : '4a',
-                aspect1:'cn',
-                starttime1:'085500',
-                endtime1:'095000',
+                section1 : classes[0].section,
+                aspect1:classes[0].class,
+                timing1: classes[0].timing,
 
-                section2:'5a',
-                aspect2:'tfcs',
-                starttime2:'09500',
-                endtime2:'104500',
+                section2 : classes[1].section,
+                aspect2:classes[1].class,
+                timing2: classes[1].timing,
 
-                section3:'4c',
-                aspect3:'networking',
-                starttime3:'111500',
-                endtime3:'121000',
+                section3: classes[2].section,
+                aspect3:classes[2].class,
+                timing3: classes[2].timing,
 
-                section4:'5D',
-                aspect4:'project work',
-                starttime4:'121000',
-                endtime4:'010500',
+                section4: classes[3].section,
+                aspect4:classes[3].class,
+                timing4: classes[3].timing,
 
                 day:current_day,
                 current_subject:rows[0].subject,
@@ -225,26 +223,22 @@ async function updateCurrClass(uid,name,res)
                 
                 res.render('pages/faculty_welcome',{
                     name,
-                    section1 : '4a',
-                    aspect1:'cn',
-                    starttime1:'085500',
-                    endtime1:'095000',
-    
-                    section2:'5a',
-                    aspect2:'tfcs',
-                    starttime2:'09500',
-                    endtime2:'104500',
-    
-                    section3:'4c',
-                    aspect3:'networking',
-                    starttime3:'111500',
-                    endtime3:'121000',
-    
-                    section4:'5D',
-                    aspect4:'project work',
-                    starttime4:'121000',
-                    endtime4:'010500',
-    
+                section1 : classes[0].section,
+                aspect1:classes[0].class,
+                timing1: classes[0].timing,
+
+                section2 : classes[1].section,
+                aspect2:classes[1].class,
+                timing2: classes[1].timing,
+
+                section3: classes[2].section,
+                aspect3:classes[2].class,
+                timing3: classes[2].timing,
+
+                section4: classes[3].section,
+                aspect4:classes[3].class,
+                timing4: classes[3].timing,
+
                     day:current_day,
                     current_subject:rows[0].subject,
                     current_section:rows[0].section,
@@ -317,48 +311,7 @@ app.post('/login', function(req,res,next){
                     updateCurrClass(uid,doc.data().name,res);
                            ////////////////////////
                     
-                            
-                           
-                    // res.render('pages/faculty_welcome',{
-                    //     name,
-                    //     section1 : '4a',
-                    //     aspect1:'cn',
-                    //     starttime1:'085500',
-                    //     endtime1:'095000',
-
-                    //     section2:'5a',
-                    //     aspect2:'tfcs',
-                    //     starttime2:'09500',
-                    //     endtime2:'104500',
-
-                    //     section3:'4c',
-                    //     aspect3:'networking',
-                    //     starttime3:'111500',
-                    //     endtime3:'121000',
-
-                    //     section4:'5D',
-                    //     aspect4:'project work',
-                    //     starttime4:'121000',
-                    //     endtime4:'010500',
-
-                    //     day:current_day,
-                    //     current_subject:rows[0].subject,
-                    //     current_section:rows[0].section,
-                    //     current_start_time:rows[0].start_time,
-                    //     current_end_time:rows[0].end_time
-
-                        
-                    //     })
-
-
-
-
-                  
-                
-                  //////
-                    
-
-                     
+               
                   
                     
                                   }// end of password matched
@@ -580,10 +533,10 @@ admin.initializeApp({
 
 
 /// getting class on unique day
- function getFirestore(uid,current_day,s_time){
+ function getFirestore(uid,current_day,time){
     const firestore_con  =  admin.firestore();
   
-    const writeResult =  firestore_con.collection('faculty').doc(uid).collection(current_day).doc(s_time).get().then(doc => {
+    const writeResult =  firestore_con.collection('faculty').doc(uid).collection(current_day).doc(time).get().then(doc => {
     if (!doc.exists) { console.log('No  document!'); }
     else {
        console.log(doc.data())
