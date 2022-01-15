@@ -155,7 +155,7 @@ async function updateCurrClass(uid,name,res)
         end_time='02:00 pm';
         
     }
-    else if (c_time >=1600)
+    else 
     {
      
         s_time='160000';
@@ -174,7 +174,7 @@ async function updateCurrClass(uid,name,res)
   //////
 
    
-            if(c_time <1600)
+            if(c_time <1600 && c_time >0855)
           {
               
             firestore_con.collection('faculty').doc(uid).collection(current_day).doc(s_time).get().then(function(doc) {
@@ -219,7 +219,7 @@ async function updateCurrClass(uid,name,res)
             .catch(err => { console.log('Error getting document', err);});
             }
 
-            else if (c_time > 1600)
+            else 
              {
                 
                 res.render('pages/faculty_welcome',{
@@ -261,7 +261,7 @@ async function updateCurrClass(uid,name,res)
 app.post('/login', function(req,res,next){
     const uid=String(req.body.uid)
     const password=String(req.body.passkey)
-
+    uniqueid=req.body.uid;
     console.log(req.body.uid);
     console.log(password)
     
@@ -591,9 +591,26 @@ function randomString(length, chars) {
 app.post("/scan", (req, res, next) => {
     var rString = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
     console.log(rString)
+    get_time();
+    var currentdate=date_ob.getDate();
+    var currentday=date_ob.getDay()
     ////// inserting random key into db
-    const writeResult =  admin.firestore().collection('faculty').doc('1bm19fa014').update({
-       key : rString
+    const writeResult =  admin.firestore().collection('QR_key').doc(rString).set({
+        class: rows[0].subject,
+        
+        date: currentdate,
+        
+        day:currentday ,
+        
+        section: rows[0].section,
+        
+        teacher_USN: uniqueid,
+        
+        time: c_time,
+        
+        valid: 1,
+        
+      
         })
         .then(function() {console.log("Document successfully written!");})
         .catch(function(error) {console.error("Error writing document: ", error);});
