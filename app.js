@@ -66,10 +66,8 @@ let date,month,year,current_day,c_time;// global
      console.log(date_ob.getMinutes())
     let c_hours=String(date_ob.getHours()+05);
     let c_minutes=String(((date_ob.getMinutes()<10?'0':'') + date_ob.getMinutes()) + 30);
-    // c_time=c_hours+""+c_minutes;
-    console.log(c_hours)
-    console.log(c_minutes)
-     c_time='1315'
+     c_time=c_hours+""+c_minutes;
+   
     console.log("printing time  "+c_time);
 };
 
