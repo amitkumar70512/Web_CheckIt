@@ -64,8 +64,8 @@ let date,month,year,current_day,c_time;// global
      current_day = weekday[d.getDay()];
      console.log(date_ob.getHours())
      console.log(date_ob.getMinutes())
-    let c_hours=String(date_ob.getHours()+05);
-    let c_minutes=String((date_ob.getMinutes()<10?'0':'') + (date_ob.getMinutes()+30));
+    let c_hours=String(date_ob.getHours());
+    let c_minutes=String((date_ob.getMinutes()<10?'0':'') + (date_ob.getMinutes()));
      c_time=c_hours+""+c_minutes;
    
     console.log("printing time  "+c_time);
@@ -109,7 +109,7 @@ app.get("/team",function(req,res){
 
 let start_time=0,end_time=0,s_time='085500';
 
-rows=[{"subject":" ","section":" ","start_time": start_time,"end_time":end_time}]
+rows=[{"subject":" ","section":" ","timing":" "}]
 
 async function updateCurrClass(uid,name,res)
 {
@@ -159,7 +159,7 @@ async function updateCurrClass(uid,name,res)
     }
     else if (c_time >=1600)
     {
-        row[0].timing='04:00 pm  next day till 08:55 am';
+     
         s_time='160000';
          
         rows[0].subject='classes are finished...'
@@ -245,7 +245,7 @@ async function updateCurrClass(uid,name,res)
                     day:current_day,
                     current_subject:rows[0].subject,
                     current_section:rows[0].section,
-                   current_timing:rows[0].timing
+                   current_timing: '04:00 pm   till 08:55 am  next day'
     
                     
                     })
