@@ -176,7 +176,8 @@ async function updateCurrClass(uid,name,res)
    
             if(c_time <160000)
           {
-            firestore_con.collection('faculty').doc(uid).collection(current_day).doc('111500').get().then(function(doc) {
+              
+            firestore_con.collection('faculty').doc(uid).collection(current_day).doc(''+s_time).get().then(function(doc) {
             rows[0].section=''+doc.data().section
             rows[0].subject=''+doc.data().class
             rows[0].timing=''+doc.data().timing
@@ -251,7 +252,8 @@ async function updateCurrClass(uid,name,res)
            
 
 }
-// for login
+// end  of update class
+
 
 
 app.post('/login', function(req,res,next){
