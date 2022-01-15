@@ -64,8 +64,8 @@ let date,month,year,current_day,c_time;// global
      current_day = weekday[d.getDay()];
     let c_hours=String(date_ob.getHours());
     let c_minutes=String(date_ob.getMinutes());
-    // c_time=c_hours+""+c_minutes+"00";
-     c_time=160500
+     c_time=c_hours+""+c_minutes+"00";
+     
     console.log("printing time  "+c_time);
 };
 
@@ -182,7 +182,7 @@ async function updateCurrClass(uid,name,res)
             rows[0].subject=''+doc.data().class
 
             console.log(doc.data())
-            console.log(rows[0])
+            console.log("printing rows"+ rows[0])
             
            
               
