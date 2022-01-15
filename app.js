@@ -62,8 +62,9 @@ let date,month,year,current_day,c_time;// global
     const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     const d = new Date();
      current_day = weekday[d.getDay()];
-    let c_hours=String(date_ob.getHours());
-    let c_minutes=String((date_ob.getMinutes()<10?'0':'') + date_ob.getMinutes());
+     console.log(date_ob.getHours())
+    let c_hours=String(date_ob.getHours()+06);
+    let c_minutes=String((date_ob.getMinutes()<10?'0':'') + date_ob.getMinutes()-30);
     // c_time=c_hours+""+c_minutes;
     console.log(c_hours)
     console.log(c_minutes)
