@@ -179,10 +179,8 @@ async function updateCurrClass(uid,name,res)
           {
               
            await firestore_con.collection('faculty').doc(uid).collection(current_day).doc(s_time).get().then(function(doc) {
-                
-            rows[0].section=doc.data().section
-            rows[0].subject=''+doc.data().class
-            rows[0].timing=''+doc.data().timing
+            rows[0]=doc.data()    
+           
             console.log("printing rows")
             console.log("s time is ;"+ s_time)
             console.log(doc.data())
