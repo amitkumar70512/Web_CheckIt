@@ -103,7 +103,7 @@ app.get("/team",function(req,res){
 })
 
 
-
+let uniqueid;
 
 let start_time=0,end_time=0,s_time='085500';
 
@@ -309,7 +309,7 @@ app.post('/login', function(req,res,next){
                 else{ // password matched 
                    
                     console.log("password matched");
-                    
+                    uniqueid=uid;
                     updateCurrClass(uid,doc.data().name,res);
                            ////////////////////////
                     
@@ -407,7 +407,7 @@ app.post('/register', [
         const writeResult = await admin.firestore().collection('faculty').doc(req.body.uid).set({
             name: req.body.name,
             email: req.body.email,
-            uid: req.body.uid,
+            
             password: encryptkey
             })
             .then(function() 
@@ -571,14 +571,6 @@ async function insertFormData(request){
     }
 
 
-app.post('/register2',async (request,response) =>{
-    var insert = await insertFormData(request);
-    var alert = await getFirestore();
-    console.log("reading from firestore" +alert)
-    //response.render('pages/login',{alert});
-    response.sendStatus(200);
-    });
-
 
 
 
@@ -587,9 +579,30 @@ app.post('/register2',async (request,response) =>{
 //////
 
 
+function randomString(length, chars) {
+    var result = '';
+    for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+    return result;
+}
+
+
+
+//// for qr page
 app.post("/scan", (req, res, next) => {
-    var input_text='www.facebook.com'
-    qrcode.toDataURL(input_text, (err, src) => {
+    var rString = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+    console.log(rString)
+    ////// inserting random key into db
+    const writeResult =  admin.firestore().collection('faculty').doc('1bm19fa014').update({
+       key : rString
+        })
+        .then(function() {console.log("Document successfully written!");})
+        .catch(function(error) {console.error("Error writing document: ", error);});
+
+
+
+    /////
+    var input_text=rString
+      qrcode.toDataURL(input_text, (err, src) => {
       if (err) res.send("Something went wrong!!");
       res.render("pages/scan", {
         qr_code: src,
