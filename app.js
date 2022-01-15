@@ -1,9 +1,8 @@
-var {QRGenerator} = require('dynamic-qr-code-generator');
 const admin = require('firebase-admin');
 const functions = require('firebase-functions');
-
+var alert = require('alert');
 var serviceAccount = require("./privatekey.json");
-
+const qrcode = require("qrcode");
  
 const express = require('express');
 
@@ -15,7 +14,7 @@ const {check, validationResult}=require('express-validator');
 const { Console } = require('console');
 const ejs = require('ejs');
 
-//const qrcode=require('qrcode');
+
 // for encryption
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
@@ -106,7 +105,6 @@ app.get("/team",function(req,res){
 
 
 
-
 let start_time=0,end_time=0,s_time='085500';
 
 rows=[{"subject":" ","section":" ","timing":" "}]
@@ -114,7 +112,7 @@ rows=[{"subject":" ","section":" ","timing":" "}]
 async function updateCurrClass(uid,name,res)
 {
     get_time();
-
+      
     const firestore_con  =  admin.firestore();
     if(c_time>=0855 && c_time <=0950)
     {
@@ -246,6 +244,7 @@ async function updateCurrClass(uid,name,res)
                     current_subject:rows[0].subject,
                     current_section:rows[0].section,
                    current_timing: '04:00 pm   till 08:55 am  next day'
+                   
     
                     
                     })
@@ -588,6 +587,18 @@ app.post('/register2',async (request,response) =>{
 //////
 
 
+app.post("/scan", (req, res, next) => {
+    var input_text='www.facebook.com'
+    qrcode.toDataURL(input_text, (err, src) => {
+      if (err) res.send("Something went wrong!!");
+      res.render("pages/scan", {
+        qr_code: src,
+      });
+    });
+  });
 
 
-// module exports
+
+  app.post('/faculty_welcome',(req,res)=>{
+      res.sendFile('')
+  })

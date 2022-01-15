@@ -1,4 +1,4 @@
-const app_func= require('../../../app')
+var fun=require('../../../app');
 
 
 var login_status=0
@@ -21,12 +21,7 @@ function take_attendance()
    
 }
 
-function showqr()
-{
-   prompt("showing qr")
-   var props={value:'www.facebook.com'};
-   QRGenerator(props)
-}
+
 
 
 
@@ -40,17 +35,3 @@ function demo()
 
 
 
-
-// for qr 
-
-  function showqr() {
-       prompt("inside showqr")
-      
-   }
-
-
-
-
-
-
-module.exports= {signin};
