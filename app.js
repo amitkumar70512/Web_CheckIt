@@ -65,7 +65,7 @@ let date,month,year,current_day,c_time;// global
      console.log(date_ob.getHours())
      console.log(date_ob.getMinutes())
     let c_hours=String(date_ob.getHours()+05);
-    let c_minutes=String(((date_ob.getMinutes()<10?'0':'') + date_ob.getMinutes()) + 30);
+    let c_minutes=String((date_ob.getMinutes()<10?'0':'') + (date_ob.getMinutes()+32));
      c_time=c_hours+""+c_minutes;
    
     console.log("printing time  "+c_time);
@@ -159,9 +159,9 @@ async function updateCurrClass(uid,name,res)
     }
     else if (c_time >=1600)
     {
-        start_time = '04:00 pm';
+        row[0].timing='04:00 pm  next day till 08:55 am';
         s_time='160000';
-        end_time=' next day till 08:55 am'
+         
         rows[0].subject='classes are finished...'
     }
     ////
