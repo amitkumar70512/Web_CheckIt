@@ -63,9 +63,9 @@ let date,month,year,current_day,c_time;// global
     const d = new Date();
      current_day = weekday[d.getDay()];
     let c_hours=String(date_ob.getHours());
-    let c_minutes=String(date_ob.getMinutes());
-    // c_time=c_hours+""+c_minutes+"00";
-     c_time='041000'
+    let c_minutes=String((date_ob.getMinutes()<10?'0':'') + date_ob.getMinutes());
+     c_time=c_hours+""+c_minutes+"00";
+     
     console.log("printing time  "+c_time);
 };
 
@@ -147,7 +147,7 @@ async function updateCurrClass(uid,name,res)
         end_time='01:05 pm';
         
     }
-    else if(c_time >=010500 &&c_time <=020000 )
+    else if(c_time >=130500 &&c_time <=160000 )
     {
 
         start_time='01:05 pm';
@@ -177,7 +177,7 @@ async function updateCurrClass(uid,name,res)
             if(c_time <160000)
           {
               
-           await firestore_con.collection('faculty').doc(uid).collection(current_day).doc(s_time).get().then(function(doc) {
+            firestore_con.collection('faculty').doc(uid).collection(current_day).doc(s_time).get().then(function(doc) {
             rows[0]=doc.data()    
            
             console.log("printing rows")
