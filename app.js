@@ -64,7 +64,7 @@ let date,month,year,current_day,c_time;// global
      current_day = weekday[d.getDay()];
     let c_hours=String(date_ob.getHours());
     let c_minutes=String((date_ob.getMinutes()<10?'0':'') + date_ob.getMinutes());
-     c_time=c_hours+""+c_minutes+"00";
+     c_time=c_hours+""+c_minutes;
      
     console.log("printing time  "+c_time);
 };
@@ -114,32 +114,32 @@ async function updateCurrClass(uid,name,res)
     get_time();
 
     const firestore_con  =  admin.firestore();
-    if(c_time>=085500 && c_time <=095000)
+    if(c_time>=0855 && c_time <=0950)
     {
         start_time="08:55 am";
         s_time='085500';
         end_time='09:50 am';
 
     }
-    else if(c_time>=095000 && c_time <=104500)
+    else if(c_time>=0950 && c_time <=1045)
     {
         start_time='09:50 am';
         s_time='095000';
         end_time='10:45 am';
     }
-    else if(c_time>=104500 && c_time <=111500)
+    else if(c_time>=1045 && c_time <=1115)
     {
         start_time='10:45 am';
         s_time='104500';
         end_time='11:15 am'
     }
-    else if(c_time >=111500 && c_time<=121000)
+    else if(c_time >=1115 && c_time<=1210)
     {
         start_time='11:15 am';
         s_time='111500';
         end_time='12:10 pm';
     }
-    else if((c_time >=121000 )&&(c_time <=130500))
+    else if((c_time >=1210 )&&(c_time <=1305))
     {
 
         start_time='12:10 pm';
@@ -147,15 +147,15 @@ async function updateCurrClass(uid,name,res)
         end_time='01:05 pm';
         
     }
-    else if(c_time >=130500 &&c_time <=160000 )
+    else if(c_time >=1305 &&c_time <=1600 )
     {
 
         start_time='01:05 pm';
-        s_time='010500';
+        s_time='130500';
         end_time='02:00 pm';
         
     }
-    else if (c_time >=160000)
+    else if (c_time >=1600)
     {
         start_time = '04:00 pm';
         s_time='160000';
@@ -174,7 +174,7 @@ async function updateCurrClass(uid,name,res)
   //////
 
    
-            if(c_time <160000)
+            if(c_time <1600)
           {
               
             firestore_con.collection('faculty').doc(uid).collection(current_day).doc(s_time).get().then(function(doc) {
@@ -219,7 +219,7 @@ async function updateCurrClass(uid,name,res)
             .catch(err => { console.log('Error getting document', err);});
             }
 
-            else if (c_time > 160000)
+            else if (c_time > 1600)
              {
                 
                 res.render('pages/faculty_welcome',{
