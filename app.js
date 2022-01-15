@@ -106,7 +106,7 @@ app.get("/team",function(req,res){
 let curr_subject='';
 let curr_section='';
 
-let start_time=0,end_time=0,s_time=0;
+let start_time=0,end_time=0,s_time='085500';
 
 rows=[{"subject":"","section":"","start_time": start_time,"end_time":end_time}]
 
@@ -165,6 +165,7 @@ async function updateCurrClass(uid,name,res)
     }
     ////
     console.log("inside updateclass start time : "+ start_time)
+    console.log("inside update class c-time is"+ c_time)
 
    
     const liam = await firestore_con.collection('faculty').doc(uid).collection(current_day).get();
@@ -178,8 +179,8 @@ async function updateCurrClass(uid,name,res)
           {
               
             firestore_con.collection('faculty').doc(uid).collection(current_day).doc(s_time).get().then(function(doc) {
-                console.log(doc.data().section)
-            rows[0].section=''+doc.data().section
+                
+            rows[0].section=doc.data().section
             rows[0].subject=''+doc.data().class
             rows[0].timing=''+doc.data().timing
             console.log("printing rows")
