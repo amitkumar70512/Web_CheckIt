@@ -108,7 +108,7 @@ let curr_section='';
 
 let start_time=0,end_time=0,s_time='085500';
 
-rows=[{"subject":"","section":"","start_time": start_time,"end_time":end_time}]
+rows=[{"subject":" ","section":" ","start_time": start_time,"end_time":end_time}]
 
 async function updateCurrClass(uid,name,res)
 {
@@ -178,7 +178,7 @@ async function updateCurrClass(uid,name,res)
             if(c_time <160000)
           {
               
-            firestore_con.collection('faculty').doc(uid).collection(current_day).doc(s_time).get().then(function(doc) {
+           await firestore_con.collection('faculty').doc(uid).collection(current_day).doc(s_time).get().then(function(doc) {
                 
             rows[0].section=doc.data().section
             rows[0].subject=''+doc.data().class
