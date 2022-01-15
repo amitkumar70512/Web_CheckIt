@@ -64,8 +64,8 @@ let date,month,year,current_day,c_time;// global
      current_day = weekday[d.getDay()];
     let c_hours=String(date_ob.getHours());
     let c_minutes=String(date_ob.getMinutes());
-     c_time=c_hours+""+c_minutes+"00";
-     
+    // c_time=c_hours+""+c_minutes+"00";
+     c_time='041000'
     console.log("printing time  "+c_time);
 };
 
@@ -103,8 +103,7 @@ app.get("/team",function(req,res){
 
 
 
-let curr_subject='';
-let curr_section='';
+
 
 let start_time=0,end_time=0,s_time='085500';
 
