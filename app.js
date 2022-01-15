@@ -172,17 +172,16 @@ async function updateCurrClass(uid,name,res)
  
     console.log(classes)
   //////
-   rows[0].start_time=start_time;
-   rows[0].end_time=end_time;
+
    
             if(c_time <160000)
           {
             firestore_con.collection('faculty').doc(uid).collection(current_day).doc(s_time).get().then(function(doc) {
             rows[0].section=''+doc.data().section
             rows[0].subject=''+doc.data().class
-
+            rows[0].timing=''+doc.data().timing
             console.log(doc.data())
-            console.log("printing rows"+ rows[0])
+            console.log("printing rows"+ rows)
             
            
               
@@ -207,9 +206,8 @@ async function updateCurrClass(uid,name,res)
 
                 day:current_day,
                 current_subject:rows[0].subject,
-                current_section:rows[0].section,
-                current_start_time:rows[0].start_time,
-                current_end_time:rows[0].end_time
+                    current_section:rows[0].section,
+                   current_timing:rows[0].timing
 
                 
                 })
@@ -242,8 +240,7 @@ async function updateCurrClass(uid,name,res)
                     day:current_day,
                     current_subject:rows[0].subject,
                     current_section:rows[0].section,
-                    current_start_time:rows[0].start_time,
-                    current_end_time:rows[0].end_time
+                   current_timing:rows[0].timing
     
                     
                     })
