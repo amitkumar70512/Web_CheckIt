@@ -49,7 +49,7 @@ app.listen(port,()=> console.log(`Express server is running at port no :${port}`
 //      for date
 
 let date,month,year,current_day,c_time;// global
-
+let c_day=date_ob.getDay();
  function get_time () {
     let ts = Date.now();
 
@@ -174,7 +174,7 @@ async function updateCurrClass(uid,name,res)
   //////
 
    
-            if(c_time <1600 && c_time >0855)
+            if(c_time <1600 && c_time >0855&&c_day !=0)
           {
               
             firestore_con.collection('faculty').doc(uid).collection(current_day).doc(s_time).get().then(function(doc) {
@@ -523,6 +523,96 @@ app.post('/feedback',  [
 
 
 // for admin login
+
+
+app.post('/verify',(req,res)=>{
+    const key=String(req.body.admin_key)
+    const password=String(req.body.passkey)
+
+
+       
+    
+    const firestore_con  =  admin.firestore();
+    const writeResult = firestore_con.collection('admins').doc(req.body.admin_key).get()
+    .then(doc => {
+        if (!doc.exists) // entered uid doesnt registered
+        { 
+            console.log('No such document!');
+            const errors=[
+                {msg:' Failed!  Invalid Crudentials..'}
+            ]
+            const alert = errors
+            res.render('pages/login', {
+                alert
+            })
+
+        }
+        else { // block for password matching and others
+              db_pass=doc.data().password;
+              //console.log(doc.data());
+             
+             console.log(db_pass)  
+             bcrypt.compare(password, db_pass, function(err, result) {
+                if (!result) {// password mismatch
+                   
+                
+                     
+                    console.log('password not matched')
+                    const errors=[
+                       {msg:'Failed! crudentials not matched'}
+                   ]
+                   const alert = errors
+                   res.render('pages/admin', {
+                          alert
+                      })
+   
+                 } // end of password mismatch
+                
+               
+              
+
+                else{ // password matched 
+                   
+                    console.log("password matched");
+                    admin_name=doc.data().name;
+
+                           ////////////////////////
+                    
+               
+                    res.render('pages/admin_edit',{
+                        admin_name
+                    })
+                    
+                                  }// end of password matched
+
+            });
+
+             }// end of  block for password matching and others
+
+
+
+
+
+        
+     }) // end of then
+
+    .catch(err => {
+         console.log('Error getting document', err);
+         const errors=[
+            {msg:' Invalid admin crudentials   : '+err}
+        ]
+        const alert = errors
+        res.render('pages/admin', {
+               alert
+           })
+     }); // end of catch
+    
+  
+
+
+
+
+});
 
 ///////firestore////
 
