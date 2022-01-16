@@ -63,10 +63,13 @@ let c_day=date_ob.getDay();
      current_day = weekday[d.getDay()];
      console.log(date_ob.getHours())
      console.log(date_ob.getMinutes())
-    let c_hours=String(date_ob.getHours());
-    let c_minutes=String((date_ob.getMinutes()<10?'0':'') + (date_ob.getMinutes()));
+    let c_hours=String(date_ob.getHours()+10);
+    minutes=date_ob.getMinutes()+30;
+    let c_minutes=String((minutes)<10?'0':'') + minutes;
      c_time=c_hours+""+c_minutes;
-   
+     console.log(minutes)
+     console.log(c_hours)
+     console.log(c_minutes)
     console.log("printing time  "+c_time);
 };
 
