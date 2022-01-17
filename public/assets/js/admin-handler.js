@@ -1,4 +1,4 @@
-const app_fun=require('../../../app')
+
 
 const status=0
 function feedback()
@@ -28,4 +28,3 @@ function check_db()
 
 
 
-module.exports = {feedback,check_faculties,check_students,check_db};

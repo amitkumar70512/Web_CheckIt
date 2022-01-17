@@ -725,3 +725,19 @@ app.post("/scan", (req, res, next) => {
   app.post('/faculty_welcome',(req,res)=>{
       res.sendFile('')
   })
+
+
+
+
+
+  ////
+  app.post('/firedb',(req,res)=>{
+     fireuid=req.body.uid;
+            
+
+     console.log(fireuid)
+     
+
+
+     console.log(req.body.s_time) 
+  })

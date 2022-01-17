@@ -137,6 +137,16 @@
 
     <!-- ======= Contact Section ======= -->
     <!-- ======= Features Section ======= -->
+   <script>
+      function droplist()
+      {
+        var d=document.getElementById("start_time");
+        var displaytxt=d.options[d.selectedIndex].text;
+        document.getElementById("stime").value=displaytxt;
+      }
+   </script>
+
+<!-- /// -->
     <section class="features">
       <div class="container">
 
@@ -144,16 +154,17 @@
           <h2>Firestore CRUD </h2>
          
         </div>
-        <form>
-          <div class="form-row">
+        <form action="/firedb" method="POST" class="form">
+          
               <div class="form-group col-md-6">
                 <label for="inputEmail4">Faculty id</label>
-                <input type="email" class="form-control" id="inputEmail4" placeholder="1bm19fa000">
+                <input type="text" class="form-control" name="uid" placeholder="1bm19fa000">
               </div>
-            
-            <div class="form-group col-md-6">
+             
+              <div class="form-row">
+            <div class="form-group col-md-2">
               <label for="inputAddress">Start time</label>
-              <select id="" class="form-control">
+              <select id="start_time" class="form-control" name="start_time"  onchange="droplist()">
                 <option selected> select start time</option>
                 <option>080000</option>
                 <option>085500</option>
@@ -164,13 +175,16 @@
                 <option>130500</option>
                 <option>140000</option>
                 <option>145500</option>
-                
-    
               </select>
+              
+
             </div>
-         </div>
-         
             <div class="form-group col-md-4">
+              <input type="text"  id="stime" class="form-control" name="s_time" > 
+            </div>
+          </div>
+         
+            <div class="form-group col-md-2">
               <label for="inputState">Day</label>
               <select id="inputState" class="form-control">
                 <option selected>Monday</option>
