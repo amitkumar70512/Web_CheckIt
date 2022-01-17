@@ -24,8 +24,7 @@ var app = express();
 
 const { join } = require('path');
   
-//const log_f= require('./public/assets/js/script_sign');
-const admin_f=require('./public/assets/js/admin-handler');
+
 const { start } = require('repl');
 
 app.use(bodyParser.urlencoded({
@@ -50,24 +49,28 @@ app.listen(port,()=> console.log(`Express server is running at port no :${port}`
 
 let date,month,year,current_day,c_time;// global
 let c_day=date_ob.getDay();
+
  function get_time () {
     let ts = Date.now();
 
     let date_ob = new Date(ts);
-    //  date = date_ob.getDate();
-    //  month = date_ob.getMonth() + 1;
-    //  year = date_ob.getFullYear();
+    utcHour=((date_ob.getUTCHours()+5)%24);
+    console.log(utcHour)
+    utcMinute=((date_ob.getUTCMinutes()+30)%60);
+    console.log(utcMinute)
+    let x=0;
+    if (date_ob.getUTCMinutes()==30){utcHour=utcHour+1;}
+    
     
     const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     const d = new Date();
      current_day = weekday[d.getDay()];
+
      console.log(date_ob.getHours())
      console.log(date_ob.getMinutes())
-     
-    let c_hours=String(date_ob.getHours());
-    minutes=date_ob.getMinutes();
-    let c_minutes=String((minutes)<10?'0':'') + minutes;
-     c_time=c_hours+""+c_minutes;
+  
+    let c_minutes=String((utcMinute)<10?'0':'') + utcMinute;
+     c_time=utcHour+""+c_minutes;
     
     console.log("printing time  "+c_time);
 
@@ -78,15 +81,13 @@ let c_day=date_ob.getDay();
 
 
 
-
+var log_time=0;
 
 
 app.get("/admin",function(req,res){
     res.render('pages/admin')
 });
-app.get("/index", function(req,res){
-    res.render('pages/index')
-});
+
 app.get("/contact", function(req,res){
     res.render('pages/contact')
 });
@@ -95,9 +96,7 @@ app.get("/register", function(req,res){
 });
 
 
-app.get("/services", function(req,res){
-    res.render('pages/services')
-});
+
 app.get("/", function(req,res){
     res.render('pages/login')
 });
@@ -118,7 +117,7 @@ rows=[{"subject":" ","section":" ","timing":" "}]
 async function updateCurrClass(uid,name,res)
 {
     get_time();
-      
+      log_time=c_time;
     const firestore_con  =  admin.firestore();
     if(c_time>=0855 && c_time <=0950)
     {
@@ -171,7 +170,7 @@ async function updateCurrClass(uid,name,res)
     ////
     console.log("inside updateclass start time : "+ start_time)
     console.log("inside update class c-time is"+ c_time)
-
+    console.log(log_time)
    
     const liam = await firestore_con.collection('faculty').doc(uid).collection(current_day).get();
     classes=liam.docs.map(doc => doc.data());
@@ -195,6 +194,7 @@ async function updateCurrClass(uid,name,res)
               
 ///////
             res.render('pages/faculty_welcome',{
+                log_time,
                 name,
                 section1 : classes[0].section,
                 aspect1:classes[0].class,
@@ -229,6 +229,7 @@ async function updateCurrClass(uid,name,res)
              {
                 
                 res.render('pages/faculty_welcome',{
+                   log_time,
                     name,
                 section1 : classes[0].section,
                 aspect1:classes[0].class,
