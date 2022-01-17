@@ -109,7 +109,7 @@ app.get("/team",function(req,res){
 
 
 let uniqueid;
-
+let scan_valid=0;
 let start_time=0,end_time=0,s_time='085500';
 
 rows=[{"subject":" ","section":" ","timing":" "}]
@@ -152,7 +152,7 @@ async function updateCurrClass(uid,name,res)
         end_time='01:05 pm';
         
     }
-    else if(c_time >=1305 &&c_time <=1600 )
+    else if(c_time >=1305 &&c_time <=1400 )
     {
 
         start_time='01:05 pm';
@@ -160,11 +160,23 @@ async function updateCurrClass(uid,name,res)
         end_time='02:00 pm';
         
     }
+    else if(c_time>1400&& c_time<1455)
+    {
+        start_time='02:00 pm';
+        s_time='140000';
+        end_time='02:55 pm';
+    }
+    else if(c_time>1455 && c_time<1550)
+    {
+        start_time='02:55 pm';
+        s_time='145500';
+        end_time='03:50 pm';
+    }
     else 
     {
      
         s_time='160000';
-         
+         scan_valid=0;
         rows[0].subject='classes are finished...'
     }
     ////
