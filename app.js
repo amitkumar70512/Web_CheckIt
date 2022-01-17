@@ -532,7 +532,7 @@ app.post('/feedback',  [
 
 
 // for admin login
-
+let admin_name="";
 
 app.post('/verify',(req,res)=>{
     const key=String(req.body.admin_key)
@@ -750,8 +750,26 @@ app.post("/scan", (req, res, next) => {
         section:firesection,
         timing:firetiming
         })
-        .then(function() {console.log("Document successfully written!");})
-        .catch(function(error) {console.error("Error writing document: ", error);});
+        .then(function() {console.log("Document successfully written!");
+        const errors=[
+            {msg:` Successfully inserted data of ${fireuid}`}
+        ]
+        const alert = errors
+        res.render('pages/admin_edit', {
+               admin_name,alert
+           })
+
+        })
+        .catch(function(error) {console.error("Error writing document: ", error);
+        const errors=[
+            {msg:'Failed to insert into database'}
+        ]
+        const alert = errors
+        res.render('pages/admin_edit', {
+               admin_name,alert
+           })
+
+        });
 
 
 
