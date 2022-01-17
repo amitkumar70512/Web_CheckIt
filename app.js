@@ -170,7 +170,7 @@ async function updateCurrClass(uid,name,res)
     ////
     console.log("inside updateclass start time : "+ start_time)
     console.log("inside update class c-time is"+ c_time)
-    console.log(log_time)
+    
    
     const liam = await firestore_con.collection('faculty').doc(uid).collection(current_day).get();
     classes=liam.docs.map(doc => doc.data());
