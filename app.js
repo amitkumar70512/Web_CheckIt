@@ -63,15 +63,12 @@ let c_day=date_ob.getDay();
      current_day = weekday[d.getDay()];
      console.log(date_ob.getHours())
      console.log(date_ob.getMinutes())
-     let x=10;
-     if(date_ob.getMinutes()>59)x=11;
-    let c_hours=String((date_ob.getHours()+10)%24);
-    minutes=((date_ob.getMinutes()+30)%60);
+     
+    let c_hours=String(date_ob.getHours());
+    minutes=date_ob.getMinutes();
     let c_minutes=String((minutes)<10?'0':'') + minutes;
      c_time=c_hours+""+c_minutes;
-     console.log(minutes)
-     console.log(c_hours)
-     console.log(c_minutes)
+    
     console.log("printing time  "+c_time);
 
     ////
@@ -532,7 +529,7 @@ app.post('/feedback',  [
 
 
 // for admin login
-let admin_name="";
+var admin_name="";
 
 app.post('/verify',(req,res)=>{
     const key=String(req.body.admin_key)
@@ -735,7 +732,7 @@ app.post("/scan", (req, res, next) => {
 
 
 
-
+/////////////////////////// for admin page ///////////
   ////
   app.post('/firedb',(req,res)=>{
      fireuid=req.body.uid;
@@ -756,7 +753,7 @@ app.post("/scan", (req, res, next) => {
         ]
         const alert = errors
         res.render('pages/admin_edit', {
-               admin_name,alert
+               admin_name,alert,feeds
            })
 
         })
@@ -766,7 +763,7 @@ app.post("/scan", (req, res, next) => {
         ]
         const alert = errors
         res.render('pages/admin_edit', {
-               admin_name,alert
+               admin_name,feeds
            })
 
         });
@@ -775,3 +772,26 @@ app.post("/scan", (req, res, next) => {
 
     
   })
+
+
+
+
+
+  /// for accessing feedbacks 
+
+  app.post('/access_feedback',async(req,res)=>{
+    const feed =  await admin.firestore().collection('feedback').get();
+    classes=feed.docs.map(doc => doc.data());
+    console.log(classes)
+    var feeds=[
+        {
+          email: 'sahilsharan48@gmail.com',
+          name: 'SAHILSHARAN',
+          message: 'your app is running nicely and thanks for it\r\n',
+          subject: 'your app is working nice'
+        }]
+    res.render('pages/admin_edit',{
+        admin_name,feeds
+    })
+  })
+

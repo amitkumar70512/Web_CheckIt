@@ -10,7 +10,7 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/logo.jpeg" rel="icon">
+  <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -24,20 +24,16 @@
   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
   <link href="assets/vendor/admin_welcome.css" rel="stylesheet">
   
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
- 
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   
- 
 </head>
-
 <body>
 
   <!-- ======= Header ======= -->
@@ -62,20 +58,15 @@
 
                 <li class="dropdown"><a class='active' href="#"><span>Actions</span> <i class="bi bi-chevron-right"></i></a>
                     <ul>
-                      <li><a onclick="feedback()" href="#"   title="monitor feedback">Check Feedbacks</a></li>
-                      <li><a onclick="check_faculties()" href="#"  title="list faculties details">Check Faculty list</a></li>
+                      <li><a onclick="showfeedback()" href="#"   title="monitor feedback">Check Feedbacks</a></li>
+                      <li><a onclick="CRUDfaculties()" href="#"  title="list faculties details">CRUD on Faculties</a></li>
                       <li><a onclick="check_students()" href="#"  title="list Students details">Check Students</a></li>
                      
                       <li><button onclick="check_db()" type="submit" class="btn btn-success btn-block"> Check DB </button></li>
                     </ul>
-                  </li>
-                
-               
+                </li>
               </ul>
-              
-          
-         
-        
+              <i class="bi bi-list mobile-nav-toggle"></i>
         
       </nav><!-- .navbar -->
 
@@ -122,41 +113,30 @@
      
   
 
-    <!-- ======= Contact Section ======= -->
-    <!-- ======= Features Section ======= -->
-   <script>
-      function droplist()
-      {
-        var d=document.getElementById("start_time");
-        var displaytxt=d.options[d.selectedIndex].text;
-        document.getElementById("stime").value=displaytxt;
-      }
-      function getday()
-      {
-        var d=document.getElementById("list_day");
-        var displaytxt=d.options[d.selectedIndex].text;
-        document.getElementById("day").value=displaytxt;
-      }
-      function list_timing()
-      {
-        var d=document.getElementById("list_time");
-        var displaytxt=d.options[d.selectedIndex].text;
-        document.getElementById("timing").value=displaytxt;
+ 
 
-      }
-
-     
-   </script>
 
 <!-- /// -->
-    <section class="features">
-      <div class="container">
+<section class="features">
+  <div class="container" >
+    <div class="form-outline" id="feedbacks" style="visibility: hidden;">
+      <label class="form-label" for="textAreaExample">Queries :</label>
+      <textarea class="form-control" id="textAreaExample1" rows="5"  >
+        <% if(typeof feeds != 'undefined') { %>
+          <%= feeds %>
+      <% } %>
+      </textarea>
+      <form action="/access_feedback" method="post"><button onclick="showfeedback()" type="submit" class="btn btn-success btn-block" style="width: 25%; text-align: center;">Acess database </button></form> 
+    </div>
+    
+  </div>
+  <div class="container" id="facultycrud" style="visibility: hidden;" data-aos="fade-up">
 
-        <div class="section-title">
+    <div class="section-title">
           <h2>Firestore CRUD </h2>
          
-        </div>
-        <form action="/login" method="post">
+    </div>
+    <form action="/login" method="post">
           <% if(typeof alert != 'undefined') { %>
             <% alert.forEach(function(error) { %>
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -167,99 +147,95 @@
                   </div>
             <% }) %>
         <% } %>
-      </form>
-        <form action="/firedb" method="POST" class="form">
+    </form>
+
+
+
+
+    <form action="/firedb" method="POST" class="form">
           
-              <div class="form-group col-md-6">
-                <label for="inputEmail4">Faculty id</label>
-                <input type="text" class="form-control" name="uid" placeholder="1bm19fa000">
-              </div>
+      <div class="form-group col-md-6">
+        <label for="inputEmail4">Faculty id</label>
+        <input type="text" class="form-control" name="uid" placeholder="1bm19fa000">
+      </div>
              
             
-              <div class="form-group col-md-2">
-              <label for="inputAddress">Start time</label>
-              <select id="start_time" class="form-control"   onchange="droplist()">
-                <option selected> select start time</option>
-                <option>080000</option>
-                <option>085500</option>
-                <option>095000</option>
-                <option>104500</option>
-                <option>111500</option>
-                <option>121000</option>
-                <option>130500</option>
-                <option>140000</option>
-                <option>145500</option>
-              </select>
-              
-              </div>
-              <div class="form-group col-md-4">
-                <input type="text"  id="stime" class="form-control" name="s_time" > 
-              </div>
+      <div class="form-group col-md-2">
+        <label for="inputAddress">Start time</label>
+        <select id="start_time" class="form-control"   onchange="droplist()">
+        <option selected> select start time</option>
+        <option>080000</option>
+        <option>085500</option>
+        <option>095000</option>
+        <option>104500</option>
+        <option>111500</option>
+        <option>121000</option>
+        <option>130500</option>
+        <option>140000</option>
+        <option>145500</option>
+      </select>
+      
+      </div>
+        <div class="form-group col-md-4">
+        <input type="text"  id="stime" class="form-control" name="s_time" > 
+      </div>
           
             
           
-            <div class="form-group col-md-2">
-              <label for="inputState">Day</label>
-              <select id="list_day" class="form-control" onchange="getday()">
-                <option selected>select day</option>
-                <option>Monday</option>
-                <option>Tuesday</option>
-                <option>Wednesday</option>
-                <option>Thursday</option>
-                <option>Friday</option>
-                <option>Saturday</option>
-                <option>Sunday</option>
-              </select>
-            </div>
-            <div class="form-group col-md-4">
-              <input type="text"  id="day" class="form-control" name="day" > 
-            </div>
+      <div class="form-group col-md-2">
+        <label for="inputState">Day</label>
+        <select id="list_day" class="form-control" onchange="getday()">
+          <option selected>select day</option>
+          <option>Monday</option>
+          <option>Tuesday</option>
+          <option>Wednesday</option>
+          <option>Thursday</option>
+          <option>Friday</option>
+          <option>Saturday</option>
+          <option>Sunday</option>
+        </select>
+      </div>
+      <div class="form-group col-md-4">
+        <input type="text"  id="day" class="form-control" name="day" > 
+      </div>
           
-            <br>
-            <div class="form-group col-md-2">
-              <label for="inputZip">Class</label>
-              <input type="text" class="form-control" name="class">
-            </div>
+      <br>
+      <div class="form-group col-md-2">
+        <label for="inputZip">Class</label>
+        <input type="text" class="form-control" name="class">
+      </div>
           
-          <div class="form-group col-md-2">
-            <label for="inputZip">Section</label>
-            <input type="text" class="form-control" name="section" >
-          </div>
+      <div class="form-group col-md-2">
+        <label for="inputZip">Section</label>
+        <input type="text" class="form-control" name="section" >
+      </div>
         
-        <div class="form-group col-md-2">
+      <div class="form-group col-md-2">
           <label for="inputState">Timing</label>
           <select id="list_time" class="form-control" onchange="list_timing()">
-            <option selected> select timing</option>
-            <option>08:55 am to 09:50 am</option>
-            <option>09:50 am to 10:45 am</option>
-            <option>10:45 am to 11:15 am</option>
-            <option>11:15 am to 12:10 pm</option>
-            <option>12:10 pm to 01:05 pm</option>
-            <option>01:05 pm to 02:00 pm</option>
-            <option>02:00 pm to 02:55 pm</option>
-            <option>02:55 pm to 03:50 pm</option>
-            <option>(Tutorial class) 02:00 pm to 03:55 pm</option>
-
+          <option selected> select timing</option>
+          <option>08:55 am to 09:50 am</option>
+          <option>09:50 am to 10:45 am</option>
+          <option>10:45 am to 11:15 am</option>
+          <option>11:15 am to 12:10 pm</option>
+          <option>12:10 pm to 01:05 pm</option>
+          <option>01:05 pm to 02:00 pm</option>
+          <option>02:00 pm to 02:55 pm</option>
+          <option>02:55 pm to 03:50 pm</option>
+          <option>(Tutorial class) 02:00 pm to 03:55 pm</option>
           </select>
-        </div>
-        <div class="form-group col-md-4">
-          <input type="text"  id="timing" class="form-control" name="timing" > 
-        </div>
-      
-              <!-- <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="myCheck">
-                <label class="form-check-label" for="gridCheck">
-                  confirm
-                </label>
-              </div> -->
-          </div>
-          <button type="submit" class="btn btn-primary">Proceed</button>
-        </form>  
       </div>
-      </section><!-- End Features Section -->
+      <div class="form-group col-md-4">
+        <input type="text"  id="timing" class="form-control" name="timing" > 
+      </div>
+      <button type="submit" class="btn btn-primary">Proceed</button>
+    </form>  
+  </div>
+</section><!-- End Features Section -->
 
-  
-    
+      
+      <hr>
+ <br>
 
   </main><!-- End #main -->
 

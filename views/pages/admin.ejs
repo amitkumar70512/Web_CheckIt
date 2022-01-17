@@ -106,9 +106,12 @@
     <section class="contact" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
       <div class="container">
 
-        
-
-          <div class="col-lg-6">
+        <div class="row" >
+         
+          <div class="col-md-5">
+            <img src="assets/img/admin.jpg" class="img-fluid" alt="">
+          </div>
+          <div class="col-md-7 pt-4">
             
             <h4 class="card-title mt-3 text-center">Admin Log in <i class="fas fa-user"></i></h4>
 
@@ -121,7 +124,7 @@
                       </button>
                     </div>
               <% }) %>
-          <% } %>
+            <% } %>
             
           
             <form action="/verify" method="post">
@@ -140,7 +143,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                     </div>
-                    <input class="form-control" placeholder="password" type="password" name="passkey">
+                    <input class="form-control" placeholder="password" type="password" name="passkey" >
                 </div> <!-- form-group// -->
                                
                 <br>

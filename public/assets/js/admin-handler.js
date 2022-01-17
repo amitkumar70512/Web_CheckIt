@@ -1,17 +1,18 @@
 
 
 const status=0
-function feedback()
+function showfeedback()
 {
-    prompt("inside feedback")
-    
-app_fun.wow();
-
+   console.log("show feedback is called")
+   var d= document.getElementById('feedbacks');
+   d.style.visibility="visible";
+   
 }
 
-function check_faculties()
+function CRUDfaculties()
 {
-    const fid=prompt("Enter faculty id ")
+    var d=document.getElementById('facultycrud');
+    d.style.visibility="visible";
 }
 
 
@@ -23,8 +24,30 @@ function check_students()
 function check_db()
 {
     console.log("checking database")
-    app_fun.check_database();
+    
 }
 
 
+
+
+//////
+function droplist()
+{
+  var d=document.getElementById("start_time");
+  var displaytxt=d.options[d.selectedIndex].text;
+  document.getElementById("stime").value=displaytxt;
+}
+function getday()
+{
+  var d=document.getElementById("list_day");
+  var displaytxt=d.options[d.selectedIndex].text;
+  document.getElementById("day").value=displaytxt;
+}
+function list_timing()
+{
+  var d=document.getElementById("list_time");
+  var displaytxt=d.options[d.selectedIndex].text;
+  document.getElementById("timing").value=displaytxt;
+
+}
 
