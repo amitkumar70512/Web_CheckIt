@@ -54,23 +54,29 @@ let c_day=date_ob.getDay();
     let ts = Date.now();
 
     let date_ob = new Date(ts);
-     date = date_ob.getDate();
-     month = date_ob.getMonth() + 1;
-     year = date_ob.getFullYear();
+    //  date = date_ob.getDate();
+    //  month = date_ob.getMonth() + 1;
+    //  year = date_ob.getFullYear();
     
     const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     const d = new Date();
      current_day = weekday[d.getDay()];
      console.log(date_ob.getHours())
      console.log(date_ob.getMinutes())
-    let c_hours=String(date_ob.getHours()+10);
-    minutes=date_ob.getMinutes()+30;
+     let x=10;
+     if(date_ob.getMinutes()>59)x=11;
+    let c_hours=String((date_ob.getHours()+10)%24);
+    minutes=((date_ob.getMinutes()+30)%60);
     let c_minutes=String((minutes)<10?'0':'') + minutes;
      c_time=c_hours+""+c_minutes;
      console.log(minutes)
      console.log(c_hours)
      console.log(c_minutes)
     console.log("printing time  "+c_time);
+
+    ////
+
+   
 };
 
 
