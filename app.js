@@ -739,11 +739,21 @@ app.post("/scan", (req, res, next) => {
   ////
   app.post('/firedb',(req,res)=>{
      fireuid=req.body.uid;
-            
+     fires_time=req.body.s_time;
+     fireday=req.body.day;
+     fireclass=req.body.class;
+     firesection=req.body.section;
+     firetiming=req.body.timing;
 
-     console.log(fireuid)
-     
+     const writeResult =  admin.firestore().collection('faculty').doc(fireuid).collection(fireday).doc(fires_time).set({
+        class:fireclass,
+        section:firesection,
+        timing:firetiming
+        })
+        .then(function() {console.log("Document successfully written!");})
+        .catch(function(error) {console.error("Error writing document: ", error);});
 
 
-     console.log(req.body.s_time) 
+
+    
   })

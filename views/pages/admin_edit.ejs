@@ -144,6 +144,18 @@
         var displaytxt=d.options[d.selectedIndex].text;
         document.getElementById("stime").value=displaytxt;
       }
+      function getday()
+      {
+        var d=document.getElementById("list_day");
+        var displaytxt=d.options[d.selectedIndex].text;
+        document.getElementById("day").value=displaytxt;
+      }
+      function list_timing()
+      {
+        var d=document.getElementById("list_time");
+        var displaytxt=d.options[d.selectedIndex].text;
+        document.getElementById("timing").value=displaytxt;
+      }
    </script>
 
 <!-- /// -->
@@ -161,10 +173,10 @@
                 <input type="text" class="form-control" name="uid" placeholder="1bm19fa000">
               </div>
              
-              <div class="form-row">
-            <div class="form-group col-md-2">
+            
+              <div class="form-group col-md-2">
               <label for="inputAddress">Start time</label>
-              <select id="start_time" class="form-control" name="start_time"  onchange="droplist()">
+              <select id="start_time" class="form-control"   onchange="droplist()">
                 <option selected> select start time</option>
                 <option>080000</option>
                 <option>085500</option>
@@ -177,16 +189,16 @@
                 <option>145500</option>
               </select>
               
-
-            </div>
-            <div class="form-group col-md-4">
-              <input type="text"  id="stime" class="form-control" name="s_time" > 
-            </div>
-          </div>
-         
+              </div>
+              <div class="form-group col-md-4">
+                <input type="text"  id="stime" class="form-control" name="s_time" > 
+              </div>
+          
+            
+          
             <div class="form-group col-md-2">
               <label for="inputState">Day</label>
-              <select id="inputState" class="form-control">
+              <select id="list_day" class="form-control" onchange="getday()">
                 <option selected>Monday</option>
                 <option>Tuesday</option>
                 <option>Wednesday</option>
@@ -196,20 +208,24 @@
                 <option>Sunday</option>
               </select>
             </div>
+            <div class="form-group col-md-4">
+              <input type="text"  id="day" class="form-control" name="day" > 
+            </div>
+          
             <br>
             <div class="form-group col-md-2">
               <label for="inputZip">Class</label>
-              <input type="text" class="form-control" id="inputZip">
+              <input type="text" class="form-control" name="class">
             </div>
           
           <div class="form-group col-md-2">
             <label for="inputZip">Section</label>
-            <input type="text" class="form-control" >
+            <input type="text" class="form-control" name="section" >
           </div>
         
         <div class="form-group col-md-2">
           <label for="inputState">Timing</label>
-          <select id="" class="form-control">
+          <select id="list_time" class="form-control" onchange="list_timing()">
             <option selected> select timing</option>
             <option>08:55 am to 09:50 am</option>
             <option>09:50 am to 10:45 am</option>
@@ -223,7 +239,9 @@
 
           </select>
         </div>
-        
+        <div class="form-group col-md-4">
+          <input type="text"  id="timing" class="form-control" name="timing" > 
+        </div>
       
           <div class="form-group">
             <div class="form-check">
