@@ -81,7 +81,7 @@ let c_day=date_ob.getDay();
 
 
 
-var log_time=0;
+
 
 
 app.get("/admin",function(req,res){
@@ -117,7 +117,7 @@ rows=[{"subject":" ","section":" ","timing":" "}]
 async function updateCurrClass(uid,name,res)
 {
     get_time();
-      log_time=c_time;
+      
     const firestore_con  =  admin.firestore();
     if(c_time>=0855 && c_time <=0950)
     {
@@ -194,7 +194,7 @@ async function updateCurrClass(uid,name,res)
               
 ///////
             res.render('pages/faculty_welcome',{
-                log_time,
+                
                 name,
                 section1 : classes[0].section,
                 aspect1:classes[0].class,
@@ -229,7 +229,7 @@ async function updateCurrClass(uid,name,res)
              {
                 
                 res.render('pages/faculty_welcome',{
-                   log_time,
+                 
                     name,
                 section1 : classes[0].section,
                 aspect1:classes[0].class,
