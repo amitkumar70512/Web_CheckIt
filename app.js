@@ -108,7 +108,7 @@ app.get("/team",function(req,res){
 })
 
 
-let uniqueid;
+var uniqueid='';
 let scan_valid=0;
 let start_time=0,end_time=0,s_time='085500';
 
@@ -701,8 +701,8 @@ app.post("/scan", (req, res, next) => {
     var rString = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
     console.log(rString)
     get_time();
-    var currentdate=date_ob.getDate();
-    var currentday=date_ob.getDay()
+    var currentdate=date_ob.getUTCDate();
+    var currentday=date_ob.getUTCDay()
     ////// inserting random key into db
     const writeResult =  admin.firestore().collection('QR_key').doc(rString).set({
         class: rows[0].subject,
