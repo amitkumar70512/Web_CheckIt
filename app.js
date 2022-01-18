@@ -746,6 +746,13 @@ app.post("/scan", (req, res, next) => {
 
 
 /////////////////////////// for admin page ///////////
+var feeds=[
+    {
+      email: 'sahilsharan48@gmail.com',
+      name: 'SAHILSHARAN',
+      message: 'your app is running nicely and thanks for it\r\n',
+      subject: 'your app is working nice'
+    }]
   ////
   app.post('/firedb',(req,res)=>{
      fireuid=req.body.uid;
@@ -796,13 +803,7 @@ app.post("/scan", (req, res, next) => {
     const feed =  await admin.firestore().collection('feedback').get();
     classes=feed.docs.map(doc => doc.data());
     console.log(classes)
-    var feeds=[
-        {
-          email: 'sahilsharan48@gmail.com',
-          name: 'SAHILSHARAN',
-          message: 'your app is running nicely and thanks for it\r\n',
-          subject: 'your app is working nice'
-        }]
+   
     res.render('pages/admin_edit',{
         admin_name,feeds
     })
