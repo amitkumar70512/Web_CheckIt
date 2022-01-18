@@ -59,7 +59,7 @@ let c_day=date_ob.getDay();
     utcMinute=((date_ob.getUTCMinutes()+30)%60);
     console.log(utcMinute)
     let x=0;
-    if (date_ob.getUTCMinutes()==30){utcHour=utcHour+1;}
+    if (date_ob.getUTCMinutes()>29){utcHour=utcHour+1;}
     
     
     const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
