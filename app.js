@@ -20,6 +20,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 let date_ob = new Date();
+
 var app = express();  
 
 const { join } = require('path');
@@ -52,27 +53,24 @@ let c_day=date_ob.getDay();
 
  function get_time () {
     let ts = Date.now();
-
     let date_ob = new Date(ts);
     utcHour=((date_ob.getUTCHours()+5)%24);
-    console.log(utcHour)
+    ////
     utcMinute=((date_ob.getUTCMinutes()+30)%60);
-    console.log(utcMinute)
+    ///
     let x=0;
     if (date_ob.getUTCMinutes()>29){utcHour=utcHour+1;}
-    
+    ///
     
     const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     const d = new Date();
      current_day = weekday[d.getDay()];
 
-     console.log(date_ob.getHours())
-     console.log(date_ob.getMinutes())
   
     let c_minutes=String((utcMinute)<10?'0':'') + utcMinute;
      c_time=utcHour+""+c_minutes;
     
-    console.log("printing time  "+c_time);
+    console.log("printing time :"+c_time);
 
     ////
 
@@ -112,7 +110,7 @@ var uniqueid='';
 let scan_valid=0;
 let start_time=0,end_time=0,s_time='085500';
 
-rows=[{"subject":" ","section":" ","timing":" "}]
+let rows=[{"subject":'ok',"section":'ok',"timing":''}]
 
 async function updateCurrClass(uid,name,res)
 {
@@ -180,27 +178,23 @@ async function updateCurrClass(uid,name,res)
         rows[0].subject='classes are finished...'
     }
     ////
-    console.log("inside updateclass start time : "+ start_time)
-    console.log("inside update class c-time is"+ c_time)
     
-   
+    
     const liam = await firestore_con.collection('faculty').doc(uid).collection(current_day).get();
     classes=liam.docs.map(doc => doc.data());
- 
+    console.log("listing all classes on current day: : ");
     console.log(classes)
   //////
-
+ 
    
             if(c_time <1600 && c_time >0855&&c_day !=0)
           {
               
             firestore_con.collection('faculty').doc(uid).collection(current_day).doc(s_time).get().then(function(doc) {
             rows[0]=doc.data()    
-           
-            console.log("printing rows")
-            console.log("s time is ;"+ s_time)
+            console.log("current class :-: ");
             console.log(doc.data())
-            console.log(rows[0].section)
+           
             
            
               
@@ -238,7 +232,7 @@ async function updateCurrClass(uid,name,res)
             }
 
             else 
-             {
+            {
                 
                 res.render('pages/faculty_welcome',{
                  
@@ -259,14 +253,10 @@ async function updateCurrClass(uid,name,res)
                 aspect4:classes[3].class,
                 timing4: classes[3].timing,
 
-                    day:current_day,
-                    current_subject:rows[0].subject,
-                    current_section:rows[0].section,
-                   current_timing: '04:00 pm   till 08:55 am  next day'
-                   
-    
-                    
-                    })
+                day:current_day,
+                current_subject:rows[0].subject,
+                current_section:rows[0].section,
+                current_timing: '04:00 pm   till 08:55 am  next day'})
     
 
             }
@@ -281,8 +271,7 @@ app.post('/login', function(req,res,next){
     const uid=String(req.body.uid)
     const password=String(req.body.passkey)
     uniqueid=req.body.uid;
-    console.log(req.body.uid);
-    console.log(password)
+ 
     
    
     
@@ -303,11 +292,10 @@ app.post('/login', function(req,res,next){
         }
         else { // block for password matching and others
               db_pass=doc.data().password;
-              //console.log(doc.data());
-             
-             console.log(db_pass)  
+              
              bcrypt.compare(password, db_pass, function(err, result) {
-                if (!result) {// password mismatch
+                if (!result) 
+                {// password mismatch
                    
                 
                      
@@ -320,26 +308,27 @@ app.post('/login', function(req,res,next){
                           alert
                       })
    
-                 } // end of password mismatch
+                } // end of password mismatch
                 
                
               
 
-                else{ // password matched 
+                else
+                { // password matched 
                    
                     console.log("password matched");
-                    uniqueid=uid;
+                   
                     updateCurrClass(uid,doc.data().name,res);
                            ////////////////////////
                     
                
                   
                     
-                                  }// end of password matched
+                }// end of password matched
 
             });
 
-             }// end of  block for password matching and others
+         }// end of  block for password matching and others
 
 
 
@@ -694,34 +683,60 @@ function randomString(length, chars) {
     return result;
 }
 
+ function incrementClass(sec,sub){
+    // getting prev count
+    let count=0;
+    const liam =  admin.firestore().collection('students_list').doc(sec).collection('total_classes').doc(sub).get().then(doc => {
+        if (!doc.exists) { console.log('No  document!'); }
+        else {
+            console.log(doc.data())
+            count=parseInt(doc.data().total);
+            count++;
+              //// if yes , update increment count of classes 
+            const writeResult =  admin.firestore().collection('students_list').doc(sec).collection('total_classes').doc(sub).set({
+                total: count
+            })
+            .then(function() {console.log("count of current classes succesfullly done!");
+                             console.log("value of count ::"+count)
+            })
 
+            .catch(function(error) {console.error("Error writing document: ", error);});
+         }
+        })
+        .catch(err => { console.log('Error getting document', err);});
+        ///count is incremented
+        
+        console.log(count)
+    
+  
+
+}
 
 //// for qr page
 app.post("/scan", (req, res, next) => {
     var rString = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
-    console.log(rString)
     get_time();
-    var currentdate=date_ob.getUTCDate();
-    var currentday=date_ob.getUTCDay()
+  //
+    var currentdate=date_ob.toDateString();
+    var currentclass=rows[0].class;
+    var currentsection=rows[0].section;
     ////// inserting random key into db
     const writeResult =  admin.firestore().collection('QR_key').doc(rString).set({
-        class: rows[0].subject,
-        
+        class: currentclass,
         date: currentdate,
-        
-        day:currentday ,
-        
-        section: rows[0].section,
-        
+        day:current_day ,
+        section: currentsection,
         teacher_USN: uniqueid,
-        
         time: c_time,
-        
         valid: 1,
-        
-      
         })
-        .then(function() {console.log("Document successfully written!");})
+        .then(function()
+        {
+             console.log("QR key successfully written!");
+             incrementClass(currentsection,currentclass);
+
+        })
+
         .catch(function(error) {console.error("Error writing document: ", error);});
 
 
@@ -733,6 +748,8 @@ app.post("/scan", (req, res, next) => {
       res.render("pages/scan", {
         qr_code: src,
       });
+
+
     });
   });
 
