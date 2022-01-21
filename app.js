@@ -5,7 +5,6 @@ var serviceAccount = require("./privatekey.json");
 const qrcode = require("qrcode");
  
 const express = require('express');
-
 const port = process.env.PORT || 3000;
 
 const path=require('path');
@@ -33,7 +32,6 @@ app.use(bodyParser.urlencoded({
 }));
 
 
-
 app.use(express.static('public'));
   
 app.set('view engine', 'ejs');
@@ -41,9 +39,6 @@ app.set('view engine', 'ejs');
 
 // To Run the server with Port Number  
 app.listen(port,()=> console.log(`Express server is running at port no :${port}`));  
- 
-
-
   
 
 //      for date
@@ -78,9 +73,10 @@ let c_day=date_ob.getDay();
 };
 
 
+var classes={};
+var rows={};
 
-
-
+var name='';
 
 app.get("/admin",function(req,res){
     res.render('pages/admin')
@@ -92,11 +88,39 @@ app.get("/contact", function(req,res){
 app.get("/register", function(req,res){
     res.render('pages/register')
 });
-app.get("/students",function(req,res){
-    res.render('pages/students')
+app.get("/faculty_check",function(req,res){
+    res.render('pages/faculty_check')
 });
+app.get("/home",(req,res)=>{
+    console.log(name);
+    console.log(classes);
+    console.log(rows);
+    res.render('pages/faculty_welcome',{
+    name,
+    section1 : classes[0].section,
+    aspect1:classes[0].class,
+    timing1: classes[0].timing,
 
+    section2 : classes[1].section,
+    aspect2:classes[1].class,
+    timing2: classes[1].timing,
 
+    section3: classes[2].section,
+    aspect3:classes[2].class,
+    timing3: classes[2].timing,
+
+    section4: classes[3].section,
+    aspect4:classes[3].class,
+    timing4: classes[3].timing,
+
+    day:current_day,
+    current_subject:rows[0].class,
+    current_section:rows[0].section,
+    current_timing:rows[0].timing
+
+    
+    })
+})
 app.get("/", function(req,res){
     res.render('pages/login')
 });
@@ -113,8 +137,8 @@ app.get("/admin_edit",function(req,res){
 var uniqueid='';
 let scan_valid=0;
 let start_time=0,end_time=0,s_time='085500';
+rows=[{"class":'',"section":'',"timing":''}]
 
-let rows=[{"subject":'ok',"section":'ok',"timing":''}]
 
 async function updateCurrClass(uid,name,res)
 {
@@ -179,7 +203,8 @@ async function updateCurrClass(uid,name,res)
      
         s_time='160000';
          scan_valid=0;
-        rows[0].subject='classes are finished...'
+        rows[0].timing='04:00 pm to 08:55 am',
+        rows[0].class='classes are finished...'
     }
     ////
     
@@ -198,7 +223,7 @@ async function updateCurrClass(uid,name,res)
             rows[0]=doc.data()    
             console.log("current class :-: ");
             console.log(doc.data())
-           
+            
             
            
               
@@ -258,7 +283,7 @@ async function updateCurrClass(uid,name,res)
                 timing4: classes[3].timing,
 
                 day:current_day,
-                current_subject:rows[0].subject,
+                current_subject:rows[0].class,
                 current_section:rows[0].section,
                 current_timing: '04:00 pm   till 08:55 am  next day'})
     
@@ -319,7 +344,7 @@ app.post('/login', function(req,res,next){
 
                 else
                 { // password matched 
-                   
+                    name=doc.data().name;
                     console.log("password matched");
                    
                     updateCurrClass(uid,doc.data().name,res);
