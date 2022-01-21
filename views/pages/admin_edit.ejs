@@ -29,10 +29,16 @@
   <link href="assets/css/style.css" rel="stylesheet">
   <link href="assets/vendor/admin_welcome.css" rel="stylesheet">
   
-  <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-   -->
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+
+  
 </head>
 <body>
 
@@ -54,180 +60,250 @@
             <ul>
                
                 <li><a class="" href="admin">Home</a></li>
-                
-
-                <li class="dropdown"><a class='active' href="#"><span>Actions</span> <i class="bi bi-chevron-right"></i></a>
-                    <ul>
-                      <li><a onclick="showfeedback()" href="#"   title="monitor feedback">Check Feedbacks</a></li>
-                      <li><a onclick="CRUDfaculties()" href="#"  title="list faculties details">CRUD on Faculties</a></li>
-                      <li><a onclick="check_students()" href="#"  title="list Students details">Check Students</a></li>
-                     
-                      <li><button onclick="check_db()" type="submit" class="btn btn-success btn-block"> Check DB </button></li>
-                    </ul>
-                </li>
-              </ul>
-              <i class="bi bi-list mobile-nav-toggle"></i>
+            </ul>
         
       </nav><!-- .navbar -->
 
     </div>
   </header><!-- End Header -->
 
-  <main id="main">
-
-
-    <!-- ======= Contact Section ======= -->
-    <section class="breadcrumbs">
-         
-      <div class="container">
-
+<main id="main">
+<!-- ======= breadcrumbs Section c======= -->
+  <section class="breadcrumbs">
+    <div class="container">
         <div class="d-flex justify-content-between align-items-center">
-          <h2></h2>
+         
+
           <ol>
-              <li>
-            <form  action="/search" method = "post" class="form-inline">
-                
-                <input class="form-control mr-sm-2" type="search" placeholder="Search keywords" name="id" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                
-            </form>
-            </li>
-          </ol>
-          <ol>
-             
-            
-                
+  
             <li>
-              <a href="#" data-toggle="popover"  data-placement="bottom" title="Administrator" data-content="Some content inside the popover"><%= admin_name %></a>
+              <!-- <a href="#" data-toggle="popover"  data-placement="bottom" title="Administrator" data-content="Some content inside the popover"></a> -->
             </li>
                 <li>Administrator</li>
           </ol>
         </div>
         
       </div>
-    </section><!-- End Contact Section -->
-     
+  </section><!-- End breadscrumbs Section -->
+
+  <section class="breadcrumbs">
+      <div class="container">
+          <div class="d-flex justify-content-between align-items-center">
+            <h2></h2>
+            <ol>
+              <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#feedback" style="margin:3px;"> Feedbacks</button>
+              <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#facultycrud" style="margin:3px;">CRUD Faculty <i class="fas fa-wrench" tyle="color: #ffffff;"></i></button>
+              <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#allstudents"style="margin:3px;">Students  </button>
+                        <!-- Trigger the modal with a button -->
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"style="margin:3px;">Find  <i class="fab fa-searchengin fa-lg fa-spin" style="color: #ffffff;"></i> </button>
+            </ol>
+          </div>
+      </div>
+  </section>
+
+ <div id="allstudents" class="collapse">
+  <section class="features" data-aos="fade-up" date-aos-delay="300">
+    <div class="container">
+      <div class="btn-group-vertical">
+        <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#5A">5A</button>
+        <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#5B">5B</button>
+        <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#5C">5C</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+  <div class="container">
+   
+      <div id="5A" class="collapse">
+        
+        <table class="table ">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Name</th>
+              <th scope="col">USN</th>
+              <th scope="col">Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Amit Kumar</td>
+              <td>1BM19CS015</td>
+              <td>amitkumar.cs19@bmsce.ac.in</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Anisha Nair</td>
+              <td>1BM19CS000</td>
+              <td>anishanair.cs19@bmsce.ac.in</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>Aishwarya V</td>
+              <td>1BM19CS000</td>
+              <td>Aishwarya.cs19@bmsce.ac.in</td>
+            </tr>
+          </tbody>
+        </table>
+  
+      </div> 
+</div>
+
   
 
 <!-- /// -->
 <section class="features">
-  <div class="container" >
-    <div class="form-outline" id="feedbacks" style="visibility: hidden;">
-      <label class="form-label" for="textAreaExample">Queries :</label>
-      <textarea class="form-control" id="textAreaExample1" rows="5"  >
-        <% if(typeof feeds != 'undefined') { %>
-          <%= feeds %>
-      <% } %>
-      </textarea>
-      <form action="/access_feedback" method="post"><button onclick="showfeedback()" type="submit" class="btn btn-success btn-block" style="width: 25%; text-align: center;">Acess database </button></form> 
-    </div>
-    
-  </div>
-  <div class="container" id="facultycrud" style="visibility: hidden;" data-aos="fade-up">
 
-    <div class="section-title">
-          <h2>Firestore CRUD </h2>
-         
+  <!-- Modal -->
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Enter Keywords..</h4>
+        </div>
+        <div class="modal-body">
+          <form  action="/search" method = "post" class="form-inline">
+                  
+            <input class="form-control mr-sm-2" type="search" placeholder="Search keywords" name="id" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
     </div>
-    <form action="/login" method="post">
-          <% if(typeof alert != 'undefined') { %>
-            <% alert.forEach(function(error) { %>
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <%= error.msg %>
-                    <button  type="submit" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                     
-                    </button>
-                  </div>
-            <% }) %>
+  
+  <!-- end of modal -->
+
+  
+
+
+  </div><!-- end of modal-body -->
+  <!-- feedback collapse -->
+  <div id="feedback" class="collapse">
+  <div class="container" data-aos="fade-up" date-aos-delay="300">
+      <div class="form-outline" id="feedbacks" style="visibility: visible;">
+        <label class="form-label" for="textAreaExample">Queries :</label>
+        <textarea class="form-control" id="textAreaExample1" rows="5"  >
+          <% if(typeof feeds != 'undefined') { %>
+            <%= feeds %>
         <% } %>
-    </form>
-
-
-
-
-    <form action="/firedb" method="POST" class="form">
-          
-      <div class="form-group col-md-6">
-        <label for="inputEmail4">Faculty id</label>
-        <input type="text" class="form-control" name="uid" placeholder="1bm19fa000">
+        </textarea>
+        <form action="/access_feedback" method="post"><button onclick="showfeedback()" type="submit" class="btn btn-success btn-block" style="width: 25%; text-align: center;">Acess database </button></form> 
       </div>
-             
-            
-      <div class="form-group col-md-2">
-        <label for="inputAddress">Start time</label>
-        <select id="start_time" class="form-control"   onchange="droplist()">
-        <option selected> select start time</option>
-        <option>080000</option>
-        <option>085500</option>
-        <option>095000</option>
-        <option>104500</option>
-        <option>111500</option>
-        <option>121000</option>
-        <option>130500</option>
-        <option>140000</option>
-        <option>145500</option>
-      </select>
       
-      </div>
-        <div class="form-group col-md-4">
-        <input type="text"  id="stime" class="form-control" name="s_time" > 
-      </div>
-          
-            
-          
-      <div class="form-group col-md-2">
-        <label for="inputState">Day</label>
-        <select id="list_day" class="form-control" onchange="getday()">
-          <option selected>select day</option>
-          <option>Monday</option>
-          <option>Tuesday</option>
-          <option>Wednesday</option>
-          <option>Thursday</option>
-          <option>Friday</option>
-          <option>Saturday</option>
-          <option>Sunday</option>
-        </select>
-      </div>
-      <div class="form-group col-md-4">
-        <input type="text"  id="day" class="form-control" name="day" > 
-      </div>
-          
-      <br>
-      <div class="form-group col-md-2">
-        <label for="inputZip">Class</label>
-        <input type="text" class="form-control" name="class">
-      </div>
-          
-      <div class="form-group col-md-2">
-        <label for="inputZip">Section</label>
-        <input type="text" class="form-control" name="section" >
-      </div>
-        
-      <div class="form-group col-md-2">
-          <label for="inputState">Timing</label>
-          <select id="list_time" class="form-control" onchange="list_timing()">
-          <option selected> select timing</option>
-          <option>08:55 am to 09:50 am</option>
-          <option>09:50 am to 10:45 am</option>
-          <option>10:45 am to 11:15 am</option>
-          <option>11:15 am to 12:10 pm</option>
-          <option>12:10 pm to 01:05 pm</option>
-          <option>01:05 pm to 02:00 pm</option>
-          <option>02:00 pm to 02:55 pm</option>
-          <option>02:55 pm to 03:50 pm</option>
-          <option>(Tutorial class) 02:00 pm to 03:55 pm</option>
+    </div>
+  </div><!-- end of feedback collapse -->
+
+  <div id="facultycrud" class="collapse">
+    <div class="container"  data-aos="fade-up" date-aos-delay="300">
+
+      <div class="section-title"><h2>Firestore CRUD  </h2></div>
+      <form action="#" method="post">
+            <% if(typeof alert != 'undefined') { %>
+              <% alert.forEach(function(error) { %>
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                      <%= error.msg %>
+                      <button  type="submit" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      
+                      </button>
+                    </div>
+              <% }) %>
+          <% } %>
+      </form>
+      <form action="/firedb" method="POST" class="form" data-aos="fade-up" date-aos-delay="300">
+        <div class="row">    
+          <div class="form-group col-md-6">
+            <label for="inputEmail4">Faculty id</label>
+            <input type="text" class="form-control" name="uid" placeholder="1bm19fa000">
+          </div>
+                
+         <div class="row">
+          <div class="form-group col-md-2">
+            <label for="inputAddress">Start time</label>
+            <select id="start_time" class="form-control"   onchange="droplist()">
+            <option selected> select start time</option>
+            <option>080000</option>
+            <option>085500</option>
+            <option>095000</option>
+            <option>104500</option>
+            <option>111500</option>
+            <option>121000</option>
+            <option>130500</option>
+            <option>140000</option>
+            <option>145500</option>
           </select>
+          </div>
+            <div class="form-group col-md-4">
+            <input type="text"  id="stime" class="form-control" name="s_time" > 
+          </div>
+        </div>        
+                
+              
+          <div class="form-group col-md-2">
+            <label for="inputState">Day</label>
+            <select id="list_day" class="form-control" onchange="getday()">
+              <option selected>select day</option>
+              <option>Monday</option>
+              <option>Tuesday</option>
+              <option>Wednesday</option>
+              <option>Thursday</option>
+              <option>Friday</option>
+              <option>Saturday</option>
+              <option>Sunday</option>
+            </select>
+          </div>
+          <div class="form-group col-md-4">
+            <input type="text"  id="day" class="form-control" name="day" > 
+          </div>
+              
+          <br>
+          <div class="form-group col-md-2">
+            <label for="inputZip">Class</label>
+            <input type="text" class="form-control" name="class">
+          </div>
+              
+          <div class="form-group col-md-2">
+            <label for="inputZip">Section</label>
+            <input type="text" class="form-control" name="section" >
+          </div>
+            
+          <div class="form-group col-md-2">
+              <label for="inputState">Timing</label>
+              <select id="list_time" class="form-control" onchange="list_timing()">
+              <option selected> select timing</option>
+              <option>08:55 am to 09:50 am</option>
+              <option>09:50 am to 10:45 am</option>
+              <option>10:45 am to 11:15 am</option>
+              <option>11:15 am to 12:10 pm</option>
+              <option>12:10 pm to 01:05 pm</option>
+              <option>01:05 pm to 02:00 pm</option>
+              <option>02:00 pm to 02:55 pm</option>
+              <option>02:55 pm to 03:50 pm</option>
+              <option>(Tutorial class) 02:00 pm to 03:55 pm</option>
+              </select>
+          </div>
+          <div class="form-group col-md-4">
+            <input type="text"  id="timing" class="form-control" name="timing" > 
+          </div>
+          <button type="submit" class="btn btn-primary">Proceed</button>
       </div>
-      <div class="form-group col-md-4">
-        <input type="text"  id="timing" class="form-control" name="timing" > 
-      </div>
-      <button type="submit" class="btn btn-primary">Proceed</button>
-    </form>  
+      </form>  
+    </div>
   </div>
-</section><!-- End Features Section -->
+
+</section><!-- End Section -->
 
       
-      <hr>
+     
  <br>
 
   </main><!-- End #main -->
@@ -249,7 +325,7 @@
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
   <script src="assets/js/admin-handler.js"></script>
-
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 </body>
 
 </html>

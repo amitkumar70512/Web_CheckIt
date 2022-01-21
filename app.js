@@ -92,7 +92,9 @@ app.get("/contact", function(req,res){
 app.get("/register", function(req,res){
     res.render('pages/register')
 });
-
+app.get("/students",function(req,res){
+    res.render('pages/students')
+});
 
 
 app.get("/", function(req,res){
@@ -104,7 +106,9 @@ app.get("/login", function(req,res){
 app.get("/team",function(req,res){
     res.render('pages/team')
 })
-
+app.get("/admin_edit",function(req,res){
+    res.render('pages/admin_edit')
+})
 
 var uniqueid='';
 let scan_valid=0;
@@ -771,7 +775,7 @@ var feeds=[
       subject: 'your app is working nice'
     }]
   ////
-  app.post('/firedb',(req,res)=>{
+app.post('/firedb',(req,res)=>{
      fireuid=req.body.uid;
      fires_time=req.body.s_time;
      fireday=req.body.day;
@@ -808,8 +812,43 @@ var feeds=[
 
 
     
-  })
+})
 
+app.post('/addStudent',(req,res)=>{
+    fireusn=(req.body.usn).toUpperCase;
+    fireemail=req.body.email;
+    firename=req.body.name;
+    firesection=(req.body.section).toUpperCase;
+
+    const writeResult =  admin.firestore().collection('students_list').doc(firesection).collection('CLASS').doc(firesusn).set({
+        email:fireemail,
+        name:firename
+       })
+       .then(function() {console.log("Document successfully written!");
+       const errors=[
+           {msg:` Successfully inserted data of ${fireusn}`}
+       ]
+       const alert = errors
+       res.render('pages/admin_edit', {
+              admin_name,alert,feeds
+          })
+
+       })
+       .catch(function(error) {console.error("Error writing document: ", error);
+       const errors=[
+           {msg:'Failed to insert into database'}
+       ]
+       const alert = errors
+       res.render('pages/admin_edit', {
+              admin_name,feeds
+          })
+
+       });
+
+
+
+   
+})
 
 
 
