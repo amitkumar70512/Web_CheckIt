@@ -50,4 +50,9 @@ function list_timing()
   document.getElementById("timing").value=displaytxt;
 
 }
+function dropsection(){
+  var d=document.getElementById("select_section");
+  var txt=d.options[d.selectedIndex].text;
+  document.getElementById("section").value=txt;
+}
 

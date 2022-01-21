@@ -815,13 +815,13 @@ app.post('/firedb',(req,res)=>{
 })
 
 app.post('/addStudent',(req,res)=>{
-    fireusn=(req.body.usn).toUpperCase;
+    fireusn=(req.body.usn).toUpperCase();
     fireemail=req.body.email;
-    firename=req.body.name;
-    firesection=(req.body.section).toUpperCase;
+    firename=(req.body.name).toUpperCase();
+    firesection=(req.body.section).toUpperCase();
 
-    const writeResult =  admin.firestore().collection('students_list').doc(firesection).collection('CLASS').doc(firesusn).set({
-        email:fireemail,
+    const writeResult =  admin.firestore().collection('students_list').doc(firesection).collection('list').doc(fireemail).set({
+        usn:fireusn,
         name:firename
        })
        .then(function() {console.log("Document successfully written!");
