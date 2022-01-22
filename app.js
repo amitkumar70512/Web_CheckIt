@@ -92,16 +92,32 @@ app.get("/contact", function(req,res){
 app.get("/register", function(req,res){
     res.render('pages/register')
 });
-async function checkStudent()
+ function checkStudent(res)
 {    
     var c_section=rows[0].section;
     console.log(c_section);
-    const second =  await admin.firestore().collection('students_list').doc('5A').collection('list').get();
-    allStudents=second.docs.map(doc => doc.data()); 
-    console.log(allStudents)
-    return allStudents;
-}
+    var coll={};
+    var i=0;
+    admin.firestore().collection("students_list").doc("5A").collection("list").get()
+    .then(val => {
+        val.forEach(doc => {
+            console.log(doc.id, " => ", doc.data());
+            coll[i]={email:doc.id,name:doc.data().name,usn:doc.data().usn};
+            i++;
+            
+        });
+        len=Object.keys(coll).length;
+         console.log(coll)
+         res.render('pages/faculty_check',{
+             count:len,
+            Students:coll
+        })
+    });
 
+   
+    
+}
+var presentStudents={};
 async function checkPresent()
 {
    console.log("inside checkPresent")
@@ -114,15 +130,15 @@ async function checkPresent()
     console.log(presentStudents)
 }
 
-app.get("/faculty_check",function(req,res){
+app.get("/faculty_check", function(req,res){
      
-    allStudents= checkStudent();
-    console.log("listing all studetns: : ");
-    console.log(allStudents)
-   // checkPresent();
+    
+ checkStudent(res);
 
-    res.render('pages/faculty_check'
-    )
+
+   // checkPresent();   should be called by  get method
+
+    
 });
 
 app.get("/home",(req,res)=>{
@@ -777,51 +793,54 @@ function randomString(length, chars) {
 
 //// for qr page
 app.post("/scan", (req, res, next) => {
-    if(c_time>1600)
+    if(c_time>1730)
     {
         console.log("no class so no qr")
         res.render("pages/faculty_check")
         
     }
-    var rString = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
-    get_time();
-  //
-    var currentdate=date_ob.toDateString();
-    var currentclass=rows[0].class;
-    var currentsection=rows[0].section;
-    ////// inserting random key into db
-    const writeResult =  admin.firestore().collection('QR_key').doc(rString).set({
-        class: currentclass,
-        date: currentdate,
-        day:current_day ,
-        section: currentsection,
-        teacher_USN: uniqueid,
-        time: c_time,
-        valid: 1,
-        })
-        .then(function()
-        {
-             console.log("QR key successfully written!");
-            
-             incrementClass(currentsection,currentclass);
+    else{
+        var rString = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+        get_time();
+    //
+        var currentdate=date_ob.toDateString();
+        var currentclass=rows[0].class;
+        var currentsection=rows[0].section;
+        ////// inserting random key into db
+        const writeResult =  admin.firestore().collection('QR_key').doc(rString).set({
+            class: currentclass,
+            date: currentdate,
+            day:current_day ,
+            section: currentsection,
+            teacher_USN: uniqueid,
+            time: c_time,
+            valid: 1,
+            })
+            .then(function()
+            {
+                console.log("QR key successfully written!");
+                
+                incrementClass(currentsection,currentclass);
 
-             //await admin.firestore().collection('QR_key').doc(rString).delete(); 
-        })
+                //await admin.firestore().collection('QR_key').doc(rString).delete(); 
+            })
 
-        .catch(function(error) {console.error("Error writing document: ", error);});
+            .catch(function(error) {console.error("Error writing document: ", error);});
 
 
 
             //////
             var input_text=rString
-              qrcode.toDataURL(input_text, (err, src) => {
-              if (err) res.send("Something went wrong!!");
-              res.render("pages/scan", {
+            qrcode.toDataURL(input_text, (err, src) => {
+            if (err) res.send("Something went wrong!!");
+            res.render("pages/scan", {
                 qr_code: src,
-              });
+            });
 
 
             });
+
+    }
 });
 
 
