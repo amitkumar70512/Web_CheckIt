@@ -1,4 +1,4 @@
-var fun=require('../../../app');
+
 
 
 var login_status=0
@@ -16,10 +16,7 @@ function scroll_window(x,y)
 
 
 
-function take_attendance()
-{
-   
-}
+
 
 
 

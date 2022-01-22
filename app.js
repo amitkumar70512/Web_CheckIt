@@ -75,9 +75,10 @@ let c_day=date_ob.getDay();
 
 var classes={};
 var rows={};
-
+rows=[{"class":'',"section":'',"timing":''}]
+var uniqueid='';
 var name='';
-
+var today=date_ob.toDateString();
 app.get("/admin",function(req,res){
     res.render('pages/admin')
 });
@@ -88,8 +89,37 @@ app.get("/contact", function(req,res){
 app.get("/register", function(req,res){
     res.render('pages/register')
 });
+async function checkStudent()
+{    
+    var c_section=rows[0].section;
+    console.log(c_section);
+    const second =  await admin.firestore().collection('students_list').doc('5A').collection('list').get();
+    allStudents=second.docs.map(doc => doc.data()); 
+    console.log(allStudents)
+    return allStudents;
+}
+
+async function checkPresent()
+{
+   console.log("inside checkPresent")
+    var c_section=rows[0].section;
+    console.log(c_section);
+    console.log(today);
+    const present =  await admin.firestore().collection('Attendance').doc(uniqueid).collection(c_section).doc(today).collection('attended').get();
+    presentStudents=present.docs.map(doc => doc.data());
+    console.log("listing present studetns: : ");
+    console.log(presentStudents)
+}
+
 app.get("/faculty_check",function(req,res){
-    res.render('pages/faculty_check')
+     
+    allStudents= checkStudent();
+    console.log("listing all studetns: : ");
+    console.log(allStudents)
+   // checkPresent();
+
+    res.render('pages/faculty_check'
+    )
 });
 app.get("/home",(req,res)=>{
     console.log(name);
@@ -134,10 +164,10 @@ app.get("/admin_edit",function(req,res){
     res.render('pages/admin_edit')
 })
 
-var uniqueid='';
+
 let scan_valid=0;
 let start_time=0,end_time=0,s_time='085500';
-rows=[{"class":'',"section":'',"timing":''}]
+
 
 
 async function updateCurrClass(uid,name,res)
@@ -249,10 +279,9 @@ async function updateCurrClass(uid,name,res)
 
                 day:current_day,
                 current_subject:rows[0].class,
-                    current_section:rows[0].section,
-                   current_timing:rows[0].timing
-
-                
+                current_section:rows[0].section,
+                current_timing:rows[0].timing
+  
                 })
 
 
@@ -741,8 +770,13 @@ function randomString(length, chars) {
 
 }
 
+
 //// for qr page
 app.post("/scan", (req, res, next) => {
+    if(c_time>1600)
+    {
+        res.render("pages/faculty_welcome")
+    }
     var rString = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
     get_time();
   //
@@ -762,31 +796,31 @@ app.post("/scan", (req, res, next) => {
         .then(function()
         {
              console.log("QR key successfully written!");
+            
              incrementClass(currentsection,currentclass);
 
+             //await admin.firestore().collection('QR_key').doc(rString).delete(); 
         })
 
         .catch(function(error) {console.error("Error writing document: ", error);});
 
 
 
-    /////
-    var input_text=rString
-      qrcode.toDataURL(input_text, (err, src) => {
-      if (err) res.send("Something went wrong!!");
-      res.render("pages/scan", {
-        qr_code: src,
-      });
+            //////
+            var input_text=rString
+              qrcode.toDataURL(input_text, (err, src) => {
+              if (err) res.send("Something went wrong!!");
+              res.render("pages/scan", {
+                qr_code: src,
+              });
 
 
-    });
-  });
+            });
+});
 
 
 
-  app.post('/faculty_welcome',(req,res)=>{
-      res.sendFile('')
-  })
+
 
 
 
