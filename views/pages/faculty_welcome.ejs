@@ -163,7 +163,7 @@
         <div class="row">
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up">
             <div class="icon-box icon-box-pink">
-              <div class="icon"><i class="bx bxl-dribbble fa-spin"></i></div>
+              <div class="icon"><i class="bx bxl-dribbble "></i></div>
               <h4 class="title"><a href="#" class="venobox play-btn mb-4">
                 <%= section1%>
               </a></h4>
@@ -173,11 +173,25 @@
                <p class="description"><%= timing1%></p>
             </div>
           </div>
+          <style>
+            .bx:hover {  
+                transform: rotate(180deg);
+            }
+            .bx {
+                transition: transform 0.5s ease 0s;
+            }
+            .col-md-6.col-lg-3.d-flex.align-items-stretch:hover{
+              transform: translateY(20px);
+            }
+
+
+          </style>
+
 
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
             <div class="icon-box icon-box-cyan">
-              <div class="icon"><i class="bx bx-file fa-spin"></i></div>
-              <h4 class="title"><a href="#">
+              <div class="icon"><i class="bx bx-file " ></i></div>
+              <h4 class="title"><a href="#" >
               <%= section2 %>
 
             </a></h4>
@@ -190,16 +204,16 @@
 
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
             <div class="icon-box icon-box-green">
-              <div class="icon"><i class="bx bx-tachometer fa-spin"></i></div>
+              <div class="icon"><i class="bx bx-tachometer "></i></div>
               <h4 class="title"><a href="#"><%= section3 %></a></h4>
               <p class="description"><%= aspect3 %></p>
               <p class="description"><%=timing3%></p>
             </div>
           </div>
 
-          <div  onclick="demo()" class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+          <div   class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
             <div class="icon-box icon-box-blue">
-              <div class="icon"><i class="bx bx-world fa-spin"></i></div>
+              <div class="icon"><i class="bx bx-world "></i></div>
               <h4 class="title"><a href="#"><%= section4 %></a></h4>
               <p class="description"><%= aspect4 %></p>
               <p class="description"><%= timing4%></p>
@@ -264,6 +278,11 @@
             
           </div>
 
+          <style>
+            .col-lg-6.d-flex.flex-column.justify-content-center.p-5.icon-box.h4:hover{
+              transform: translateY(-20px);
+            }
+          </style>
           <div class="col-lg-6 d-flex flex-column justify-content-center p-5">
 
             <div class="icon-box">
@@ -281,14 +300,13 @@
             
              
             <hr>
-        <div class="row">
+        
         <form action="/scan" method="POST" class="form">
             
             <button type="submit" class="btn btn-primary">Generate QR Code <i class="fas fa-sync-alt fa-spin" style="color:white"></i></button>
 
         </form>
         
-      </div>
         
         </div>
 

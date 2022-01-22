@@ -82,6 +82,9 @@ var today=date_ob.toDateString();
 app.get("/admin",function(req,res){
     res.render('pages/admin')
 });
+app.get("/students",function(req,res){
+    res.render('pages/faculty_check')
+});
 
 app.get("/contact", function(req,res){
     res.render('pages/contact')
@@ -121,6 +124,7 @@ app.get("/faculty_check",function(req,res){
     res.render('pages/faculty_check'
     )
 });
+
 app.get("/home",(req,res)=>{
     console.log(name);
     console.log(classes);
@@ -775,7 +779,9 @@ function randomString(length, chars) {
 app.post("/scan", (req, res, next) => {
     if(c_time>1600)
     {
-        res.render("pages/faculty_welcome")
+        console.log("no class so no qr")
+        res.render("pages/faculty_check")
+        
     }
     var rString = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
     get_time();

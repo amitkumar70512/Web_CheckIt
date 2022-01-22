@@ -39,7 +39,14 @@
         <h2>Scan it</h2>
         <img src=<%=qr_code %> alt="QR Code" name="qrcode"   style="vertical-align:middle;margin:0px 20px"  width="80%" height="40%">
         </div>
+        <hr>
+        <form action="/students" method="get" class="form">
+            
+          <button type="submit" class="btn btn-primary">Close <i class="far fa-times-circle" style="color:white"></i><i class="fa fa-refresh fa-2x fa-spin-hover"></i></button>
+    
+      </form>
     </div>
+   
     </section>
     <script>
       window.setInterval('refresh()', 10000); 	
