@@ -77,8 +77,28 @@
      .prog{
        padding:20px;
      }
+     
 
+     .far.fa-user-circle:hover {  
+        transform: rotate(180deg);
+    }
+    .far.fa-user-circle {
+        transition: transform 0.5s ease 0s;
+        color:rgb(65, 144, 180);
+        
+    }
     
+  
+    .btn-group-horizontal.btn.btn-primary:hover{
+    color:black;
+   }
+   section.breadcrumbs button:hover{
+      transform: translateY(5px);
+     
+    }
+   section.breadcrumbs button{
+    transition: transform 0.5s ease 0.1s;
+   }
    </style>
 
 <main id="main">
@@ -125,10 +145,14 @@
     
     
      <div id="allstudents" class="collapse">
+           
       <section class="features" data-aos="fade-up" date-aos-delay="300">
         <div class="container">
+          <div class="section-title">
+            <h2><i class="far fa-user-circle fa-lg"></i></h2>
+            </div>
           <div class="btn-group-horizontal" >
-            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#5A">5A</button>
+            <button id="amit" type="button" class="btn btn-primary" data-toggle="collapse" data-target="#5A">5A</button>
             <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#5B">5B</button>
             <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#5C">5C</button>
           </div>
@@ -150,9 +174,9 @@
                 </tr>
               </thead>
               
-            <% for (var i =0; i <=count;  i++ ) { %>
+            <% for (var i =0; i <=countA;  i++ ) { %>
     
-              <% if(typeof Students[i] != 'undefined') { %>
+              <% if(typeof StudentsA[i] != 'undefined') { %>
                   
                   <tbody>
                       <tr>
@@ -160,13 +184,13 @@
                           <%=i+1%>
                         </th>
                     <td>
-                    <%=  Students[i].name%>
+                    <%=  StudentsA[i].name%>
                     </td>
                     <td>
-                    <%=  Students[i].usn%>
+                    <%=  StudentsA[i].usn%>
                     </td>
                     <td>
-                    <%=  Students[i].email%>
+                    <%=  StudentsA[i].email%>
                     </td>
                     </tr>
                     
@@ -182,8 +206,54 @@
           </div> 
     </div>
     
-      
+     <!-- for 5B  -->
+     <div class="container">
+       
+      <div id="5B" class="collapse">
+        
+        <table class="table "data-aos="fade-up" date-aos-delay="300">
+          <thead>
+            <tr>
+              <th scope="col">'5B'</th>
+              <th scope="col">Name</th>
+              <th scope="col">USN</th>
+              <th scope="col">Email</th>
+            </tr>
+          </thead>
+         
+        <% for (var i =0; i <=countB;  i++ ) { %>
+
+          <% if(typeof StudentsB[i] != 'undefined') { %>
+              
+              <tbody>
+                  <tr>
+                    <th scope="row">
+                      <%=i+1%>
+                    </th>
+                <td>
+                <%=  StudentsB[i].name%>
+                </td>
+                <td>
+                <%=  StudentsB[i].usn%>
+                </td>
+                <td>
+                <%=  StudentsB[i].email%>
+                </td>
+                </tr>
+                
+              </tbody>
+               
+          <% } %>
+         
+        <%  }%>
     
+
+        </table>
+  
+      </div> 
+</div>
+
+
     <!-- /// -->
     <section class="features">
     

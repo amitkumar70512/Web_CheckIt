@@ -96,25 +96,45 @@ app.get("/register", function(req,res){
 {    
     var c_section=rows[0].section;
     console.log(c_section);
-    var coll={};
-    var i=0;
+    var collA={};
+    var collB={}
+    var i=0,j=0;
+    var lenA=0;
+    var lenB=0;
     admin.firestore().collection("students_list").doc("5A").collection("list").get()
     .then(val => {
         val.forEach(doc => {
             console.log(doc.id, " => ", doc.data());
-            coll[i]={email:doc.id,name:doc.data().name,usn:doc.data().usn};
+            collA[i]={email:doc.id,name:doc.data().name,usn:doc.data().usn};
             i++;
             
         });
-        len=Object.keys(coll).length;
-         console.log(coll)
-         res.render('pages/faculty_check',{
-             count:len,
-            Students:coll
-        })
-    });
+        lenA = Object.keys(collA).length
+        ////////
 
+        admin.firestore().collection("students_list").doc("5B").collection("list").get()
+        .then(val2 => {
+            val2.forEach(doc => {
+                console.log(doc.id, " => ", doc.data());
+                collB[j]={email:doc.id,name:doc.data().name,usn:doc.data().usn};
+                j++;
+                
+            });
+        lenB = Object.keys(collB).length
+            
+         /////
+    
+     res.render('pages/faculty_check',{
+        countA:lenA,
+        StudentsA:collA,
+        countB:lenB,
+        StudentsB:collB
+    })
+       
+    });// end of 5B
    
+
+});  // end of 5A
     
 }
 var presentStudents={};
