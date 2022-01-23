@@ -157,12 +157,16 @@
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up">
             <div class="icon-box icon-box-pink">
               <div class="icon"><i class="bx bxl-dribbble "></i></div>
+              <% if(typeof section1 != 'undefined') { %>
               <h4 class="title"><a href="#" class="venobox play-btn mb-4">
                 <%= section1%>
               </a></h4>
+              <% } %>
+              <% if(typeof aspect1 != 'undefined') { %>
               <p class="description">
                 <%= aspect1 %>
                </p>
+               <% }%>
                <p class="description"><%= timing1%></p>
             </div>
           </div>

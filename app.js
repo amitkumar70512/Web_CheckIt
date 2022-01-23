@@ -60,7 +60,7 @@ let c_day=date_ob.getDay();
     const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     const d = new Date();
      current_day = weekday[d.getDay()];
-
+   
   
     let c_minutes=String((utcMinute)<10?'0':'') + utcMinute;
      c_time=utcHour+""+c_minutes;
@@ -78,7 +78,10 @@ var rows={};
 rows=[{"class":'',"section":'',"timing":''}]
 var uniqueid='';
 var name='';
+
 var today=date_ob.toDateString();
+
+
 app.get("/admin",function(req,res){
     res.render('pages/admin')
 });
@@ -106,7 +109,7 @@ app.get("/register", function(req,res){
     admin.firestore().collection("students_list").doc("5A").collection("list").get()
     .then(val => {
         val.forEach(doc => {
-            console.log(doc.id, " => ", doc.data());
+            
             collA[i]={email:doc.id,name:doc.data().name,usn:doc.data().usn};
             i++;
             
@@ -117,7 +120,7 @@ app.get("/register", function(req,res){
         admin.firestore().collection("students_list").doc("5B").collection("list").get()
         .then(val2 => {
             val2.forEach(doc => {
-                console.log(doc.id, " => ", doc.data());
+                
                 collB[j]={email:doc.id,name:doc.data().name,usn:doc.data().usn};
                 j++;
                 
@@ -128,7 +131,7 @@ app.get("/register", function(req,res){
         admin.firestore().collection("students_list").doc("5C").collection("list").get()
         .then(val3 => {
             val3.forEach(doc => {
-                console.log(doc.id, " => ", doc.data());
+                
                 collC[k]={email:doc.id,name:doc.data().name,usn:doc.data().usn};
                 k++;
                 
@@ -163,14 +166,9 @@ async function checkPresent()
 }
 
 app.get("/faculty_check", function(req,res){
-     
-    
+      
  checkStudent(res);
-
-
    // checkPresent();   should be called by  get method
-
-    
 });
 
 app.get("/home",(req,res)=>{
@@ -822,11 +820,17 @@ function randomString(length, chars) {
 
 }
 
+async function deletekey(key)
+{
+    console.log(key)
+    //await admin.firestore().collection('QR_key').doc(key).delete(); 
+    console.log(" key is deleted")
+}
 
 //// for qr page
 app.post("/scan", (req, res, next) => {
 
-    if(c_time>1730||current_day==="Sunday")
+    if(c_time>1730||current_day=="Sunday")
     {
         console.log("no class so no qr")
         checkStudent(res);
@@ -835,10 +839,17 @@ app.post("/scan", (req, res, next) => {
     else{
         var rString = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
         get_time();
-    //
+      var count=0;
+      var str='';
         var currentdate=date_ob.toDateString();
         var currentclass=rows[0].class;
         var currentsection=rows[0].section;
+        console.log(currentdate)
+        console.log(currentclass)
+        console.log(currentsection)
+        console.log(uniqueid)
+        console.log(c_time)
+        console.log(c_day)
         ////// inserting random key into db
         const writeResult =  admin.firestore().collection('QR_key').doc(rString).set({
             class: currentclass,
@@ -851,11 +862,12 @@ app.post("/scan", (req, res, next) => {
             })
             .then(function()
             {
+               
                 console.log("QR key successfully written!");
-                
+                 
                 incrementClass(currentsection,currentclass);
 
-                //await admin.firestore().collection('QR_key').doc(rString).delete(); 
+                
             })
 
             .catch(function(error) {console.error("Error writing document: ", error);});
