@@ -251,8 +251,53 @@
         </table>
   
       </div> 
-</div>
+     </div>
+     <!-- for 5B  -->
+     <div class="container">
+       
+      <div id="5C" class="collapse">
+        
+        <table class="table "data-aos="fade-up" date-aos-delay="300">
+          <thead>
+            <tr>
+              <th scope="col">'5C'</th>
+              <th scope="col">Name</th>
+              <th scope="col">USN</th>
+              <th scope="col">Email</th>
+            </tr>
+          </thead>
+         
+        <% for (var i =0; i <=countC;  i++ ) { %>
 
+          <% if(typeof StudentsC[i] != 'undefined') { %>
+              
+              <tbody>
+                  <tr>
+                    <th scope="row">
+                      <%=i+1%>
+                    </th>
+                <td>
+                <%=  StudentsC[i].name%>
+                </td>
+                <td>
+                <%=  StudentsC[i].usn%>
+                </td>
+                <td>
+                <%=  StudentsC[i].email%>
+                </td>
+                </tr>
+                
+              </tbody>
+               
+          <% } %>
+         
+        <%  }%>
+    
+
+        </table>
+  
+      </div> 
+     </div>
 
     <!-- /// -->
     <section class="features">

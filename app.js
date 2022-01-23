@@ -97,10 +97,12 @@ app.get("/register", function(req,res){
     var c_section=rows[0].section;
     console.log(c_section);
     var collA={};
-    var collB={}
-    var i=0,j=0;
+    var collB={};
+    var collC={};
+    var i=0,j=0,k=0;
     var lenA=0;
     var lenB=0;
+    var lenC=0;
     admin.firestore().collection("students_list").doc("5A").collection("list").get()
     .then(val => {
         val.forEach(doc => {
@@ -121,21 +123,31 @@ app.get("/register", function(req,res){
                 
             });
         lenB = Object.keys(collB).length
-            
+        
+        
+        admin.firestore().collection("students_list").doc("5C").collection("list").get()
+        .then(val3 => {
+            val3.forEach(doc => {
+                console.log(doc.id, " => ", doc.data());
+                collC[k]={email:doc.id,name:doc.data().name,usn:doc.data().usn};
+                k++;
+                
+            });
+        lenC = Object.keys(collC).length
          /////
     
      res.render('pages/faculty_check',{
         countA:lenA,
         StudentsA:collA,
         countB:lenB,
-        StudentsB:collB
+        StudentsB:collB,
+        countC:lenC,
+        StudentsC:collC
     })
        
-    });// end of 5B
-   
-
+});  // end of 5C
+});  // end of 5B
 });  // end of 5A
-    
 }
 var presentStudents={};
 async function checkPresent()
@@ -813,10 +825,11 @@ function randomString(length, chars) {
 
 //// for qr page
 app.post("/scan", (req, res, next) => {
-    if(c_time>1730)
+
+    if(c_time>1730||current_day==="Sunday")
     {
         console.log("no class so no qr")
-        res.render("pages/faculty_check")
+        checkStudent(res);
         
     }
     else{
