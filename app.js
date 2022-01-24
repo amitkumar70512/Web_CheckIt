@@ -657,7 +657,12 @@ app.post('/feedback',  [
 
 // for admin login
 var admin_name='admin';
-
+var lenA=0;
+var lenB=0;
+var lenC=0;
+var collA={};
+var collB={};
+var collC={};
 app.post('/verify',(req,res)=>{
     const key=String(req.body.admin_key)
     const password=String(req.body.passkey)
@@ -711,15 +716,9 @@ app.post('/verify',(req,res)=>{
                         admin_name=doc.data().name;
 
                             ////////////////////////
-                        
-                
-                            var collA={};
-                            var collB={};
-                            var collC={};
+                    
                             var i=0,j=0,k=0;
-                            var lenA=0;
-                            var lenB=0;
-                            var lenC=0;
+                          
                             admin.firestore().collection("students_list").doc("5A").collection("list").get()
                             .then(val => {
                                 val.forEach(doc => {
@@ -995,7 +994,16 @@ app.post('/firedb',(req,res)=>{
         ]
         const alert = errors
         res.render('pages/admin_edit', {
-               admin_name,alert,feeds
+              
+               admin_name,
+               lenfeed:0,
+               feeds:'',
+               countA:lenA,
+               StudentsA:collA,
+               countB:lenB,
+               StudentsB:collB,
+               countC:lenC,
+               StudentsC:collC
            })
 
         })
@@ -1005,7 +1013,15 @@ app.post('/firedb',(req,res)=>{
         ]
         const alert = errors
         res.render('pages/admin_edit', {
-               admin_name,feeds
+            admin_name,
+            lenfeed:0,
+            feeds:'',
+            countA:lenA,
+            StudentsA:collA,
+            countB:lenB,
+            StudentsB:collB,
+            countC:lenC,
+            StudentsC:collC
            })
 
         });
@@ -1031,7 +1047,15 @@ app.post('/addStudent',(req,res)=>{
        ]
        const alert = errors
        res.render('pages/admin_edit', {
-              admin_name,alert,feeds
+        admin_name,
+        lenfeed:0,
+        feeds:'',
+        countA:lenA,
+        StudentsA:collA,
+        countB:lenB,
+        StudentsB:collB,
+        countC:lenC,
+        StudentsC:collC
           })
 
        })
@@ -1041,7 +1065,15 @@ app.post('/addStudent',(req,res)=>{
        ]
        const alert = errors
        res.render('pages/admin_edit', {
-              admin_name,feeds
+        admin_name,
+        lenfeed:0,
+        feeds:'',
+        countA:lenA,
+        StudentsA:collA,
+        countB:lenB,
+        StudentsB:collB,
+        countC:lenC,
+        StudentsC:collC
           })
 
        });
