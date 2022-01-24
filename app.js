@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000;
 
 const path=require('path');
 const bodyParser= require('body-parser');
-const {check, validationResult}=require('express-validator');
+const {check, validationResult, checkSchema}=require('express-validator');
 const { Console } = require('console');
 const ejs = require('ejs');
 
@@ -96,7 +96,8 @@ app.get("/register", function(req,res){
     res.render('pages/register')
 });
  function checkStudent(res)
-{    
+{   
+   
     var c_section=rows[0].section;
     console.log(c_section);
     var collA={};
@@ -138,7 +139,7 @@ app.get("/register", function(req,res){
             });
         lenC = Object.keys(collC).length
          /////
-    
+     checkPresent();
      res.render('pages/faculty_check',{
         countA:lenA,
         StudentsA:collA,
@@ -153,22 +154,35 @@ app.get("/register", function(req,res){
 });  // end of 5A
 }
 var presentStudents={};
-async function checkPresent()
+ function checkPresent()
 {
    console.log("inside checkPresent")
     var c_section=rows[0].section;
     console.log(c_section);
     console.log(today);
-    const present =  await admin.firestore().collection('Attendance').doc(uniqueid).collection(c_section).doc(today).collection('attended').get();
-    presentStudents=present.docs.map(doc => doc.data());
-    console.log("listing present studetns: : ");
-    console.log(presentStudents)
+    var present={};
+    var x=0;
+    admin.firestore().collection("Attendance").doc(uniqueid).collection(c_section).doc(today).collection('attended').get()
+        .then(val => {
+            val.forEach(doc => {
+                console.log('email:'+doc.id+',name:'+doc.data().name+',usn:'+doc.data().usn)
+               // present[x]={email:doc.id,name:doc.data().name,usn:doc.data().usn};
+                k++;
+                
+            });
+        });
+        // lenC = Object.keys(collC).length
+    // const present =  await admin.firestore().collection('Attendance').doc(uniqueid).collection(c_section).doc(today).collection('attended').get();
+    // presentStudents=present.docs.map(doc => doc.data());
+    // console.log("listing present studetns: : ");
+    // console.log(presentStudents)
 }
 
 app.get("/faculty_check", function(req,res){
       
  checkStudent(res);
-   // checkPresent();   should be called by  get method
+
+    checkPresent();  // should be called by  get method
 });
 
 app.get("/home",(req,res)=>{
@@ -243,6 +257,9 @@ async function updateCurrClass(uid,name,res)
         start_time='10:45 am';
         s_time='104500';
         end_time='11:15 am'
+        rows[0].timing='10:45am   to 11:15 am';
+        rows[0].class='Tea Break';
+        rows[0].secion='';
     }
     else if(c_time >=1115 && c_time<=1210)
     {
