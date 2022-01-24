@@ -639,7 +639,7 @@ app.post('/feedback',  [
 
 
 // for admin login
-var admin_name="";
+var admin_name='admin';
 
 app.post('/verify',(req,res)=>{
     const key=String(req.body.admin_key)
@@ -687,19 +687,80 @@ app.post('/verify',(req,res)=>{
                
               
 
-                else{ // password matched 
+                else
+                { // password matched 
                    
-                    console.log("password matched");
-                    admin_name=doc.data().name;
+                        console.log("password matched");
+                        admin_name=doc.data().name;
 
-                           ////////////////////////
-                    
-               
+                            ////////////////////////
+                        
+                
+                            var collA={};
+                            var collB={};
+                            var collC={};
+                            var i=0,j=0,k=0;
+                            var lenA=0;
+                            var lenB=0;
+                            var lenC=0;
+                            admin.firestore().collection("students_list").doc("5A").collection("list").get()
+                            .then(val => {
+                                val.forEach(doc => {
+                                    
+                                    collA[i]={email:doc.id,name:doc.data().name,usn:doc.data().usn};
+                                    i++;
+                                    
+                                });
+                                lenA = Object.keys(collA).length
+                                ////////
+                
+                                admin.firestore().collection("students_list").doc("5B").collection("list").get()
+                                .then(val2 => {
+                                    val2.forEach(doc => {
+                                        
+                                        collB[j]={email:doc.id,name:doc.data().name,usn:doc.data().usn};
+                                        j++;
+                                        
+                                    });
+                                lenB = Object.keys(collB).length
+                                
+                                
+                                admin.firestore().collection("students_list").doc("5C").collection("list").get()
+                                .then(val3 => {
+                                    val3.forEach(doc => {
+                                        
+                                        collC[k]={email:doc.id,name:doc.data().name,usn:doc.data().usn};
+                                        k++;
+                                        
+                                    });
+                                lenC = Object.keys(collC).length
+                                /////
+                            
+                            /////
                     res.render('pages/admin_edit',{
-                        admin_name
+                        admin_name,
+                        lenfeed:0,
+                        feeds:'',
+                        countA:lenA,
+                        StudentsA:collA,
+                        countB:lenB,
+                        StudentsB:collB,
+                        countC:lenC,
+                        StudentsC:collC
                     })
+                           
+                        });  // end of 5C
+                        });  // end of 5B
+                        
+                
+                
+                
+                
+                   
+                
+                    });// end of  5A
                     
-                                  }// end of password matched
+                }// end of password matched
 
             });
 
@@ -896,13 +957,7 @@ app.post("/scan", (req, res, next) => {
 
 
 /////////////////////////// for admin page ///////////
-var feeds=[
-    {
-      email: 'sahilsharan48@gmail.com',
-      name: 'SAHILSHARAN',
-      message: 'your app is running nicely and thanks for it\r\n',
-      subject: 'your app is working nice'
-    }]
+var feeds={};
   ////
 app.post('/firedb',(req,res)=>{
      fireuid=req.body.uid;
@@ -986,11 +1041,84 @@ app.post('/addStudent',(req,res)=>{
 
   app.post('/access_feedback',async(req,res)=>{
     const feed =  await admin.firestore().collection('feedback').get();
-    classes=feed.docs.map(doc => doc.data());
-    console.log(classes)
-   
-    res.render('pages/admin_edit',{
-        admin_name,feeds
-    })
-  })
+    feedbacks=feed.docs.map(doc => doc.data());
+    console.log(feedbacks)
+    lenfeed = Object.keys(feedbacks).length
+    /////
+            var collA={};
+            var collB={};
+            var collC={};
+            var i=0,j=0,k=0;
+            var lenA=0;
+            var lenB=0;
+            var lenC=0;
+            admin.firestore().collection("students_list").doc("5A").collection("list").get()
+            .then(val => {
+                val.forEach(doc => {
+                    
+                    collA[i]={email:doc.id,name:doc.data().name,usn:doc.data().usn};
+                    i++;
+                    
+                });
+                lenA = Object.keys(collA).length
+                ////////
 
+                admin.firestore().collection("students_list").doc("5B").collection("list").get()
+                .then(val2 => {
+                    val2.forEach(doc => {
+                        
+                        collB[j]={email:doc.id,name:doc.data().name,usn:doc.data().usn};
+                        j++;
+                        
+                    });
+                lenB = Object.keys(collB).length
+                
+                
+                admin.firestore().collection("students_list").doc("5C").collection("list").get()
+                .then(val3 => {
+                    val3.forEach(doc => {
+                        
+                        collC[k]={email:doc.id,name:doc.data().name,usn:doc.data().usn};
+                        k++;
+                        
+                    });
+                lenC = Object.keys(collC).length
+                /////
+              /////
+            res.render('pages/admin_edit',{
+                admin_name,
+                lenfeed:lenfeed,
+                feeds:feedbacks,
+                countA:lenA,
+                StudentsA:collA,
+                countB:lenB,
+                StudentsB:collB,
+                countC:lenC,
+                StudentsC:collC
+            })
+           
+           
+        });  // end of 5C
+        });  // end of 5B
+
+    });// end of  5
+})
+
+
+  app.post('/deleteQRkey',(req,res)=>{
+      getDay=req.body.daytokey;
+      var i=0;
+        admin.firestore().collection("QR_key").where('day','==',getDay).get()
+        .then(val => {
+            val.forEach(doc => {
+                
+                garbage[i]={email:doc.id};
+                i++;
+                
+            });
+        res.render('pages/admin_edit',{
+            admin_name
+        })
+    });  
+
+})
