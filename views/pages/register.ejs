@@ -42,11 +42,11 @@
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center ">
     <div class="container d-flex justify-content-between align-items-center">
-
+     
       <div class="logo">
         <h1 class="text-light"><a href="index"><span>Checkit</span></a></h1>
       
-        <!-- <a href="index"><img src="assets/img/logo.png" alt="" class="img-fluid"></a> -->
+        
       </div>
 
       <nav id="navbar" class="navbar">
@@ -105,81 +105,75 @@
         </div>
       </section><!-- End Features Section -->
   
-    <!-- ======= Contact Section ======= -->
-    <section class="contact" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
-      <div class="container">
+      <section class="contact " data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
 
+      <div class="container py-5 h-100">
+        <div class="row d-flex align-items-center justify-content-center h-100">
+          <div class="col-md-8 col-lg-7 col-xl-6">
+            <img  src="/assets/img/signup.jpg" class="img-fluid" alt="Phone image">
+          </div>
+          <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
 
-          <div class="col-lg-6">
-            
-           <% if(typeof alert != 'undefined') { %>
+            <% if(typeof alert != 'undefined') { %>
               <% alert.forEach(function(error) { %>
                   <div class="alert alert-warning alert-dismissible fade show" role="alert">
                       <%= error.msg %>
-                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      <button  type="submit" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                       
+                      </button>
                     </div>
               <% }) %>
           <% } %>
-          <% if(typeof success!= 'undefined') { %>
-            <% success.forEach(function(error) { %>
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                   <%=  error.msg %>
-                    
-                  </div>
-            <% }) %>
-        <% } %>
-            <h4 class="card-title mt-3 text-center">Create Account</h4>
+
             <form action="/register" method="post" role="form">
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-                     </div>
-                    <input name="name" class="form-control" placeholder="Fullname" type="text">
-                </div> <!-- form-group// -->
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
-                     </div>
-                    <input name="email" class="form-control" placeholder="Email address" type="email">
-                </div> <!-- form-group// -->
-                <div class="form-group input-group">
-                  <div class="input-group-prepend">
-                      <span class="input-group-text"> <i class="fas fa-id-badge"></i> </span>
-                  </div>
-                 
-                  <input name="uid" class="form-control" placeholder="UID" type="text">
-              </div> <!-- form-group// -->
-               
+              <!-- name input -->
+              <div class="form-outline mb-4">
+                <input name="name" class="form-control "  type="text">
+                <label class="form-label" for="form1Example13">Name</label>
+              </div>
     
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-key"></i> </span>
-                    </div>
-                    <input class="form-control" placeholder="Create password" type="password" name="passkey">
-                </div> <!-- form-group// -->
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-                    </div>
-                    <input  class="form-control" placeholder="Repeat password" type="password" name="confirmpasskey">
-                </div> <!-- form-group// -->                                      
-                <div class="form-group">
-                    <button onclick="validateregister()" type="submit" class="btn btn-primary btn-block"> Create Account  </button>
-                </div> <!-- form-group// -->      
-                <p class="text-center">Have an account? <a href="login">Log In</a> </p>    
-                                                                           
+              <!-- email input -->
+              <div class="form-outline mb-4">
+                <input type="email" id="form1Example23" class="form-control "   name="email" />
+                <label class="form-label" for="form1Example23">Email</label>
+              </div>
+              <!-- uid input -->
+              <div class="form-outline mb-4">
+                <input type="text" id="form1Example23" class="form-control "   name="uid" />
+                <label class="form-label" for="form1Example23">UniqueId</label>
+              </div>
+               <!-- passone -->
+              <div class="form-outline mb-4">
+                <input type="password" id="form1Example23" class="form-control "   name="passkey" />
+                <label class="form-label" for="form1Example23">Password</label>
+              </div>
+              <!-- passtwo -->
+              <div class="form-outline mb-4">
+                <input type="password" id="form1Example23" class="form-control "   name="confirmpasskey" />
+                <label class="form-label" for="form1Example23">Confirm Password</label>
+              </div>
+              <!-- Submit button -->
+              <button type="submit" class="btn btn-primary btn-lg btn-block">Sign up</button>
+    
+              <div class="divider d-flex align-items-center my-4">
+                <p class="text-center fw-bold mx-3 mb-0 text-muted">Have an account? <a href="login">Log In</a></p>
+               
+              </div>
+             
             </form>
           </div>
-
         </div>
-
       </div>
-    </section><!-- End  Section -->
-
-   
-    <br>
-    <br>
-    <br><br>
+    </section>
+    <style>
+      .divider:after,
+      .divider:before {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: #eee;
+      }
+    </style>
 
   </main><!-- End #main -->
 
