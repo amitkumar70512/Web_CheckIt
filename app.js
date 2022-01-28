@@ -76,7 +76,7 @@ let c_day=date_ob.getDay();
 var classes={};
 var rows={};
 rows=[{"class":'',"section":'',"timing":''}]
-var uniqueid='';
+var uid='';
 var name='';
 var today=date_ob.toDateString();
  function checkStudent(res)
@@ -146,7 +146,7 @@ function checkPresent()
     console.log(today);
     var present={};
     var x=0;
-    admin.firestore().collection("Attendance").doc(uniqueid).collection(c_section).doc(today).collection('attended').get()
+    admin.firestore().collection("Attendance").doc(uid).collection(c_section).doc(today).collection('attended').get()
         .then(val => {
             val.forEach(doc => {
                 console.log('email:'+doc.id+',name:'+doc.data().name+',usn:'+doc.data().usn)
@@ -156,7 +156,7 @@ function checkPresent()
             });
         });
         // lenC = Object.keys(collC).length
-    // const present =  await admin.firestore().collection('Attendance').doc(uniqueid).collection(c_section).doc(today).collection('attended').get();
+    // const present =  await admin.firestore().collection('Attendance').doc(uid).collection(c_section).doc(today).collection('attended').get();
     // presentStudents=present.docs.map(doc => doc.data());
     // console.log("listing present studetns: : ");
     // console.log(presentStudents)
@@ -229,6 +229,12 @@ function generateAccessToken(username) {
 function authenticateToken(req, res, next) {
     console.log("inside authentication token function");
     const token =  req.headers.cookie;
+    //// for reading uid
+    const uidtoken=token && token.split("=")[2]
+    console.log(uidtoken)
+    uid=uidtoken;
+    console.log(uid)
+    ////
     const finaltoken=token && token.split('=')[1]
     console.log("finaltokenis ::");
     console.log(finaltoken);
@@ -414,7 +420,7 @@ async function updateCurrClass(uid,name,res)
 app.post('/login', function(req,res,next){
     const uid=String(req.body.uid)
     const password=String(req.body.passkey)
-    uniqueid=req.body.uid;
+    uid=req.body.uid;
     
     const firestore_con  =  admin.firestore();
     const writeResult = firestore_con.collection('faculty').doc(req.body.uid).get()
@@ -468,7 +474,9 @@ app.post('/login', function(req,res,next){
                      console.log(token)
                      
                      res.cookie("jwt_authentication",token,{ maxAge: 900000,httpOnly:true})
-                   
+                    
+                     res.cookie("uid",uid,{ maxAge: 900000,httpOnly:true})
+                     ///////
                     updateCurrClass(uid,doc.data().name,res);
                            ////////////////////////
                  
@@ -943,7 +951,7 @@ app.post("/scan", (req, res, next) => {
         console.log(currentdate)
         console.log(currentclass)
         console.log(currentsection)
-        console.log(uniqueid)
+        console.log(uid)
         console.log(c_time)
         console.log(c_day)
         ////// inserting random key into db
@@ -952,7 +960,7 @@ app.post("/scan", (req, res, next) => {
             date: currentdate,
             day:current_day ,
             section: currentsection,
-            teacher_USN: uniqueid,
+            teacher_USN: uid,
             time: c_time,
             valid: 1,
             })
