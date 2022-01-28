@@ -203,6 +203,9 @@ app.get("/", function(req,res){
 app.get("/login", function(req,res){
     res.render('pages/login')
 });
+app.get("/admin",function(req,res){
+    res.render('pages/admin')
+});
 app.get("/:id",authenticateToken, function(req,res){
    
     res.render(`pages/${req.params.id}`)
