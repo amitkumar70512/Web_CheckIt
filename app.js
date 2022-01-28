@@ -139,7 +139,7 @@ app.get("/register", function(req,res){
             });
         lenC = Object.keys(collC).length
          /////
-     checkPresent();
+     //checkPresent();
      res.render('pages/faculty_check',{
         countA:lenA,
         StudentsA:collA,
@@ -182,7 +182,7 @@ app.get("/faculty_check", function(req,res){
       
  checkStudent(res);
 
-    checkPresent();  // should be called by  get method
+    //checkPresent();  // should be called by  get method
 });
 
 app.get("/home",(req,res)=>{
@@ -321,9 +321,6 @@ async function updateCurrClass(uid,name,res)
             console.log("current class :-: ");
             console.log(doc.data())
             
-            
-           
-              
 ///////
             res.render('pages/faculty_welcome',{
                 
@@ -855,10 +852,6 @@ async function insertFormData(request){
 
 
 
-
-
-
-
 //////
 
 
@@ -906,7 +899,7 @@ async function deletekey(key)
 
 //// for qr page
 app.post("/scan", (req, res, next) => {
-
+    console.log(c_time)
     if(c_time>1730||current_day=="Sunday")
     {
         console.log("no class so no qr")
