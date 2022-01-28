@@ -197,8 +197,8 @@ app.get("/home",authenticateToken,(req,res)=>{
     
     })
 })
-app.get("/", function(req,res){
-    res.render('pages/register')
+app.get("/",authenticateToken, function(req,res){
+    updateCurrClass(uid,name,res);
 });
 app.get("/login", function(req,res){
     res.render('pages/login')
@@ -477,9 +477,9 @@ app.post('/login', function(req,res,next){
                      console.log("token is created")
                      console.log(token)
                      
-                     res.cookie("jwt_authentication",token,{ maxAge: 900000,httpOnly:true})
+                     res.cookie("jwt_authentication",token,{ maxAge: 15*24*60*60*1000,httpOnly:true})
                     
-                     res.cookie("uid",uid,{ maxAge: 900000,httpOnly:true})
+                     res.cookie("uid",uid,{ maxAge: 15*24*60*60*1000,httpOnly:true})
                      ///////
                     updateCurrClass(uid,doc.data().name,res);
                            ////////////////////////
