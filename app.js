@@ -229,6 +229,7 @@ function generateAccessToken(username) {
 function authenticateToken(req, res, next) {
     console.log("inside authentication token function");
     const token =  req.headers.cookie;
+    console.log(token)
     //// for reading uid
     const uidtoken=token && token.split("=")[2]
     console.log(uidtoken)
