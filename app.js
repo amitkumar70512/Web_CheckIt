@@ -405,7 +405,9 @@ async function updateCurrClass(uid,name,res)
 
 }
 // end  of update class
-
+app.get('/take_attendance',authenticateToken,function(req,res){
+updateCurrClass(res);
+})
 
 
 app.post('/login', function(req,res,next){
