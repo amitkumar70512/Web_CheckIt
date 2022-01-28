@@ -236,7 +236,9 @@ function authenticateToken(req, res, next) {
     uid=uidtoken;
     console.log(uid)
     ////
-    const finaltoken=token && token.split('=')[1]
+    const first_token= token && token.split(';')[0]
+    console.log(first_token)
+    const finaltoken=first_token && first_token.split('=')[1]
     console.log("finaltokenis ::");
     console.log(finaltoken);
     
