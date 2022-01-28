@@ -213,7 +213,7 @@ app.get("/contact",function(req,res){
     res.render('pages/contact')
 });
 app.get('/take_attendance',authenticateToken,function(req,res){
-    updateCurrClass(res);
+    updateCurrClass(uid,name,res);
     })
     
 app.get("/:id",authenticateToken, function(req,res){
@@ -336,7 +336,8 @@ async function updateCurrClass(uid,name,res)
         rows[0].class='classes are finished...'
     }
     ////
-    
+    console.log(uid)
+    console.log(current_day)
     
     const liam = await firestore_con.collection('faculty').doc(uid).collection(current_day).get();
     classes=liam.docs.map(doc => doc.data());
