@@ -216,24 +216,46 @@ app.get("/home",(req,res)=>{
     })
 })
 app.get("/", function(req,res){
-    res.render('pages/login')
+    res.render('pages/register')
 });
 app.get("/login", function(req,res){
     res.render('pages/login')
 });
-app.get("/team",function(req,res){
-    res.render('pages/team')
-})
-app.get("/admin_edit",function(req,res){
-    res.render('pages/admin_edit')
-})
+app.get("/:id",authenticateToken, function(req,res){
+   
+    res.render(`pages/${req.params.id}`)
+     
+ });
+//////token/////
+function generateAccessToken(username) {
+    return jwt.sign(username, process.env.TOKEN_SECRET, { expiresIn: '1800s' });
+}
+function authenticateToken(req, res, next) {
+      
+    const token =  req.headers.cookie;
+    const finaltoken=token && token.split('=')[1]
+    
+    
+    if (finaltoken == null) {
+        res.render('pages/login',{
+            alert:'Session Expired!'
+        })
+        
+        }
+        else{
+            jwt.verify(finaltoken, process.env.TOKEN_SECRET, (err, user) => {
+           
+        
+            if (err) return res.sendStatus(403)
 
+            next()
+            })
+        }
+  }
 
+////////////////////
 let scan_valid=0;
 let start_time=0,end_time=0,s_time='085500';
-
-
-
 async function updateCurrClass(uid,name,res)
 {
     get_time();
@@ -393,9 +415,6 @@ app.post('/login', function(req,res,next){
     const uid=String(req.body.uid)
     const password=String(req.body.passkey)
     uniqueid=req.body.uid;
- 
-    
-   
     
     const firestore_con  =  admin.firestore();
     const writeResult = firestore_con.collection('faculty').doc(req.body.uid).get()
@@ -439,13 +458,20 @@ app.post('/login', function(req,res,next){
                 { // password matched 
                     name=doc.data().name;
                     console.log("password matched");
+                    const user={
+                        id:uid,
+                        username:name,
+                        password:password
+                    }
+                     const token = generateAccessToken(user);
+                     console.log("token is created")
+                   
+                     
+                     res.cookie("jwt_authentication",token,{ maxAge: 900000, httpOnly: true })
                    
                     updateCurrClass(uid,doc.data().name,res);
                            ////////////////////////
-                    
-               
-                  
-                    
+                 
                 }// end of password matched
 
             });
