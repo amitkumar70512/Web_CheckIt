@@ -12,8 +12,11 @@ const bodyParser= require('body-parser');
 const {check, validationResult, checkSchema}=require('express-validator');
 const { Console } = require('console');
 const ejs = require('ejs');
-
-
+const jwt= require("jsonwebtoken");
+const dotenv = require('dotenv');
+// get config vars
+dotenv.config();
+process.env.TOKEN_SECRET;
 // for encryption
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
@@ -64,11 +67,8 @@ let c_day=date_ob.getDay();
   
     let c_minutes=String((utcMinute)<10?'0':'') + utcMinute;
      c_time=utcHour+""+c_minutes;
-    
     console.log("printing time :"+c_time);
-
     ////
-
    
 };
 
@@ -78,23 +78,7 @@ var rows={};
 rows=[{"class":'',"section":'',"timing":''}]
 var uniqueid='';
 var name='';
-
 var today=date_ob.toDateString();
-
-
-app.get("/admin",function(req,res){
-    res.render('pages/admin')
-});
-app.get("/students",function(req,res){
-    res.render('pages/faculty_check')
-});
-
-app.get("/contact", function(req,res){
-    res.render('pages/contact')
-});
-app.get("/register", function(req,res){
-    res.render('pages/register')
-});
  function checkStudent(res)
 {   
    
@@ -154,7 +138,7 @@ app.get("/register", function(req,res){
 });  // end of 5A
 }
 var presentStudents={};
- function checkPresent()
+function checkPresent()
 {
    console.log("inside checkPresent")
     var c_section=rows[0].section;
@@ -178,14 +162,12 @@ var presentStudents={};
     // console.log(presentStudents)
 }
 
-app.get("/faculty_check", function(req,res){
-      
+app.get("/faculty_check",authenticateToken, function(req,res){
  checkStudent(res);
-
-    //checkPresent();  // should be called by  get method
+//checkPresent();  // should be called by  get method
 });
 
-app.get("/home",(req,res)=>{
+app.get("/home",authenticateToken,(req,res)=>{
     console.log(name);
     console.log(classes);
     console.log(rows);
@@ -228,17 +210,23 @@ app.get("/:id",authenticateToken, function(req,res){
  });
 //////token/////
 function generateAccessToken(username) {
-    return jwt.sign(username, process.env.TOKEN_SECRET, { expiresIn: '1800s' });
+    console.log("token is geneerated");
+    return jwt.sign(username, process.env.TOKEN_SECRET, { expiresIn: '15d' });
 }
 function authenticateToken(req, res, next) {
-      
+    console.log("inside authentication token function");
     const token =  req.headers.cookie;
     const finaltoken=token && token.split('=')[1]
-    
+    console.log("finaltokenis ::");
+    console.log(finaltoken);
     
     if (finaltoken == null) {
+        const errors=[
+            {msg:'Session Expired!'}
+        ]
+        const alert = errors
         res.render('pages/login',{
-            alert:'Session Expired!'
+            alert
         })
         
         }
