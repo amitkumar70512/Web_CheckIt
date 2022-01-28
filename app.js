@@ -212,6 +212,10 @@ app.get("/admin",function(req,res){
 app.get("/contact",function(req,res){
     res.render('pages/contact')
 });
+app.get('/take_attendance',authenticateToken,function(req,res){
+    updateCurrClass(res);
+    })
+    
 app.get("/:id",authenticateToken, function(req,res){
    
     res.render(`pages/${req.params.id}`)
@@ -405,9 +409,6 @@ async function updateCurrClass(uid,name,res)
 
 }
 // end  of update class
-app.get('/take_attendance',authenticateToken,function(req,res){
-updateCurrClass(res);
-})
 
 
 app.post('/login', function(req,res,next){
