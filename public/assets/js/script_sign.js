@@ -1,14 +1,4 @@
-
-
-
-var login_status=0
-function signin()
-{
-   console.log("setting status to  on" ) 
-   login_status=1
-    
-}
-
+// scroll function controlling scroll  in faculty welocme page
 function scroll_window(x,y)
 {
    window.scrollTo(x, y);
@@ -16,19 +6,11 @@ function scroll_window(x,y)
 
 
 
+///// for cookies
 
-
-
-
-
-
-function demo()
+let x=document.cookie();
+function getCookie()
 {
-  // prompt("inside demo")
-   prompt(app_func.nameuser)
-   app_func.wow
+   console.log("printing all cookies from browser:::>");
+   console.log(x);
 }
-
-
-
-
