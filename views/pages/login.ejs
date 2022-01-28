@@ -53,9 +53,8 @@
          
            <li><a href="contact">Contact</a></li>
           <li><a href="team">Team</a></li>
-         
-         
-          <li><a class="active" id="log" href="register">Sign In</a></li>
+          
+          <li><a class="active" id="user_login" href="register">Sign In</a></li>
         </ul>
         <!-- <i class="bi bi-list mobile-nav-toggle"></i> -->
       </nav><!-- .navbar -->
@@ -99,7 +98,7 @@
                     </div>
               <% }) %>
           <% } %>
-
+          
             <form action="/login" method="post">
               <!-- uid input -->
               <div class="form-outline mb-4">
@@ -109,7 +108,7 @@
     
               <!-- Password input -->
               <div class="form-outline mb-4">
-                <input type="password" id="form1Example23" class="form-control form-control-lg"   name="passkey" />
+                <input type="password"  class="form-control form-control-lg"   name="passkey" />
                 <label class="form-label" for="form1Example23">Password</label>
               </div>
     
@@ -123,9 +122,8 @@
                 </div>
                 <a href="#!">Forgot password?</a>
               </div>
-    
               <!-- Submit button -->
-              <button onclick="getCookie()" type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
+              <button  type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
               
               <div class="divider d-flex align-items-center my-4">
                 <p class="text-center fw-bold mx-3 mb-0 text-muted">Not have an account yet? <a href="register">Register</a></p>

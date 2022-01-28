@@ -209,6 +209,9 @@ app.get("/register",function(req,res){
 app.get("/admin",function(req,res){
     res.render('pages/admin')
 });
+app.get("/contact",function(req,res){
+    res.render('pages/contact')
+});
 app.get("/:id",authenticateToken, function(req,res){
    
     res.render(`pages/${req.params.id}`)
@@ -238,7 +241,7 @@ function authenticateToken(req, res, next) {
         }
         else{
             jwt.verify(finaltoken, process.env.TOKEN_SECRET, (err, user) => {
-           
+            console.log("token matched");
         
             if (err) return res.sendStatus(403)
 
@@ -459,9 +462,9 @@ app.post('/login', function(req,res,next){
                     }
                      const token = generateAccessToken(user);
                      console.log("token is created")
-                   
+                     console.log(token)
                      
-                     res.cookie("jwt_authentication",token,{ maxAge: 900000, httpOnly: true })
+                     res.cookie("jwt_authentication",token,{ maxAge: 900000})
                    
                     updateCurrClass(uid,doc.data().name,res);
                            ////////////////////////
