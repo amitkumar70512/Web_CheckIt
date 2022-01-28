@@ -8,7 +8,7 @@ function scroll_window(x,y)
 
 ///// for cookies
 
-let x=document.cookie();
+let x=document.cookie;
 function getCookie()
 {
    console.log("printing all cookies from browser:::>");
