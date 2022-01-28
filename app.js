@@ -418,7 +418,7 @@ async function updateCurrClass(uid,name,res)
 
 
 app.post('/login', function(req,res,next){
-    const uid=String(req.body.uid)
+     uid=String(req.body.uid)
     const password=String(req.body.passkey)
     uid=req.body.uid;
     
