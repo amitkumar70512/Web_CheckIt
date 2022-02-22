@@ -58,13 +58,11 @@
             <%= name%>
           </span></a>
             <ul>
-              <li>
                 <%= name%>
-               </li>
-              
-        
-               <li><button type="button" class="btn btn-danger">Log out</button></li> 
-
+               
+               <form action="/logout" method="get" class="form">
+               <button type="button" class="btn btn-danger">Log out</button>
+               </form>
             </ul>
           </li>
 
@@ -113,7 +111,6 @@
       <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
         <span class="carousel-control-prev-icon bx bx-chevron-left" aria-hidden="true"></span>
       </a>
-
       <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
         <span class="carousel-control-next-icon bx bx-chevron-right" aria-hidden="true"></span>
       </a> -->
@@ -180,8 +177,6 @@
             .col-md-6.col-lg-3.d-flex.align-items-stretch:hover{
               transform: translateY(20px);
             }
-
-
           </style>
 
 
@@ -226,7 +221,6 @@
       img {
         opacity: 0.5;
       }
-
       img:hover {
         opacity: 1.0;
       }

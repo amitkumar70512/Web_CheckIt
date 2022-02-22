@@ -215,7 +215,15 @@ app.get("/contact",function(req,res){
 app.get('/take_attendance',authenticateToken,function(req,res){
     updateCurrClass(uid,name,res);
     })
-    
+app.get("/logout",authenticateToken,async(req,res)=>{
+    try {
+        res.clearCookie("jwt_authentication");
+        console.log("logout successfully");
+        res.render('pages/register');
+    } catch (error) {
+        res.status(500).send(errer);
+    }
+})
 app.get("/:id",authenticateToken, function(req,res){
    
     res.render(`pages/${req.params.id}`)
@@ -256,8 +264,15 @@ function authenticateToken(req, res, next) {
             jwt.verify(finaltoken, process.env.TOKEN_SECRET, (err, user) => {
             console.log("token matched");
         
-            if (err) return res.sendStatus(403)
-
+            if (err) {
+                const errors=[
+                    {msg:'Session Expired!'}
+                ]
+                const alert = errors
+                res.render('pages/login',{
+                    alert
+                })
+            }// if error occurs
             next()
             })
         }
