@@ -99,11 +99,10 @@
     transition: transform 0.5s ease 0.1s;
    }
    #presentModal{
-    position: relative;
+    position: absolute;
     width: 50%;
-    padding:20px;
+    padding:5px;
     overflow-y: auto;
-  
     left:25%;
    }
    </style>
@@ -334,6 +333,36 @@
                     <th scope="col">Email</th>
                   </tr>
                 </thead>
+                
+              <% for (var i =0; i <=countA;  i++ ) { %>
+      
+                <% if(typeof StudentsA[i] != 'undefined') { %>
+                    
+                    <tbody>
+                        <tr>
+                          <th scope="row">
+                            <%=i+1%>
+                          </th>
+                      <td>
+                      <%=  StudentsA[i].name%>
+                      </td>
+                      <td>
+                      <%=  StudentsA[i].usn%>
+                      </td>
+                      <td>
+                      <%=  StudentsA[i].email%>
+                      </td>
+                      </tr>
+                      
+                    </tbody>
+                     
+                <% } %>
+               
+              <%  }%>
+          
+                  
+
+
                 
               <% for (var i =0; i <=countA;  i++ ) { %>
       
