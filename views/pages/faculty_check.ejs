@@ -86,8 +86,16 @@
         color:rgb(65, 144, 180);
         
     }
-    
-  
+    .table .fa-solid:hover{
+      transform: rotate(180deg);
+    }
+    .table .fa-solid{
+      transition: transform 0.5s ease 0s;
+        color:rgb(2, 197, 28);
+    }
+    .table .fa-solid.fa-circle-xmark{
+      color:rgb(153, 26, 4);
+    }
     .btn-group-horizontal.btn.btn-primary:hover{
     color:black;
    }
@@ -319,18 +327,15 @@
               <h4 class="modal-title">List of present Students<i class="fa-solid fa-calendar-check"></i></h4>
             </div>
             <div class="modal-body">
-              <h1>
-                i am inside h1 , here  list of present students will be displayed <i class="fa-solid fa-user"></i>
-              </h1>
-
-
+              <h1><i class="fa-regular fa-qrcode"></i></h1>
+              
               <table class="table "data-aos="fade-up" date-aos-delay="300">
                 <thead>
                   <tr>
-                    <th scope="col">'5A'</th>
+                    <th scope="col">''</th>
                     <th scope="col">Name</th>
                     <th scope="col">USN</th>
-                    <th scope="col">Email</th>
+                    <th scope="col">Status</th>
                   </tr>
                 </thead>
                 
@@ -350,7 +355,7 @@
                       <%=  StudentsA[i].usn%>
                       </td>
                       <td>
-                      <%=  StudentsA[i].email%>
+                        <i class="fa-solid fa-circle-xmark"></i>
                       </td>
                       </tr>
                       
@@ -380,7 +385,7 @@
                       <%=  StudentsA[i].usn%>
                       </td>
                       <td>
-                      <%=  StudentsA[i].email%>
+                        <i class="fa-solid fa-check-double"></i>
                       </td>
                       </tr>
                       
