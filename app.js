@@ -364,17 +364,19 @@ async function updateCurrClass(uid,name,res)
    
             if(c_time <1600 && c_time >0800&&c_day !=0)
           {
-            if(c_time<0800&&c_time>0001){
-                rows[0].timing='',
-                t=0855-c_time;
-                rows[0].timing='classes will start in '+t+' hours ...';
-            }
+           
             firestore_con.collection('faculty').doc(uid).collection(current_day).doc(s_time).get().then(function(doc) {
             rows[0]=doc.data()    
             console.log("current class :-: ");
             console.log(doc.data())
             
-///////
+            ///////     
+             if(c_time<0800&&c_time>0001){
+               
+                t=0800-c_time;
+                rows[0].timing='classes will start in '+t+' hours ...';
+                rows[0].class='';
+            }
             res.render('pages/faculty_welcome',{
                 
                 name,
