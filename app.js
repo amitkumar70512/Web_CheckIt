@@ -77,8 +77,7 @@ let c_day=date_ob.getDay();
 var classes={};
 var rows={};
 rows=[{"class":'',"section":'',"timing":''}]
-var uid='';
-let name='';
+let name,uid;// to be used in dynamic ejs
 var today=date_ob.toDateString();
  function checkStudent(res)
 {   
@@ -361,7 +360,7 @@ async function updateCurrClass(uid,name,res)
     console.log(classes)
   //////
    console.log('name of faculty'+name);
-   
+   console.log(c_time);
             if(c_time <1600 && c_time >0800&&c_day !=0)
           {
            
@@ -371,12 +370,7 @@ async function updateCurrClass(uid,name,res)
             console.log(doc.data())
             
             ///////     
-             if(c_time<0800&&c_time>0001){
-               
-                t=0800-c_time;
-                rows[0].timing='classes will start in '+t+' hours ...';
-                rows[0].class='';
-            }
+             
             res.render('pages/faculty_welcome',{
                 
                 name,
