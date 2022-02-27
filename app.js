@@ -77,7 +77,7 @@ let c_day=date_ob.getDay();
 var classes={};
 var rows={};
 rows=[{"class":'',"section":'',"timing":''}]
-let name,uid;// to be used in dynamic ejs
+var fname,uid;// to be used in dynamic ejs
 var today=date_ob.toDateString();
  function checkStudent(res)
 {   
@@ -95,7 +95,7 @@ var today=date_ob.toDateString();
     .then(val => {
         val.forEach(doc => {
             
-            collA[i]={email:doc.id,name:doc.data().name,usn:doc.data().usn};
+            collA[i]={email:doc.id,fname:doc.data().fname,usn:doc.data().usn};
             i++;
             
         });
@@ -106,7 +106,7 @@ var today=date_ob.toDateString();
         .then(val2 => {
             val2.forEach(doc => {
                 
-                collB[j]={email:doc.id,name:doc.data().name,usn:doc.data().usn};
+                collB[j]={email:doc.id,fname:doc.data().fname,usn:doc.data().usn};
                 j++;
                 
             });
@@ -117,7 +117,7 @@ var today=date_ob.toDateString();
         .then(val3 => {
             val3.forEach(doc => {
                 
-                collC[k]={email:doc.id,name:doc.data().name,usn:doc.data().usn};
+                collC[k]={email:doc.id,fname:doc.data().fname,usn:doc.data().usn};
                 k++;
                 
             });
@@ -149,8 +149,8 @@ function checkPresent()
     admin.firestore().collection("Attendance").doc(uid).collection(c_section).doc(today).collection('attended').get()
         .then(val => {
             val.forEach(doc => {
-                console.log('email:'+doc.id+',name:'+doc.data().name+',usn:'+doc.data().usn)
-               // present[x]={email:doc.id,name:doc.data().name,usn:doc.data().usn};
+                console.log('email:'+doc.id+',fname:'+doc.data().fname+',usn:'+doc.data().usn)
+               // present[x]={email:doc.id,fname:doc.data().fname,usn:doc.data().usn};
                 k++;
                 
             });
@@ -168,11 +168,11 @@ app.get("/faculty_check",authenticateToken, function(req,res){
 });
 
 app.get("/home",authenticateToken,(req,res)=>{
-    console.log(name);
+    console.log(fname);
     console.log(classes);
     console.log(rows);
     res.render('pages/faculty_welcome',{
-    name,
+    fname,
     section1 : classes[0].section,
     aspect1:classes[0].class,
     timing1: classes[0].timing,
@@ -198,7 +198,7 @@ app.get("/home",authenticateToken,(req,res)=>{
     })
 })
 app.get("/",authenticateToken, function(req,res){
-    updateCurrClass(uid,name,res);
+    updateCurrClass(uid,fname,res);
 });
 app.get("/login", function(req,res){
     res.render('pages/login')
@@ -213,7 +213,7 @@ app.get("/contact",function(req,res){
     res.render('pages/contact')
 });
 app.get('/take_attendance',authenticateToken,function(req,res){
-    updateCurrClass(uid,name,res);
+    updateCurrClass(uid,fname,res);
     })
 app.get("/logout",authenticateToken,async(req,res)=>{
     try {
@@ -281,7 +281,7 @@ function authenticateToken(req, res, next) {
 ////////////////////
 let scan_valid=0;
 let start_time=0,end_time=0,s_time='085500';
-async function updateCurrClass(uid,name,res)
+async function updateCurrClass(uid,fname,res)
 {
     get_time();
       
@@ -359,8 +359,13 @@ async function updateCurrClass(uid,name,res)
     console.log("listing all classes on current day: : ");
     console.log(classes)
   //////
-   console.log('name of faculty'+name);
+   console.log('fname of faculty'+fname);
    console.log(c_time);
+   if(c_day==0)
+   {
+    rows[0].timing='NO CLASSES TODAY';
+    rows[0].class=''
+   }
             if(c_time <1600 && c_time >0800&&c_day !=0)
           {
            
@@ -373,7 +378,7 @@ async function updateCurrClass(uid,name,res)
              
             res.render('pages/faculty_welcome',{
                 
-                name,
+                fname,
                 section1 : classes[0].section,
                 aspect1:classes[0].class,
                 timing1: classes[0].timing,
@@ -406,16 +411,18 @@ async function updateCurrClass(uid,name,res)
             else 
             {
                 if(c_time<0800&&c_time>0001){
+                    console.log("inside else block")
+                    
                     rows[0].timing='',
                     t=0855-c_time;
                     rows[0].timing='classes will start in '+t+' hours ...';
                 }
-                else{
+                else {
                     rows[0].timing='04:00 pm   till 08:55 am  next day';
                 }
                 res.render('pages/faculty_welcome',{
                  
-                    name,
+                    fname,
                 section1 : classes[0].section,
                 aspect1:classes[0].class,
                 timing1: classes[0].timing,
@@ -492,11 +499,11 @@ app.post('/login', function(req,res,next){
 
                 else
                 { // password matched 
-                    name=doc.data().name;
+                    fname=doc.data().fname;
                     console.log("password matched");
                     const user={
                         id:uid,
-                        username:name,
+                        username:fname,
                         password:password
                     }
                      const token = generateAccessToken(user);
@@ -507,7 +514,7 @@ app.post('/login', function(req,res,next){
                     
                      res.cookie("uid",uid,{ maxAge: 15*24*60*60*1000,httpOnly:true})
                      ///////
-                    updateCurrClass(uid,doc.data().name,res);
+                    updateCurrClass(uid,doc.data().fname,res);
                            ////////////////////////
                  
                 }// end of password matched
@@ -545,7 +552,7 @@ app.post('/login', function(req,res,next){
 
 // for register.ejs
 app.post('/register', [
-    check('name', 'Please enter valid username without space..')
+    check('fname', 'Please enter valid username without space..')
         .exists()
         .isLength({ min: 3 })
         .isAlpha(),
@@ -585,7 +592,7 @@ app.post('/register', [
     else{// if no errors
        
     
-        console.log(req.body.name);
+        console.log(req.body.fname);
         console.log(req.body.email);
         console.log(req.body.uid);
         console.log(req.body.passkey);
@@ -599,7 +606,7 @@ app.post('/register', [
 
 
         const writeResult = await admin.firestore().collection('faculty').doc(req.body.uid).set({
-            name: req.body.name,
+            fname: req.body.fname,
             email: req.body.email,
             
             password: encryptkey
@@ -634,7 +641,7 @@ app.post('/register', [
 // working fine
 
 app.post('/feedback',  [
-    check('name', 'Please enter valid username without space..')
+    check('fname', 'Please enter valid username without space..')
         .exists()
         .isLength({ min: 3 })
         .isAlpha(),
@@ -672,8 +679,8 @@ app.post('/feedback',  [
 
 
 
-        const writeResult = await admin.firestore().collection('feedback').doc(req.body.name+" "+ req.body.subject).set({
-            name: req.body.name,
+        const writeResult = await admin.firestore().collection('feedback').doc(req.body.fname+" "+ req.body.subject).set({
+            fname: req.body.fname,
             email: req.body.email,
             subject: req.body.subject,
             message: req.body.message
@@ -683,7 +690,7 @@ app.post('/feedback',  [
                 console.log("feedback inserted succesfully using node");
                 const errors=[
                     
-                    {msg:"Thank you '" + req.body.name.toUpperCase() + "'  for contacting us...."}
+                    {msg:"Thank you '" + req.body.fname.toUpperCase() + "'  for contacting us...."}
                 ]
                 const message = errors
                 res.render('pages/contact', {
@@ -774,7 +781,7 @@ app.post('/verify',(req,res)=>{
                 { // password matched 
                    
                         console.log("password matched");
-                        admin_name=doc.data().name;
+                        admin_name=doc.data().fname;
 
                             ////////////////////////
                     
@@ -784,7 +791,7 @@ app.post('/verify',(req,res)=>{
                             .then(val => {
                                 val.forEach(doc => {
                                     
-                                    collA[i]={email:doc.id,name:doc.data().name,usn:doc.data().usn};
+                                    collA[i]={email:doc.id,fname:doc.data().fname,usn:doc.data().usn};
                                     i++;
                                     
                                 });
@@ -795,7 +802,7 @@ app.post('/verify',(req,res)=>{
                                 .then(val2 => {
                                     val2.forEach(doc => {
                                         
-                                        collB[j]={email:doc.id,name:doc.data().name,usn:doc.data().usn};
+                                        collB[j]={email:doc.id,fname:doc.data().fname,usn:doc.data().usn};
                                         j++;
                                         
                                     });
@@ -806,7 +813,7 @@ app.post('/verify',(req,res)=>{
                                 .then(val3 => {
                                     val3.forEach(doc => {
                                         
-                                        collC[k]={email:doc.id,name:doc.data().name,usn:doc.data().usn};
+                                        collC[k]={email:doc.id,fname:doc.data().fname,usn:doc.data().usn};
                                         k++;
                                         
                                     });
@@ -905,7 +912,7 @@ admin.initializeApp({
 ///  inserting data
 async function insertFormData(request){
     const writeResult = await admin.firestore().collection('faculty').add({
-    name: request.body.name,
+    fname: request.body.fname,
     email: request.body.email,
     uid: request.body.uid,
     password: request.body.passkey
@@ -1091,12 +1098,12 @@ app.post('/firedb',(req,res)=>{
 app.post('/addStudent',(req,res)=>{
     fireusn=(req.body.usn).toUpperCase();
     fireemail=req.body.email;
-    firename=(req.body.name).toUpperCase();
+    firename=(req.body.fname).toUpperCase();
     firesection=(req.body.section).toUpperCase();
 
     const writeResult =  admin.firestore().collection('students_list').doc(firesection).collection('list').doc(fireemail).set({
         usn:fireusn,
-        name:firename
+        fname:firename
        })
        .then(function() {console.log("Document successfully written!");
        const errors=[
@@ -1162,7 +1169,7 @@ app.post('/addStudent',(req,res)=>{
             .then(val => {
                 val.forEach(doc => {
                     
-                    collA[i]={email:doc.id,name:doc.data().name,usn:doc.data().usn};
+                    collA[i]={email:doc.id,fname:doc.data().fname,usn:doc.data().usn};
                     i++;
                     
                 });
@@ -1173,7 +1180,7 @@ app.post('/addStudent',(req,res)=>{
                 .then(val2 => {
                     val2.forEach(doc => {
                         
-                        collB[j]={email:doc.id,name:doc.data().name,usn:doc.data().usn};
+                        collB[j]={email:doc.id,fname:doc.data().fname,usn:doc.data().usn};
                         j++;
                         
                     });
@@ -1184,7 +1191,7 @@ app.post('/addStudent',(req,res)=>{
                 .then(val3 => {
                     val3.forEach(doc => {
                         
-                        collC[k]={email:doc.id,name:doc.data().name,usn:doc.data().usn};
+                        collC[k]={email:doc.id,fname:doc.data().fname,usn:doc.data().usn};
                         k++;
                         
                     });
