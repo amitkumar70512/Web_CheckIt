@@ -96,6 +96,10 @@
     .table .fa-solid.fa-circle-xmark{
       color:rgb(153, 26, 4);
     }
+    .fa-solid.fa-calendar-check{
+      color:rgb(34, 93, 128);
+      font-size: medium;
+    }
     .btn-group-horizontal.btn.btn-primary:hover{
     color:black;
    }
@@ -108,10 +112,10 @@
    }
    #presentModal{
     position: absolute;
-    width: 50%;
+    width: 60%;
     padding:5px;
     overflow-y: auto;
-    left:25%;
+    left:20%;
    }
    </style>
 
@@ -324,17 +328,17 @@
           <div class="modal-content">
             <div class="modal-header">
               
-              <h4 class="modal-title">List of present Students<i class="fa-solid fa-calendar-check"></i></h4>
+              <h4 class="modal-title">List of present Students  <i class="fa-solid fa-calendar-check"></i></h4>
             </div>
             <div class="modal-body">
-              <h1><i class="fa-regular fa-qrcode"></i></h1>
+              <i class="fa-regular fa-qrcode"></i>
               
               <table class="table "data-aos="fade-up" date-aos-delay="300">
                 <thead>
                   <tr>
                     <th scope="col">''</th>
-                    <th scope="col">Name</th>
                     <th scope="col">USN</th>
+                    <th scope="col">Name</th>
                     <th scope="col">Status</th>
                   </tr>
                 </thead>
@@ -349,10 +353,10 @@
                             <%=i+1%>
                           </th>
                       <td>
-                      <%=  StudentsA[i].name%>
+                      <%=  StudentsA[i].usn%>
                       </td>
                       <td>
-                      <%=  StudentsA[i].usn%>
+                      <%=  StudentsA[i].name%>
                       </td>
                       <td>
                         <i class="fa-solid fa-circle-xmark"></i>
@@ -379,10 +383,10 @@
                             <%=i+1%>
                           </th>
                       <td>
-                      <%=  StudentsA[i].name%>
+                      <%=  StudentsA[i].usn%>
                       </td>
                       <td>
-                      <%=  StudentsA[i].usn%>
+                      <%=  StudentsA[i].name%>
                       </td>
                       <td>
                         <i class="fa-solid fa-check-double"></i>
