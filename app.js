@@ -95,7 +95,7 @@ var today=date_ob.toDateString();
     .then(val => {
         val.forEach(doc => {
             
-            collA[i]={email:doc.id,fname:doc.data().name,usn:doc.data().usn};
+            collA[i]={email:doc.id,name:doc.data().name,usn:doc.data().usn};
             i++;
             
         });
@@ -106,7 +106,7 @@ var today=date_ob.toDateString();
         .then(val2 => {
             val2.forEach(doc => {
                 
-                collB[j]={email:doc.id,fname:doc.data().name,usn:doc.data().usn};
+                collB[j]={email:doc.id,name:doc.data().name,usn:doc.data().usn};
                 j++;
                 
             });
@@ -117,7 +117,7 @@ var today=date_ob.toDateString();
         .then(val3 => {
             val3.forEach(doc => {
                 
-                collC[k]={email:doc.id,fname:doc.data().name,usn:doc.data().usn};
+                collC[k]={email:doc.id,name:doc.data().name,usn:doc.data().usn};
                 k++;
                 
             });
@@ -149,8 +149,8 @@ function checkPresent()
     admin.firestore().collection("Attendance").doc(uid).collection(c_section).doc(today).collection('attended').get()
         .then(val => {
             val.forEach(doc => {
-                console.log('email:'+doc.id+',fname:'+doc.data().name+',usn:'+doc.data().usn)
-               // present[x]={email:doc.id,fname:doc.data().name,usn:doc.data().usn};
+                console.log('email:'+doc.id+',name:'+doc.data().name+',usn:'+doc.data().usn)
+               // present[x]={email:doc.id,name:doc.data().name,usn:doc.data().usn};
                 k++;
                 
             });
@@ -777,7 +777,7 @@ app.post('/verify',(req,res)=>{
                             .then(val => {
                                 val.forEach(doc => {
                                     
-                                    collA[i]={email:doc.id,fname:doc.data().name,usn:doc.data().usn};
+                                    collA[i]={email:doc.id,name:doc.data().name,usn:doc.data().usn};
                                     i++;
                                     
                                 });
@@ -788,7 +788,7 @@ app.post('/verify',(req,res)=>{
                                 .then(val2 => {
                                     val2.forEach(doc => {
                                         
-                                        collB[j]={email:doc.id,fname:doc.data().name,usn:doc.data().usn};
+                                        collB[j]={email:doc.id,name:doc.data().name,usn:doc.data().usn};
                                         j++;
                                         
                                     });
@@ -799,7 +799,7 @@ app.post('/verify',(req,res)=>{
                                 .then(val3 => {
                                     val3.forEach(doc => {
                                         
-                                        collC[k]={email:doc.id,fname:doc.data().name,usn:doc.data().usn};
+                                        collC[k]={email:doc.id,name:doc.data().name,usn:doc.data().usn};
                                         k++;
                                         
                                     });
@@ -898,7 +898,7 @@ admin.initializeApp({
 ///  inserting data
 async function insertFormData(request){
     const writeResult = await admin.firestore().collection('faculty').add({
-    fname: request.body.fname,
+    name: request.body.fname,
     email: request.body.email,
     uid: request.body.uid,
     password: request.body.passkey
@@ -1089,7 +1089,7 @@ app.post('/addStudent',(req,res)=>{
 
     const writeResult =  admin.firestore().collection('students_list').doc(firesection).collection('list').doc(fireemail).set({
         usn:fireusn,
-        fname:firename
+        name:firename
        })
        .then(function() {console.log("Document successfully written!");
        const errors=[
@@ -1155,7 +1155,7 @@ app.post('/addStudent',(req,res)=>{
             .then(val => {
                 val.forEach(doc => {
                     
-                    collA[i]={email:doc.id,fname:doc.data().name,usn:doc.data().usn};
+                    collA[i]={email:doc.id,name:doc.data().name,usn:doc.data().usn};
                     i++;
                     
                 });
@@ -1166,7 +1166,7 @@ app.post('/addStudent',(req,res)=>{
                 .then(val2 => {
                     val2.forEach(doc => {
                         
-                        collB[j]={email:doc.id,fname:doc.data().name,usn:doc.data().usn};
+                        collB[j]={email:doc.id,name:doc.data().name,usn:doc.data().usn};
                         j++;
                         
                     });
@@ -1177,7 +1177,7 @@ app.post('/addStudent',(req,res)=>{
                 .then(val3 => {
                     val3.forEach(doc => {
                         
-                        collC[k]={email:doc.id,fname:doc.data().name,usn:doc.data().usn};
+                        collC[k]={email:doc.id,name:doc.data().name,usn:doc.data().usn};
                         k++;
                         
                     });
