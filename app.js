@@ -375,7 +375,7 @@ async function updateCurrClass(uid,fname,res)
             ///////     
              
             res.render('pages/faculty_welcome',{
-                
+                uid,
                 fname,
                 section1 : classes[0].section,
                 aspect1:classes[0].class,
@@ -419,7 +419,7 @@ async function updateCurrClass(uid,fname,res)
                     rows[0].timing='04:00 pm   till 08:55 am  next day';
                 }
                 res.render('pages/faculty_welcome',{
-                 
+                uid,
                 fname,
                 section1 : classes[0].section,
                 aspect1:classes[0].class,
