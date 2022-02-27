@@ -392,7 +392,8 @@ async function updateCurrClass(uid,name,res)
                 day:current_day,
                 current_subject:rows[0].class,
                 current_section:rows[0].section,
-                current_timing:rows[0].timing
+                current_timing:rows[0].timing,
+                current_time:c_time
   
                 })
 
