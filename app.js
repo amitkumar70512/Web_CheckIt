@@ -172,6 +172,7 @@ app.get("/home",authenticateToken,(req,res)=>{
     console.log(classes);
     console.log(rows);
     res.render('pages/faculty_welcome',{
+    uid,
     fname,
     section1 : classes[0].section,
     aspect1:classes[0].class,
