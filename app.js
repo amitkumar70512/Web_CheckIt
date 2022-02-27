@@ -427,7 +427,9 @@ async function updateCurrClass(uid,name,res)
                 day:current_day,
                 current_subject:rows[0].class,
                 current_section:rows[0].section,
-                current_timing: '04:00 pm   till 08:55 am  next day'})
+                current_timing: '04:00 pm   till 08:55 am  next day',
+                current_time:c_time
+            })
     
 
             }
