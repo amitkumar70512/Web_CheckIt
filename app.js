@@ -47,6 +47,7 @@ app.listen(port,()=> console.log(`Express server is running at port no :${port}`
 //      for date
 
 let date,month,year,current_day,c_time;// global
+
 let c_day=date_ob.getDay();
 
  function get_time () {
@@ -361,7 +362,7 @@ async function updateCurrClass(uid,name,res)
   //////
  
    
-            if(c_time <1600 && c_time >0855&&c_day !=0)
+            if(c_time <1600 && c_time >0800&&c_day !=0)
           {
               
             firestore_con.collection('faculty').doc(uid).collection(current_day).doc(s_time).get().then(function(doc) {
@@ -404,7 +405,11 @@ async function updateCurrClass(uid,name,res)
 
             else 
             {
-                
+                if(c_time<0800&&c_time>0001){
+                    rows[0].timing='',
+                    t=0855-c_time;
+                    rows[0].class='classes will start in '+t+' hours ...';
+                }
                 res.render('pages/faculty_welcome',{
                  
                     name,
