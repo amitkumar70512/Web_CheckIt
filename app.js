@@ -63,7 +63,7 @@ let c_day=date_ob.getDay();
     
     const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     const d = new Date();
-     current_day = weekday[d.getDay()];
+     current_day = weekday[d.getDay()+1];
     
     let c_hour=String((utcHour)<10?'0':'')+utcHour;
     let c_minutes=String((utcMinute)<10?'0':'') + utcMinute;
@@ -360,7 +360,7 @@ async function updateCurrClass(uid,name,res)
     console.log("listing all classes on current day: : ");
     console.log(classes)
   //////
- 
+   console.log('name of faculty'+name);
    
             if(c_time <1600 && c_time >0800&&c_day !=0)
           {
@@ -408,7 +408,10 @@ async function updateCurrClass(uid,name,res)
                 if(c_time<0800&&c_time>0001){
                     rows[0].timing='',
                     t=0855-c_time;
-                    rows[0].class='classes will start in '+t+' hours ...';
+                    rows[0].timing='classes will start in '+t+' hours ...';
+                }
+                else{
+                    rows[0].timing='04:00 pm   till 08:55 am  next day';
                 }
                 res.render('pages/faculty_welcome',{
                  
