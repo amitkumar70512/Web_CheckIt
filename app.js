@@ -95,7 +95,7 @@ var today=date_ob.toDateString();
     .then(val => {
         val.forEach(doc => {
             
-            collA[i]={email:doc.id,fname:doc.data().fname,usn:doc.data().usn};
+            collA[i]={email:doc.id,fname:doc.data().name,usn:doc.data().usn};
             i++;
             
         });
@@ -106,7 +106,7 @@ var today=date_ob.toDateString();
         .then(val2 => {
             val2.forEach(doc => {
                 
-                collB[j]={email:doc.id,fname:doc.data().fname,usn:doc.data().usn};
+                collB[j]={email:doc.id,fname:doc.data().name,usn:doc.data().usn};
                 j++;
                 
             });
@@ -117,7 +117,7 @@ var today=date_ob.toDateString();
         .then(val3 => {
             val3.forEach(doc => {
                 
-                collC[k]={email:doc.id,fname:doc.data().fname,usn:doc.data().usn};
+                collC[k]={email:doc.id,fname:doc.data().name,usn:doc.data().usn};
                 k++;
                 
             });
@@ -149,8 +149,8 @@ function checkPresent()
     admin.firestore().collection("Attendance").doc(uid).collection(c_section).doc(today).collection('attended').get()
         .then(val => {
             val.forEach(doc => {
-                console.log('email:'+doc.id+',fname:'+doc.data().fname+',usn:'+doc.data().usn)
-               // present[x]={email:doc.id,fname:doc.data().fname,usn:doc.data().usn};
+                console.log('email:'+doc.id+',fname:'+doc.data().name+',usn:'+doc.data().usn)
+               // present[x]={email:doc.id,fname:doc.data().name,usn:doc.data().usn};
                 k++;
                 
             });
@@ -240,9 +240,7 @@ function authenticateToken(req, res, next) {
     console.log(token)
     //// for reading uid
     const uidtoken=token && token.split("=")[2]
-    console.log(uidtoken)
     uid=uidtoken;
-    console.log(uid)
     ////
     const first_token= token && token.split(';')[0]
     console.log(first_token)
@@ -442,7 +440,7 @@ async function updateCurrClass(uid,fname,res)
                 day:current_day,
                 current_subject:rows[0].class,
                 current_section:rows[0].section,
-                current_timing: '04:00 pm   till 08:55 am  next day',
+                current_timing: rows[0].timing,
                 current_time:c_time
             })
     
@@ -499,12 +497,11 @@ app.post('/login', function(req,res,next){
 
                 else
                 { // password matched 
-                    fname=doc.data().fname;
+                    fname=doc.data().name;
                     console.log("password matched");
                     const user={
                         id:uid,
-                        username:fname,
-                        password:password
+                        username:fname
                     }
                      const token = generateAccessToken(user);
                      console.log("token is created")
@@ -514,7 +511,7 @@ app.post('/login', function(req,res,next){
                     
                      res.cookie("uid",uid,{ maxAge: 15*24*60*60*1000,httpOnly:true})
                      ///////
-                    updateCurrClass(uid,doc.data().fname,res);
+                    updateCurrClass(uid,doc.data().name,res);
                            ////////////////////////
                  
                 }// end of password matched
@@ -592,21 +589,15 @@ app.post('/register', [
     else{// if no errors
        
     
-        console.log(req.body.fname);
+        console.log(req.body.name);
         console.log(req.body.email);
         console.log(req.body.uid);
         console.log(req.body.passkey);
        
     
         const encryptkey = await bcrypt.hash(req.body.passkey, saltRounds)
-        ////
-
-        
-
-
-
         const writeResult = await admin.firestore().collection('faculty').doc(req.body.uid).set({
-            fname: req.body.fname,
+            name: req.body.name,
             email: req.body.email,
             
             password: encryptkey
@@ -621,7 +612,7 @@ app.post('/register', [
                 // Already exist 
                         console.log("error in inserting")
                         const errors=[
-                             {msg:'Request Denied !! Uable to registet.'}
+                             {msg:'Request Denied !! Uable to register...'}
                          ]
                          const alert = errors
                          res.render('pages/register', {
@@ -641,7 +632,7 @@ app.post('/register', [
 // working fine
 
 app.post('/feedback',  [
-    check('fname', 'Please enter valid username without space..')
+    check('name', 'Please enter valid username without space..')
         .exists()
         .isLength({ min: 3 })
         .isAlpha(),
@@ -671,16 +662,9 @@ app.post('/feedback',  [
     }
     else
     {
-      
-        
-      
-    
-       
 
-
-
-        const writeResult = await admin.firestore().collection('feedback').doc(req.body.fname+" "+ req.body.subject).set({
-            fname: req.body.fname,
+        const writeResult = await admin.firestore().collection('feedback').doc(req.body.name+" "+ req.body.subject).set({
+            name: req.body.name,
             email: req.body.email,
             subject: req.body.subject,
             message: req.body.message
@@ -690,7 +674,7 @@ app.post('/feedback',  [
                 console.log("feedback inserted succesfully using node");
                 const errors=[
                     
-                    {msg:"Thank you '" + req.body.fname.toUpperCase() + "'  for contacting us...."}
+                    {msg:"Thank you '" + req.body.name.toUpperCase() + "'  for contacting us...."}
                 ]
                 const message = errors
                 res.render('pages/contact', {
@@ -781,7 +765,7 @@ app.post('/verify',(req,res)=>{
                 { // password matched 
                    
                         console.log("password matched");
-                        admin_name=doc.data().fname;
+                        admin_name=doc.data().name;
 
                             ////////////////////////
                     
@@ -791,7 +775,7 @@ app.post('/verify',(req,res)=>{
                             .then(val => {
                                 val.forEach(doc => {
                                     
-                                    collA[i]={email:doc.id,fname:doc.data().fname,usn:doc.data().usn};
+                                    collA[i]={email:doc.id,fname:doc.data().name,usn:doc.data().usn};
                                     i++;
                                     
                                 });
@@ -802,7 +786,7 @@ app.post('/verify',(req,res)=>{
                                 .then(val2 => {
                                     val2.forEach(doc => {
                                         
-                                        collB[j]={email:doc.id,fname:doc.data().fname,usn:doc.data().usn};
+                                        collB[j]={email:doc.id,fname:doc.data().name,usn:doc.data().usn};
                                         j++;
                                         
                                     });
@@ -813,7 +797,7 @@ app.post('/verify',(req,res)=>{
                                 .then(val3 => {
                                     val3.forEach(doc => {
                                         
-                                        collC[k]={email:doc.id,fname:doc.data().fname,usn:doc.data().usn};
+                                        collC[k]={email:doc.id,fname:doc.data().name,usn:doc.data().usn};
                                         k++;
                                         
                                     });
@@ -1098,7 +1082,7 @@ app.post('/firedb',(req,res)=>{
 app.post('/addStudent',(req,res)=>{
     fireusn=(req.body.usn).toUpperCase();
     fireemail=req.body.email;
-    firename=(req.body.fname).toUpperCase();
+    firename=(req.body.name).toUpperCase();
     firesection=(req.body.section).toUpperCase();
 
     const writeResult =  admin.firestore().collection('students_list').doc(firesection).collection('list').doc(fireemail).set({
@@ -1169,7 +1153,7 @@ app.post('/addStudent',(req,res)=>{
             .then(val => {
                 val.forEach(doc => {
                     
-                    collA[i]={email:doc.id,fname:doc.data().fname,usn:doc.data().usn};
+                    collA[i]={email:doc.id,fname:doc.data().name,usn:doc.data().usn};
                     i++;
                     
                 });
@@ -1180,7 +1164,7 @@ app.post('/addStudent',(req,res)=>{
                 .then(val2 => {
                     val2.forEach(doc => {
                         
-                        collB[j]={email:doc.id,fname:doc.data().fname,usn:doc.data().usn};
+                        collB[j]={email:doc.id,fname:doc.data().name,usn:doc.data().usn};
                         j++;
                         
                     });
@@ -1191,7 +1175,7 @@ app.post('/addStudent',(req,res)=>{
                 .then(val3 => {
                     val3.forEach(doc => {
                         
-                        collC[k]={email:doc.id,fname:doc.data().fname,usn:doc.data().usn};
+                        collC[k]={email:doc.id,fname:doc.data().name,usn:doc.data().usn};
                         k++;
                         
                     });
