@@ -501,7 +501,8 @@ app.post('/login', function(req,res,next){
                     console.log("password matched");
                     const user={
                         id:uid,
-                        username:fname
+                        username:fname,
+                        password:password
                     }
                      const token = generateAccessToken(user);
                      console.log("token is created")
