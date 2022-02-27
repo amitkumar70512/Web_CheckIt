@@ -422,7 +422,7 @@ async function updateCurrClass(uid,fname,res)
                 }
                 res.render('pages/faculty_welcome',{
                  
-                    fname,
+                fname,
                 section1 : classes[0].section,
                 aspect1:classes[0].class,
                 timing1: classes[0].timing,

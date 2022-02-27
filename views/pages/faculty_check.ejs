@@ -319,6 +319,47 @@
                 i am inside h1 , here  list of present students will be displayed <i class="fa-solid fa-user"></i>
               </h1>
 
+
+              <table class="table "data-aos="fade-up" date-aos-delay="300">
+                <thead>
+                  <tr>
+                    <th scope="col">'5A'</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">USN</th>
+                    <th scope="col">Email</th>
+                  </tr>
+                </thead>
+                
+              <% for (var i =0; i <=countA;  i++ ) { %>
+      
+                <% if(typeof StudentsA[i] != 'undefined') { %>
+                    
+                    <tbody>
+                        <tr>
+                          <th scope="row">
+                            <%=i+1%>
+                          </th>
+                      <td>
+                      <%=  StudentsA[i].name%>
+                      </td>
+                      <td>
+                      <%=  StudentsA[i].usn%>
+                      </td>
+                      <td>
+                      <%=  StudentsA[i].email%>
+                      </td>
+                      </tr>
+                      
+                    </tbody>
+                     
+                <% } %>
+               
+              <%  }%>
+          
+  
+              </table>
+        
+
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
