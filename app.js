@@ -77,7 +77,7 @@ let c_day=date_ob.getDay();
 var classes={};
 var rows={};
 rows=[{"class":'',"section":'',"timing":''}]
-var fname,uid;// to be used in dynamic ejs
+var fname='',uid='';// to be used in dynamic ejs
 var today=date_ob.toDateString();
  function checkStudent(res)
 {   
