@@ -54,15 +54,19 @@
           <li><a href="contact">Contact</a></li>
           
 
-          <li class="dropdown" ><a href="#"><span>
-            <%= uid%>
-          </span></a>
+          <li class="dropdown profile" >
+            <a href="#"><span>
+              <%= uid%>
+            </span></a>
             <ul>
+              <span>profile</span>
                 <%= fname%>
-               
+                <%= femail%>
+                <br>
                <form action="/logout" method="get" class="form">
                <button type="submit" class="btn btn-danger">Log out</button>
                </form>
+               <br>
             </ul>
           </li>
 
@@ -176,6 +180,10 @@
             }
             .col-md-6.col-lg-3.d-flex.align-items-stretch:hover{
               transform: translateY(20px);
+            }
+
+            .navbar .dropdown.profile{
+              width: max-content;
             }
           </style>
 
