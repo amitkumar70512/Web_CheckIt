@@ -168,10 +168,10 @@ app.get("/faculty_check",authenticateToken, function(req,res){
 });
 
 app.get("/home",authenticateToken,(req,res)=>{
-    updateCurrClass(uid,fname,res);
+    updateCurrClass(uid,fname,req,res);
 })
 app.get("/",authenticateToken, function(req,res){
-    updateCurrClass(uid,fname,res);
+    updateCurrClass(uid,fname,req,res);
 });
 app.get("/login", function(req,res){
     res.render('pages/login')
@@ -250,7 +250,7 @@ function authenticateToken(req, res, next) {
 ////////////////////
 let scan_valid=0;
 let start_time=0,end_time=0,s_time='085500';
-async function updateCurrClass(uid,fname,res)
+async function updateCurrClass(uid,fname,req,res)
 {
     get_time();
       
@@ -506,7 +506,7 @@ app.post('/login', function(req,res,next){
                     
                      res.cookie("uid",uid,{ maxAge: 15*24*60*60*1000,httpOnly:true})
                      ///////
-                    updateCurrClass(uid,doc.data().name,res);
+                    updateCurrClass(uid,doc.data().name,req,res);
                            ////////////////////////
                  
                 }// end of password matched
