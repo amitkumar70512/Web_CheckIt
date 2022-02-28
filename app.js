@@ -253,13 +253,13 @@ let start_time=0,end_time=0,s_time='085500';
 async function updateCurrClass(uid,fname,res)
 {
     get_time();
-      
+    console.log("inside update uid="+uid);
     const firestore_con  =  admin.firestore();
     const writeResult = firestore_con.collection('faculty').doc(uid).get()
     .then(doc => {
         if (!doc.exists) 
         { 
-            console.log('No such document!');
+            console.log('No such document in write result!');
             const errors=[
                 {msg:' Failed!  server error..'}
             ]
