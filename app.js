@@ -193,7 +193,8 @@ app.get("/home",authenticateToken,(req,res)=>{
     day:current_day,
     current_subject:rows[0].class,
     current_section:rows[0].section,
-    current_timing:rows[0].timing
+    current_timing:rows[0].timing,
+    current_time:c_time
 
     
     })
@@ -213,9 +214,7 @@ app.get("/admin",function(req,res){
 app.get("/contact",function(req,res){
     res.render('pages/contact')
 });
-app.get('/home',authenticateToken,function(req,res){
-    updateCurrClass(uid,fname,res);
-    })
+
 app.get("/logout",authenticateToken,async(req,res)=>{
     try {
         res.clearCookie("jwt_authentication");
