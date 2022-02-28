@@ -145,8 +145,8 @@ h1, h2, h3, h4, h5, h6, .font-primary {
   position: absolute;
   left: 14px;
   top: calc(100% + 30px);
-  margin: 0;
-  padding: 10px 0;
+  margin: 5px;
+  padding: 10px 0 5px 10px;
   z-index: -99;
   opacity: 0;
   visibility: hidden;

@@ -48,7 +48,7 @@
       padding:10px;
 
     }
-    .navbar .dropdown.profile #button{
+    .navbar .dropdown.profile button{
       margin:4px;
       color:rgb(8, 72, 102);
       display:flex;
@@ -58,12 +58,7 @@
     .navbar .dropdown.profile #button:hover{
       color:rgb(39, 105, 247);
     }
-    .navbar .dropdown.profile #label{
-      margin:5px;
-      color:rgb(8, 72, 102);
-      font-family:monospace;
-      padding-right: 5px;
-    }
+   
   </style>
 
 
@@ -96,8 +91,8 @@
             <ul>
               <span>profile</span>
 
-              <p id="label"><%= fname%></p>
-              <p id="label"><%= femail%></p>
+              <a><%= fname%></a>
+              <a><%= femail%></a>
                 <br>
               
                <form action="/logout" method="get" class="form">
