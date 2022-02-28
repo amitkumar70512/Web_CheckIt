@@ -371,6 +371,7 @@ async function updateCurrClass(uid,fname,res)
             res.render('pages/faculty_welcome',{
                 uid,
                 fname,
+                femail,
                 section1 : classes[0].section,
                 aspect1:classes[0].class,
                 timing1: classes[0].timing,
@@ -415,6 +416,7 @@ async function updateCurrClass(uid,fname,res)
                 res.render('pages/faculty_welcome',{
                 uid,
                 fname,
+                femail,
                 section1 : classes[0].section,
                 aspect1:classes[0].class,
                 timing1: classes[0].timing,
