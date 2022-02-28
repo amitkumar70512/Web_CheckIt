@@ -77,7 +77,7 @@ let c_day=date_ob.getDay();
 var classes={};
 var rows={};
 rows=[{"class":'',"section":'',"timing":''}]
-var fname='',uid='';// to be used in dynamic ejs
+var fname='',femail='',uid='';// to be used in dynamic ejs
 var today=date_ob.toDateString();
  function checkStudent(res)
 {   
@@ -168,11 +168,9 @@ app.get("/faculty_check",authenticateToken, function(req,res){
 });
 
 app.get("/home",authenticateToken,(req,res)=>{
-    console.log(fname);
     updateCurrClass(uid,fname,res);
 })
 app.get("/",authenticateToken, function(req,res){
-    console.log("in /  fname==  " + fname);
     updateCurrClass(uid,fname,res);
 });
 app.get("/login", function(req,res){
@@ -257,6 +255,29 @@ async function updateCurrClass(uid,fname,res)
     get_time();
       
     const firestore_con  =  admin.firestore();
+    const writeResult = firestore_con.collection('faculty').doc(req.body.uid).get()
+    .then(doc => {
+        if (!doc.exists) 
+        { 
+            console.log('No such document!');
+            const errors=[
+                {msg:' Failed!  server error..'}
+            ]
+            const alert = errors
+            res.render('pages/login', {
+                alert
+            })
+
+        }
+        else { 
+            fname=doc.data().name;
+            femail=doc.data().email;
+            console.log(fname+"  "+femail);
+    
+        }
+    });// end of getting fname and femail
+
+
     if(c_time>=0855 && c_time <=0950)
     {
         start_time="08:55 am";
