@@ -32,6 +32,41 @@
 </head>
 
 <body>
+  <style>
+    .fas:hover,.bx:hover {  
+        transform: rotate(180deg);
+    }
+    .fas,.bx {
+        transition: transform 0.5s ease 0s;
+    }
+    .col-md-6.col-lg-3.d-flex.align-items-stretch:hover{
+      transform: translateY(20px);
+    }
+
+    .navbar .dropdown.profile{
+      width: max-content;
+      padding:10px;
+
+    }
+    .navbar .dropdown.profile #button{
+      margin:4px;
+      color:rgb(8, 72, 102);
+      display:flex;
+      flex-direction: row;
+      
+    }
+    .navbar .dropdown.profile #button:hover{
+      color:rgb(39, 105, 247);
+    }
+    .navbar .dropdown.profile #label{
+      margin:5px;
+      color:rgb(8, 72, 102);
+      font-family:monospace;
+      padding-right: 5px;
+    }
+  </style>
+
+
 
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center ">
@@ -60,10 +95,15 @@
             </span></a>
             <ul>
               <span>profile</span>
-                <%= fname%>
-                <%= femail%>
+
+              <p id="label"><%= fname%></p>
+              <p id="label"><%= femail%></p>
                 <br>
+              
                <form action="/logout" method="get" class="form">
+                <div class="divider d-flex align-items-center my-4">
+                  <p class="text-center fw-bold mx-3 mb-0 text-muted"></p>
+                </div>
                <button type="submit" class="btn btn-danger">Log out</button>
                </form>
                <br>
@@ -171,22 +211,7 @@
                <p class="description"><%= timing1%></p>
             </div>
           </div>
-          <style>
-            .fas:hover,.bx:hover {  
-                transform: rotate(180deg);
-            }
-            .fas,.bx {
-                transition: transform 0.5s ease 0s;
-            }
-            .col-md-6.col-lg-3.d-flex.align-items-stretch:hover{
-              transform: translateY(20px);
-            }
-
-            .navbar .dropdown.profile{
-              width: max-content;
-            }
-          </style>
-
+          
 
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
             <div class="icon-box icon-box-cyan">
