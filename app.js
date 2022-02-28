@@ -213,7 +213,7 @@ app.get("/admin",function(req,res){
 app.get("/contact",function(req,res){
     res.render('pages/contact')
 });
-app.get('/take_attendance',authenticateToken,function(req,res){
+app.get('/home',authenticateToken,function(req,res){
     updateCurrClass(uid,fname,res);
     })
 app.get("/logout",authenticateToken,async(req,res)=>{
