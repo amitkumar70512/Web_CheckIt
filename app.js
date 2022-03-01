@@ -366,9 +366,8 @@ async function updateCurrClass(uid,fname,res)
             rows[0]=doc.data()    
             console.log("current class :-: ");
             console.log(doc.data())
-            console.log(rows);
-            console.log(typeof rows);
-            if(doc.data()==='undefined')
+           
+            if(doc.data()===undefined)
             {
                 console.log("i am inside undefined doc.data");
                 rows[0].class='';
