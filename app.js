@@ -363,17 +363,21 @@ async function updateCurrClass(uid,fname,res)
           {
            
             firestore_con.collection('faculty').doc(uid).collection(current_day).doc(s_time).get().then(function(doc) {
-            rows[0]=doc.data()    
-            console.log("current class :-: ");
-            console.log(doc.data())
+                if(doc.data()===undefined)
+                {
+                    console.log("i am inside undefined doc.data");
+                    rows[0].class='NO CLASS NOW !!';
+                    rows[0].section='';
+                    rows[0].timing=''
+                }
+                else{
+                    rows[0]=doc.data() 
+                    }   
+              
+                    console.log("current class :-: ");
+                    console.log(doc.data())
            
-            if(doc.data()===undefined)
-            {
-                console.log("i am inside undefined doc.data");
-                rows[0].class='';
-                rows[0].section='';
-                rows[0].timing=''
-            }
+           
             
             ///////     
              
