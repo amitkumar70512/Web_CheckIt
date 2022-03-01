@@ -385,22 +385,7 @@ async function updateCurrClass(uid,fname,res)
                 uid,
                 fname,
                 femail,
-                section1 : classes[0].section,
-                aspect1:classes[0].class,
-                timing1: classes[0].timing,
-
-                section2 : classes[1].section,
-                aspect2:classes[1].class,
-                timing2: classes[1].timing,
-
-                section3: classes[2].section,
-                aspect3:classes[2].class,
-                timing3: classes[2].timing,
-
-                section4: classes[3].section,
-                aspect4:classes[3].class,
-                timing4: classes[3].timing,
-                
+                classes,
                 day:current_day,
                 current_subject:rows[0].class,
                 current_section:rows[0].section,
@@ -430,22 +415,7 @@ async function updateCurrClass(uid,fname,res)
                 uid,
                 fname,
                 femail,
-                section1 : classes[0].section,
-                aspect1:classes[0].class,
-                timing1: classes[0].timing,
-
-                section2 : classes[1].section,
-                aspect2:classes[1].class,
-                timing2: classes[1].timing,
-
-                section3: classes[2].section,
-                aspect3:classes[2].class,
-                timing3: classes[2].timing,
-
-                section4: classes[3].section,
-                aspect4:classes[3].class,
-                timing4: classes[3].timing,
-
+                classes,
                 day:current_day,
                 current_subject:rows[0].class,
                 current_section:rows[0].section,
