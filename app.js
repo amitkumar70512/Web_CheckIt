@@ -234,6 +234,7 @@ function authenticateToken(req, res, next) {
             console.log("token matched");
         
             if (err) {
+                console.log("an error has occurred")
                 const errors=[
                     {msg:'Session Expired!'}
                 ]
