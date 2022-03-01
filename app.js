@@ -400,6 +400,7 @@ async function updateCurrClass(uid,fname,res)
                 section4: classes[3].section,
                 aspect4:classes[3].class,
                 timing4: classes[3].timing,
+                
 
                 day:current_day,
                 current_subject:rows[0].class,
