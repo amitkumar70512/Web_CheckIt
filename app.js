@@ -366,11 +366,11 @@ async function updateCurrClass(uid,fname,res)
             rows[0]=doc.data()    
             console.log("current class :-: ");
             console.log(doc.data())
-            if(doc.data()==undefined)
+            if(typeof rows=='undefined')
             {
                 rows[0].class='';
                 rows[0].section='';
-                
+                rows[0].timing=''
             }
             
             ///////     
