@@ -186,7 +186,8 @@
       <div class="container">
 
         <div class="row">
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up">
+
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
             <div class="icon-box icon-box-pink">
               <div class="icon"><i class="bx bxl-dribbble "></i></div>
               <% if(typeof section1 != 'undefined') { %>
@@ -207,41 +208,64 @@
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100" >
             <div class="icon-box icon-box-cyan">
               <div class="icon"><i class="bx bx-file " ></i></div>
+              <% if(typeof section2 != 'undefined') { %>
               <h4 class="title"><a href="#" >
               <%= section2 %>
-
-            </a></h4>
+              </a></h4>
+              <% } %>
+              <% if(typeof aspect2 != 'undefined') { %>
               <p class="description">
                 <%= aspect2%>
               </p>
+              <% }%>
+              <% if(typeof timing2 != 'undefined') { %>
               <p class="description"><%= timing2%></p>
+              <% }%>
             </div>
           </div>
 
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
             <div class="icon-box icon-box-green">
               <div class="icon"><i class="bx bx-tachometer "></i></div>
+              <% if(typeof section3 != 'undefined') { %>
               <h4 class="title"><a href="#"><%= section3 %></a></h4>
+              <% } %>
+              <% if(typeof aspect3 != 'undefined') { %>
               <p class="description"><%= aspect3 %></p>
+              <% }%>
+              <% if(typeof timing3 != 'undefined') { %>
               <p class="description"><%=timing3%></p>
+              <% }%>
             </div>
           </div>
 
           <div   class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
             <div class="icon-box icon-box-blue">
               <div class="icon"><i class="fas fa-pen-square"></i></div>
+              <% if(typeof section4 != 'undefined') { %>
               <h4 class="title"><a href="#"><%= section4 %></a></h4>
+              <% } %>
+              <% if(typeof aspect4 != 'undefined') { %>
               <p class="description"><%= aspect4 %></p>
+              <% } %>
+              <% if(typeof timing4 != 'undefined') { %>
               <p class="description"><%= timing4%></p>
+              <% } %>
             </div>
           </div>
 
           <div   class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
             <div class="icon-box icon-box-blue">
               <div class="icon"><i class="fas fa-pen-square"></i></div>
+              <% if(typeof section4 != 'undefined') { %>
               <h4 class="title"><a href="#"><%= section4 %></a></h4>
+              <% } %>
+              <% if(typeof aspect4 != 'undefined') { %>
               <p class="description"><%= aspect4 %></p>
+              <% } %>
+              <% if(typeof timing4 != 'undefined') { %>
               <p class="description"><%= timing4%></p>
+              <% } %>
             </div>
           </div>
 
