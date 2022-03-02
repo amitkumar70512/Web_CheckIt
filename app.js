@@ -351,6 +351,7 @@ async function updateCurrClass(uid,fname,res)
    
     await firestore_con.collection('faculty').doc(uid).collection(current_day).get()
         .then(querySnapshot => {
+        classes=[];
         querySnapshot.docs.forEach(doc => {
         classes.push(doc.data());
         });
