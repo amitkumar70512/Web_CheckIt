@@ -262,6 +262,7 @@ async function updateCurrClass(uid,fname,res)
         if (!doc.exists) 
         { 
             console.log('No such document in write result!');
+            console.log(uid);
             const errors=[
                 {msg:' Failed!  server error..'}
             ]
