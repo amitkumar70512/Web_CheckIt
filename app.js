@@ -617,7 +617,7 @@ app.post('/feedback',  [
     check('name', 'Please enter valid username ..')
         .exists()
         .isLength({ min: 3 })
-        .matches("^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$" ),
+        .matches("^[a-zA-Z]+(\s[a-zA-Z]+)?$" ),
     check('email', 'Please provide valid email !!')
         .isEmail()
         .normalizeEmail(),
@@ -628,7 +628,7 @@ app.post('/feedback',  [
             "message",
             "Invalid message body!!"  )
       
-       .isLength({min:10})
+       .isLength({min:5})
 
 
 ]
