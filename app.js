@@ -411,21 +411,16 @@ async function updateCurrClass(uid,fname,res)
                     console.log(typeof classes[0])
                     if(typeof classes[0]!='undefined')
                     {
-                    t=classes[0]-c_time;
+                    
+                    rows[0].timing=classes[0].class+'  will start at '+classes[0].timing ;
                     }
                     else{
                         t=0855-c_time;
-                    }
-                    console.log(t)
-                    let min=t%100;
-                    let minutes=String((min)<10?'0':'') + min;
-                    console.log(min)
-                    t=t/100;
-                    let hours=String((t)<10?'0':'') + t;
-                    console.log(t)
-                    console.log(hours);
+                        
 
-                    rows[0].timing='classes will start in '+hours+'hour,' +min+'min';
+                    rows[0].timing='classes will start in '+t+' hours' ;
+                    }
+                    
                 }
                 else {
                     rows[0].timing='04:00 pm   till 08:55 am  next day';
