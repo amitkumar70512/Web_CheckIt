@@ -358,8 +358,7 @@ async function updateCurrClass(uid,fname,res)
         console.log('marker data');
         console.log(classes)
         ///
-        console.log(classes[0])
-        console.log(classes[1].class)
+    
         
     // const liam =  await firestore_con.collection('faculty').doc(uid).collection(current_day).get();
     // classes=liam.docs.map(doc => doc.data());
