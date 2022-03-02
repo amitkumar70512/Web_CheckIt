@@ -249,7 +249,7 @@ function authenticateToken(req, res, next) {
         }
   }
 
-////////////////////
+//////////////////// update function is loading home page as well
 let scan_valid=0;
 let start_time=0,end_time=0,s_time='085500';
 async function updateCurrClass(uid,fname,res)
@@ -614,14 +614,15 @@ app.post('/register', [
 // working fine
 
 app.post('/feedback',  [
-    check('name', 'Please enter valid username without space..')
+    check('name', 'Please enter valid username ..')
         .exists()
         .isLength({ min: 3 })
-        .isAlpha(),
+        .isAlpha()
+        .matches("^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$" ),
     check('email', 'Please provide valid email !!')
         .isEmail()
         .normalizeEmail(),
-    check('subject',' invalid subject !!')    
+    check('subject','Please provide subject title !!')    
            .exists()
            ,
     check(
