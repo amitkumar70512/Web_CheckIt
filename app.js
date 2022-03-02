@@ -189,6 +189,7 @@ app.get("/contact",function(req,res){
 app.get("/logout",authenticateToken,async(req,res)=>{
     try {
         res.clearCookie("jwt_authentication");
+        res.clearCookie("uid");
         console.log("logout successfully");
         res.render('pages/register');
     } catch (error) {
