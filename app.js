@@ -252,7 +252,7 @@ function authenticateToken(req, res, next) {
 //////////////////// update function is loading home page as well
 let scan_valid=0;
 let start_time=0,end_time=0,s_time='085500';
- function updateCurrClass(uid,fname,res)
+async function updateCurrClass(uid,fname,res)
 {
     get_time();
     console.log("inside update uid="+uid);
@@ -348,8 +348,16 @@ let start_time=0,end_time=0,s_time='085500';
     ////
     console.log(uid)
     console.log(current_day)
-    
-    const liam =  firestore_con.collection('faculty').doc(uid).collection(current_day).get();
+    const markers = [];
+    await firestore_con.collection('faculty').doc(uid).collection(current_day).get()
+        .then(querySnapshot => {
+        querySnapshot.docs.forEach(doc => {
+        markers.push(doc.data());
+        });
+    });
+    console.log('marker data');
+    console.log(markers)
+    const liam =  await firestore_con.collection('faculty').doc(uid).collection(current_day).get();
     classes=liam.docs.map(doc => doc.data());
     console.log("listing all classes on current day: : ");
     console.log(classes)
