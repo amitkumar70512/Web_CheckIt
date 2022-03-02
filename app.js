@@ -193,7 +193,7 @@ app.get("/logout",authenticateToken,async(req,res)=>{
         console.log("logout successfully");
         res.render('pages/register');
     } catch (error) {
-        res.status(500).send(errer);
+        res.status(500).send(error);
     }
 })
 app.get("/:id",authenticateToken, function(req,res){
