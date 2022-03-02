@@ -252,7 +252,7 @@ function authenticateToken(req, res, next) {
 //////////////////// update function is loading home page as well
 let scan_valid=0;
 let start_time=0,end_time=0,s_time='085500';
-async function updateCurrClass(uid,fname,res)
+ function updateCurrClass(uid,fname,res)
 {
     get_time();
     console.log("inside update uid="+uid);
@@ -384,19 +384,29 @@ async function updateCurrClass(uid,fname,res)
            
             
             ///////     
-             
-            res.render('pages/faculty_welcome',{
-                uid,
-                fname,
-                femail,
-                classes,
-                day:current_day,
-                current_subject:rows[0].class,
-                current_section:rows[0].section,
-                current_timing:rows[0].timing,
-                current_time:c_time
-  
+            try{
+                res.render('pages/faculty_welcome',{
+                    uid,
+                    fname,
+                    femail,
+                    classes,
+                    day:current_day,
+                    current_subject:rows[0].class,
+                    current_section:rows[0].section,
+                    current_timing: rows[0].timing,
+                    current_time:c_time
                 })
+            }
+            catch (error) {
+                res.status(500).send(error);
+                const errors=[
+                    {msg:error}
+                ]
+                const alert = errors
+                res.render('pages/login', {
+                    alert
+                })
+             }
 
 
             })// end of firestore_con collection
