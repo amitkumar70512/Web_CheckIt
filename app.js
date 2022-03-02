@@ -74,7 +74,7 @@ let c_day=date_ob.getDay();
 };
 
 
-var classes={};
+var classes=[];
 var rows={};
 rows=[{"class":'',"section":'',"timing":''}]
 var fname='',femail='',uid='';// to be used in dynamic ejs
@@ -352,17 +352,17 @@ async function updateCurrClass(uid,fname,res)
     await firestore_con.collection('faculty').doc(uid).collection(current_day).get()
         .then(querySnapshot => {
         querySnapshot.docs.forEach(doc => {
-        markers.push(doc.data());
+        classes.push(doc.data());
         });
         console.log('marker data');
-        console.log(markers)
+        console.log(classes)
         ///
 
         
-    const liam =  await firestore_con.collection('faculty').doc(uid).collection(current_day).get();
-    classes=liam.docs.map(doc => doc.data());
-    console.log("listing all classes on current day: : ");
-    console.log(classes)
+    // const liam =  await firestore_con.collection('faculty').doc(uid).collection(current_day).get();
+    // classes=liam.docs.map(doc => doc.data());
+    // console.log("listing all classes on current day: : ");
+    // console.log(classes)
   //////
    console.log('fname of faculty'+fname);
    console.log(c_time);
