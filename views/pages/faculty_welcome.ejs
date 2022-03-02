@@ -352,15 +352,15 @@
 
         <div class="row">
           <div class="col-lg-6 video-box">
-            <!-- <img src="assets/img/qr_gif.gif" class="img-fluid" alt=""> -->
+            <img src="assets/img/qr_gif.gif" class="img-fluid" alt="">
 
             <!-- <a   class="venobox play-btn mb-4"  title="click me to show qr" ></a> -->
            
-            <iframe 
+            <!-- <iframe 
             src="https://www.youtube.com/embed/6H2RgARWsfw?controls=0&autoplay=1" 
             title="YouTube video player" frameborder="0" 
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-          </iframe>
+          </iframe> -->
           </div>
 
           <style>
@@ -374,7 +374,7 @@
               <div class="icon"><i class="fas fa-book"></i></div>
               <h4 class="title"><a href=""> Current Class </a></h4>
               <h5 class="title" ><%= current_subject %></h2>
-              <h3 class="title"><%=current_time %></h3>
+              <h3 class="title"><i class="fa-solid fa-clock"></i>--<%=current_time %></h3>
               <p class="description"><%= current_section %> <br> -- <%= current_timing %></p>
             </div>
 
