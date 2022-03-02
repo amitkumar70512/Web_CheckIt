@@ -408,6 +408,7 @@ async function updateCurrClass(uid,fname,res)
                 if(c_time<0800&&c_time>0001){
                     console.log("inside else block")
                     rows[0].timing='';
+                    scan_valid=0;
                     console.log(typeof classes[0])
                     if(typeof classes[0]!='undefined')
                     {
@@ -425,17 +426,30 @@ async function updateCurrClass(uid,fname,res)
                 else {
                     rows[0].timing='04:00 pm   till 08:55 am  next day';
                 }
-                res.render('pages/faculty_welcome',{
-                uid,
-                fname,
-                femail,
-                classes,
-                day:current_day,
-                current_subject:rows[0].class,
-                current_section:rows[0].section,
-                current_timing: rows[0].timing,
-                current_time:c_time
-            })
+                try{
+                    res.render('pages/faculty_welcome',{
+                        uid,
+                        fname,
+                        femail,
+                        classes,
+                        day:current_day,
+                        current_subject:rows[0].class,
+                        current_section:rows[0].section,
+                        current_timing: rows[0].timing,
+                        current_time:c_time
+                    })
+                }
+                catch (error) {
+                    res.status(500).send(error);
+                    const errors=[
+                        {msg:error}
+                    ]
+                    const alert = errors
+                    res.render('pages/login', {
+                        alert
+                    })
+                 }
+                
     
 
             }
@@ -953,7 +967,7 @@ async function deletekey(key)
 //// for qr page
 app.post("/scan", (req, res, next) => {
     console.log(c_time)
-    if(c_time>1730||current_day=="Sunday")
+    if(c_time>1730||current_day=="Sunday"||scan_valid==0)
     {
         console.log("no class so no qr")
         checkStudent(res);
