@@ -371,9 +371,11 @@ async function updateCurrClass(uid,fname,res)
                     rows[0].class='NO CLASS NOW !!';
                     rows[0].section='';
                     rows[0].timing=''
+                    scan_valid=0;
                 }
                 else{
                     rows[0]=doc.data() 
+                    scan_valid=1;
                     }   
               
                     console.log("current class :-: ");
@@ -405,10 +407,24 @@ async function updateCurrClass(uid,fname,res)
             {
                 if(c_time<0800&&c_time>0001){
                     console.log("inside else block")
+                    rows[0].timing='';
+                    if(typeof classes!='undefined')
+                    {
+                    t=classes[0]-c_time;
+                    }
+                    else{
+                        t=0855-c_time;
+                    }
                     
-                    rows[0].timing='',
-                    t=0855-c_time;
-                    rows[0].timing='classes will start in '+t+' hours ...';
+                    let min=t%100;
+                    let minutes=String((min)<10?'0':'') + min;
+                    console.log(min)
+                    t=t/100;
+                    let hours=String((t)<10?'0':'') + t;
+                    console.log(t)
+                    console.log(hours);
+
+                    rows[0].timing='classes will start in '+hours+'hour,' +min+'min';
                 }
                 else {
                     rows[0].timing='04:00 pm   till 08:55 am  next day';
@@ -534,7 +550,9 @@ app.post('/register', [
     check('name', 'Please enter valid username without space..')
         .exists()
         .isLength({ min: 3 })
-        .isAlpha(),
+        .matches(
+            /^[a-zA-Z]+(\s[a-zA-Z]+)?$/
+             ),
     check('email', 'Please provide valid email')
         .isEmail()
         
@@ -617,7 +635,9 @@ app.post('/feedback',  [
     check('name', 'Please enter valid username ..')
         .exists()
         .isLength({ min: 3 })
-        .matches("^[a-zA-Z]+(\s[a-zA-Z]+)?$" ),
+        .matches(
+           /^[a-zA-Z]+(\s[a-zA-Z]+)?$/
+            ),
     check('email', 'Please provide valid email !!')
         .isEmail()
         .normalizeEmail(),
