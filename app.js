@@ -349,7 +349,7 @@ let start_time=0,end_time=0,s_time='085500';
     console.log(uid)
     console.log(current_day)
     
-    const liam = await firestore_con.collection('faculty').doc(uid).collection(current_day).get();
+    const liam =  firestore_con.collection('faculty').doc(uid).collection(current_day).get();
     classes=liam.docs.map(doc => doc.data());
     console.log("listing all classes on current day: : ");
     console.log(classes)
