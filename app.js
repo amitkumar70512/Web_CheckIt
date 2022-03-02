@@ -408,15 +408,15 @@ async function updateCurrClass(uid,fname,res)
                 if(c_time<0800&&c_time>0001){
                     console.log("inside else block")
                     rows[0].timing='';
-                    console.log(typeof classes)
-                    if(typeof classes!='undefined')
+                    console.log(typeof classes[0])
+                    if(typeof classes[0]!='undefined')
                     {
                     t=classes[0]-c_time;
                     }
                     else{
                         t=0855-c_time;
                     }
-                    
+                    console.log(t)
                     let min=t%100;
                     let minutes=String((min)<10?'0':'') + min;
                     console.log(min)
