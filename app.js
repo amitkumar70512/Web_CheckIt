@@ -354,9 +354,11 @@ async function updateCurrClass(uid,fname,res)
         querySnapshot.docs.forEach(doc => {
         markers.push(doc.data());
         });
-    });
-    console.log('marker data');
-    console.log(markers)
+        console.log('marker data');
+        console.log(markers)
+        ///
+
+        
     const liam =  await firestore_con.collection('faculty').doc(uid).collection(current_day).get();
     classes=liam.docs.map(doc => doc.data());
     console.log("listing all classes on current day: : ");
@@ -473,6 +475,10 @@ async function updateCurrClass(uid,fname,res)
             }
            
 
+
+        ///
+    });
+   
 }
 // end  of update class
 
