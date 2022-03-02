@@ -531,7 +531,7 @@ app.post('/login', function(req,res,next){
 
 // for register.ejs
 app.post('/register', [
-    check('fname', 'Please enter valid username without space..')
+    check('name', 'Please enter valid username without space..')
         .exists()
         .isLength({ min: 3 })
         .isAlpha(),
@@ -617,7 +617,6 @@ app.post('/feedback',  [
     check('name', 'Please enter valid username ..')
         .exists()
         .isLength({ min: 3 })
-        .isAlpha()
         .matches("^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$" ),
     check('email', 'Please provide valid email !!')
         .isEmail()
@@ -657,7 +656,7 @@ app.post('/feedback',  [
                 console.log("feedback inserted succesfully using node");
                 const errors=[
                     
-                    {msg:"Thank you '" + req.body.name.toUpperCase() + "'  for contacting us...."}
+                    {msg:"Thank you '" + req.body.name.toUpperCase() + "'  for contacting us. Our team will respond you"}
                 ]
                 const message = errors
                 res.render('pages/contact', {
