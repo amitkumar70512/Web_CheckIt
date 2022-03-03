@@ -990,8 +990,14 @@ async function deletekey(key)
 }
 
 //// for qr page
+let prev='';
 app.post("/scan", (req, res, next) => {
     console.log(c_time)
+    console.log('in /scan post method qr ');
+    if(prev=='')
+    {
+
+    }
     if(c_time>1730||current_day=="Sunday"||scan_valid==0)
     {
         console.log("no class so no qr")
@@ -1052,7 +1058,25 @@ app.post("/scan", (req, res, next) => {
 
 
 
+app.get('/delete',req,res)
+{
+    let collectionRef = fs.collection(QR_key);
 
+collectionRef.where("name", "==", name)
+.get()
+.then(querySnapshot => {
+  querySnapshot.forEach((doc) => {
+    doc.ref.delete().then(() => {
+      console.log("Document successfully deleted!");
+    }).catch(function(error) {
+      console.error("Error removing document: ", error);
+    });
+  });
+})
+.catch(function(error) {
+  console.log("Error getting documents: ", error);
+});
+}
 
 
 
