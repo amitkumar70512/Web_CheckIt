@@ -1064,7 +1064,7 @@ function deletekey()
     console.log(uid);
     let collectionRef = admin.firestore().collection('QR_key');
 
-    collectionRef.where("teacher_USN", "==",fid)
+    collectionRef.where("teacher_USN", "==",uid)
     .get()
     .then(querySnapshot => {
     querySnapshot.forEach((doc) => {
