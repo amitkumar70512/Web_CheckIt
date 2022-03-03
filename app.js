@@ -63,7 +63,7 @@ let c_day=date_ob.getDay();
     
     const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     const d = new Date();
-     current_day = weekday[d.getUTCDay()+1];
+     current_day = weekday[d.getUTCDay()];
     
     let c_hour=String((utcHour)<10?'0':'')+utcHour;
     let c_minutes=String((utcMinute)<10?'0':'') + utcMinute;
