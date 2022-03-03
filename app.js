@@ -1030,6 +1030,7 @@ app.post("/scan", (req, res, next) => {
             })
             .then(function()
             {
+                prev_rkey=rString;// storing current random string in prev
                
                 console.log("QR key successfully written!");
                  
@@ -1058,25 +1059,28 @@ app.post("/scan", (req, res, next) => {
 
 
 
-app.get('/delete',req,res)
+app.get('/delete/:id',(req,res)=>
 {
+    fid=req.params.id;
+
     let collectionRef = fs.collection(QR_key);
 
-collectionRef.where("name", "==", name)
-.get()
-.then(querySnapshot => {
-  querySnapshot.forEach((doc) => {
-    doc.ref.delete().then(() => {
-      console.log("Document successfully deleted!");
-    }).catch(function(error) {
-      console.error("Error removing document: ", error);
+    collectionRef.where("teacher_USN", "==","1bm19fa014")
+    .get()
+    .then(querySnapshot => {
+    querySnapshot.forEach((doc) => {
+        doc.ref.delete().then(() => {
+        console.log("Document successfully deleted!");
+        }).catch(function(error) {
+        console.error("Error removing document: ", error);
+        });
     });
-  });
-})
-.catch(function(error) {
-  console.log("Error getting documents: ", error);
+    })
+    .catch(function(error) {
+    console.log("Error getting documents: ", error);
+    });
+
 });
-}
 
 
 
@@ -1263,7 +1267,7 @@ app.post('/addStudent',(req,res)=>{
 })
 
 
-  app.post('/deleteQRkey',(req,res)=>{
+  app.post('/deletefuture',(req,res)=>{
       getDay=req.body.daytokey;
       var i=0;
         admin.firestore().collection("QR_key").where('day','==',getDay).get()
