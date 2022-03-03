@@ -1064,7 +1064,7 @@ app.get('/delete/:id',(req,res)=>
     fid=req.params.id;
     console.log('i am inside /delete/id');
     console.log(fid);
-    let collectionRef = admin.firestore().collection(QR_key);
+    let collectionRef = admin.firestore().collection('QR_key');
 
     collectionRef.where("teacher_USN", "==","1bm19fa014")
     .get()
