@@ -982,22 +982,20 @@ function randomString(length, chars) {
 
 }
 
-async function deletekey(key)
-{
-    console.log(key)
-    //await admin.firestore().collection('QR_key').doc(key).delete(); 
-    console.log(" key is deleted")
-}
+// async function deletekey(key)
+// {
+//     console.log(key)
+//     //await admin.firestore().collection('QR_key').doc(key).delete(); 
+//     console.log(" key is deleted")
+// }
 
-//// for qr page
-let prev='';
+
+//// for qr page scanning 
+
 app.post("/scan", (req, res, next) => {
     console.log(c_time)
     console.log('in /scan post method qr ');
-    if(prev=='')
-    {
-
-    }
+    deletekey();
     if(c_time>1730||current_day=="Sunday"||scan_valid==0)
     {
         console.log("no class so no qr")
@@ -1059,14 +1057,14 @@ app.post("/scan", (req, res, next) => {
 
 
 
-app.get('/delete/:id',(req,res)=>
+function deletekey()
 {
-    fid=req.params.id;
-    console.log('i am inside /delete/id');
-    console.log(fid);
+    
+    console.log('i am inside /delete/key');
+    console.log(uid);
     let collectionRef = admin.firestore().collection('QR_key');
 
-    collectionRef.where("teacher_USN", "==","1bm19fa014")
+    collectionRef.where("teacher_USN", "==",fid)
     .get()
     .then(querySnapshot => {
     querySnapshot.forEach((doc) => {
@@ -1081,7 +1079,8 @@ app.get('/delete/:id',(req,res)=>
     console.log("Error getting documents: ", error);
     });
 
-});
+    console.log('deletion worked inside deletekey');
+};
 
 
 
@@ -1268,20 +1267,4 @@ app.post('/addStudent',(req,res)=>{
 })
 
 
-  app.post('/deletefuture',(req,res)=>{
-      getDay=req.body.daytokey;
-      var i=0;
-        admin.firestore().collection("QR_key").where('day','==',getDay).get()
-        .then(val => {
-            val.forEach(doc => {
-                
-                garbage[i]={email:doc.id};
-                i++;
-                
-            });
-        res.render('pages/admin_edit',{
-            admin_name
-        })
-    });  
-
-})
+ 
