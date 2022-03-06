@@ -162,6 +162,13 @@ function checkPresent()
     // console.log(presentStudents)
 }
 
+///
+app.get('/demo.txt/:id',function(req,res){
+console.log(req.params.id);
+console.log("i am inside get request user");
+
+});
+///
 app.get("/faculty_check",authenticateToken, function(req,res){
  checkStudent(res);
 //checkPresent();  // should be called by  get method
@@ -196,11 +203,11 @@ app.get("/logout",authenticateToken,async(req,res)=>{
        return res.status(500).send(error);
     }
 })
-app.get("/:id",authenticateToken, function(req,res){
+// app.get("/:id",authenticateToken, function(req,res){
    
-    res.render(`pages/${req.params.id}`)
+//     res.render(`pages/${req.params.id}`)
      
- });
+//  });
 //////token/////
 function generateAccessToken(username) {
     console.log("token is geneerated");

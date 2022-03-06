@@ -1,0 +1,4 @@
+<div class="container">
+<h3> i am inside ajax content</h3>
+<h4> beautifully created by amit kumar , designed by bootstrap</h4>
+</div>

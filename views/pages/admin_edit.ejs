@@ -37,7 +37,7 @@
   
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
-
+  <script src="./admin-handler.js"></script>
   
 </head>
 <body>
@@ -93,6 +93,9 @@
           <div class="d-flex justify-content-between align-items-center">
             <h2></h2>
             <ol>
+              <button type="button" class="btn btn-warning" onclick="show()" >show</button>
+              <button type="button" class="btn btn-primary" onclick="close()" >show</button>
+              <button type="button" class="btn btn-secondary" onclick="loadAjax()" style="padding: 10px; color:rgb(253, 253, 253)" >ajax</button>
               <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#feedback" style="margin:3px;"> Feedbacks</button>
               <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#facultycrud" style="margin:3px;">CRUD Faculty <i class="fas fa-wrench" tyle="color: #ffffff;"></i></button>
               <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#studentcrud" style="margin:3px;">CRUD Students <i class="fas fa-spinner fa-spin" style="color: #ffffff;"></i></button>
@@ -104,6 +107,55 @@
       </div>
   </section>
 
+  
+  <style>
+   #cover-spin {
+    position:fixed;
+    width:100%;
+    left:0;right:0;top:0;bottom:0;
+    background-color: rgba(255,255,255,0.7);
+    z-index:9999;
+    display:none;
+}
+
+@-webkit-keyframes spin {
+	from {-webkit-transform:rotate(0deg);}
+	to {-webkit-transform:rotate(360deg);}
+}
+
+@keyframes spin {
+	from {transform:rotate(0deg);}
+	to {transform:rotate(360deg);}
+}
+
+#cover-spin::after {
+    content:'';
+    display:block;
+    position:absolute;
+    left:48%;top:40%;
+    width:40px;height:40px;
+    border-style:solid;
+    border-color:rgb(15, 79, 138);
+    border-top-color:transparent;
+    border-width: 4px;
+    border-radius:50%;
+    -webkit-animation: spin .8s linear infinite;
+    animation: spin .8s linear infinite;
+}
+
+  </style>
+   <!-- for ajax  -->
+   <div class="container">
+     <div id="ajaxLoad">
+
+     </div>
+   </div>
+   <!-- <div id="spin">
+    <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+</div> -->
+<div id="cover-spin"></div>
     <div class="container">
       <% if(typeof alert != 'undefined') { %>
         <% alert.forEach(function(error) { %>
@@ -124,7 +176,7 @@
         <div class="container">
           <div class="section-title">
             <h2><i class="far fa-user-circle fa-lg"></i></h2>
-            </div>
+          </div>
           <div class="btn-group-horizontal" >
             <button id="amit" type="button" class="btn btn-primary" data-toggle="collapse" data-target="#5A">5A</button>
             <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#5B">5B</button>
@@ -530,8 +582,32 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-  <script src="assets/js/admin-handler.js"></script>
+ 
+
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+  <script>
+    var spin=document.getElementById('cover-spin');
+      function loadAjax()
+  {
+      console.log("ajax button is clicked");
+  
+      var xhttp= new XMLHttpRequest();
+      xhttp.onload=function()
+      {
+        spin.style.display='block';  
+        console.warn('loading...');
+      }
+      xhttp.onreadystatechange=function(){
+          if(this.readyState==4 && this.status==200)
+          {
+            spin.style.display='';  
+            document.getElementById('ajaxLoad').innerHTML=this.responseText;
+          }
+      };
+      xhttp.open('GET','./demo.txt',true);
+      xhttp.send();
+  }
+    </script>
 </body>
 
 </html>
