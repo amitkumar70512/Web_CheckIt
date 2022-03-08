@@ -79,14 +79,15 @@ var rows={};
 rows=[{"class":'',"section":'',"timing":''}]
 var fname='',femail='',uid='';// to be used in dynamic ejs
 var today=date_ob.toDateString();
+var collA={};
+var collB={};
+var collC={};
  function checkStudent(res)
 {   
    
     var c_section=rows[0].section;
     console.log(c_section);
-    var collA={};
-    var collB={};
-    var collC={};
+    
     var i=0,j=0,k=0;
     var lenA=0;
     var lenB=0;
@@ -162,12 +163,73 @@ function checkPresent()
     // console.log(presentStudents)
 }
 
+
 ///
-app.get('/demo.txt/:id',function(req,res){
+var students=[['amitkumar','1bm19cs015'],['aishwariya','1bm19as004']];
+var table;
+function ajaxrender()
+{
+ var i,j;
+  table="";
+  table="<tr><th>Title</th><th>Artist</th></tr>";
+  
+  for (i = 0; i < students.length; i++) {
+    for (j = 0; j < students.length; j++) {
+        table += "<tr><td>" +
+        students[i][j] +
+        "</td></tr><br>";
+    }   
+  }
+}
+
+function get_section(sec)
+{
+    var i,j;
+    console.log(sec);
+    var section='<table class="table "data-aos="fade-up" date-aos-delay="300"><thead><tr><th scope="col">\'#\'</th><th scope="col">Name</th><th scope="col">USN</th><th scope="col">Email</th></tr></thead><tbody>';
+    console.log( Object.keys(sec).length);
+    len=Object.keys(sec).length;
+    for(i=0;i<len;i++){
+        section+='<tr><th scope="row">'+
+            (i+1)+
+            '</th><td>'
+            +  sec[i].name + 
+            '</td><td>' + sec[i].usn +
+            '</td><td>' + sec[i].email+ 
+            '</td></tr>';
+    }
+    section+='</tbody></table>';
+    console.log(section);
+    return section;
+}
+app.get('/check/:id',function(req,res){
 console.log(req.params.id);
 console.log("i am inside get request user");
-res.redirect('pages/contact');
+ajaxrender();
+
+if(req.params.id=='sectionA')
+{
+
+res.send(get_section(collA));
+}
+else if(req.params.id=='sectionB')
+{
+
+res.send(get_section(collB));// end of render res
+}
+else if(req.params.id=='sectionC')
+{
+res.send(get_section(collC));
+}
+else{
+    res.send('<div class="container"> <span>invalid request for section</span></div>');
+}
+
+
+// res.send(`<div>table</div><h1>i am inside send</h1><table><tr><th>Name</th><th>Usn</th></tr><tr><td><${students[0][0]}</td><td>${students[0][1]}</td></tr>`);
 });
+
+
 ///
 app.get("/faculty_check",authenticateToken, function(req,res){
  checkStudent(res);

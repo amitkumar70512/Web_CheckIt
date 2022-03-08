@@ -1,58 +1,31 @@
-
-
-const status=0
-function showfeedback()
+ var spin=document.getElementById('cover-spin');
+ var selectedValue;
+function loadAjax()
 {
-   console.log("show feedback is called")
-   var d= document.getElementById('feedbacks');
-   d.style.visibility="visible";
+    var ddl = document.getElementById("get_ajax");
+     selectedValue = ddl.options[ddl.selectedIndex].value;
+    console.log("ajax button is clicked");
    
-}
-
-function CRUDfaculties()
-{
-    var d=document.getElementById('facultycrud');
-    d.style.visibility="visible";
-}
-
-
-function check_students()
-{
-    console.log("checking students")
-}
-
-function check_db()
-{
-    console.log("checking database")
+    var xhttp= new XMLHttpRequest();
     
-}
-
-
-
-
-//////
-function droplist()
-{
-  var d=document.getElementById("start_time");
-  var displaytxt=d.options[d.selectedIndex].text;
-  document.getElementById("stime").value=displaytxt;
-}
-function getday()
-{
-  var d=document.getElementById("list_day");
-  var displaytxt=d.options[d.selectedIndex].text;
-  document.getElementById("day").value=displaytxt;
-}
-function list_timing()
-{
-  var d=document.getElementById("list_time");
-  var displaytxt=d.options[d.selectedIndex].text;
-  document.getElementById("timing").value=displaytxt;
-
-}
-function dropsection(){
-  var d=document.getElementById("select_section");
-  var txt=d.options[d.selectedIndex].text;
-  document.getElementById("section").value=txt;
+    xhttp.onprogress = function () {
+        console.log('LOADING', xhttp.readyState); // readyState will be 3
+        spin.style.display='block';
+    };
+    xhttp.onload = function () {
+        console.log('DONE', xhttp.readyState); // readyState will be 4
+        spin.style.display='none';
+    };
+    xhttp.onreadystatechange=function(){
+       
+        if(this.readyState==4 && this.status==200)
+        {
+           
+            console.log('inside ready state 4 status okk')
+            document.getElementById('ajaxLoad').innerHTML=this.responseText;
+        }
+    };
+    xhttp.open('GET',`check/${selectedValue}`,true);
+    setInterval(xhttp.send(),5000);
 }
 
