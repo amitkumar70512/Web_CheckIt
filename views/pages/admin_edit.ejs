@@ -37,6 +37,7 @@
   
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+  <script src="https://kit.fontawesome.com/b51d5e4e6a.js" crossorigin="anonymous"></script>
   
 </head>
 <body>
@@ -104,48 +105,62 @@
       </div>
   </section>
   <!-- ////// -->
-  <section class="breadcrumbs">
+  <section class="breadcrumbs" id="get_students">
     <div class="container">
-      <div class="d-flex justify-content-between align-items-center">
-        <label for="data">Choose :</label>
-              <select  name="get_data" id="get_ajax">
-                <optgroup label="First year">
-                  <option value="1_sectionA">Section A</option>
-                  <option value="1_sectionB">Section B</option>
-                  <option value="1_sectionC">Section C</option>
-                  <option value="sectionD">Section D</option>
-                </optgroup>
-                <optgroup label="Second year">
-                  <option value="2_sectionA">Section A</option>
-                  <option value="2_sectionB">Section B</option>
-                  <option value="2_sectionC">Section C</option>
-                  <option value="2_sectionD">Section D</option>
-                </optgroup>
-                <optgroup label="Third year">
-                  <option value="3_sectionA">Section A</option>
-                  <option value="3_sectionB">Section B</option>
-                  <option value="3_sectionC">Section C</option>
-                  <option value="3_sectionD">Section D</option>
-                </optgroup>
-                <optgroup label="Fourth year">
-                  <option value="4_sectionA">Section A</option>
-                  <option value="4_sectionB">Section B</option>
-                  <option value="4_sectionC">Section C</option>
-                  <option value="4_sectionD">Section D</option>
-                </optgroup>
-                <optgroup label="HOD's">
-                  <option value="hodCSE">Jyoti mam (cse hod)</option>
-                  <option value="hodISE">Audi</option>
-                </optgroup>
-              </select>
-              
-              <button type="button" class="btn btn-info" onclick="loadAjax()" style="padding: 10px; color:rgb(253, 253, 253)" >GET</button>
+     
+      <div class="input-group">
+        <select class="custom-select" name="get_data" id="get_ajax">
+          <optgroup label="First year">
+            <option value="1_sectionA">Section A</option>
+            <option value="1_sectionB">Section B</option>
+            <option value="1_sectionC">Section C</option>
+            <option value="sectionD">Section D</option>
+          </optgroup>
+          <optgroup label="Second year">
+            <option value="2_sectionA">Section A</option>
+            <option value="2_sectionB">Section B</option>
+            <option value="2_sectionC">Section C</option>
+            <option value="2_sectionD">Section D</option>
+          </optgroup>
+          <optgroup label="Third year">
+            <option value="3_sectionA">Section A</option>
+            <option value="3_sectionB">Section B</option>
+            <option value="3_sectionC">Section C</option>
+            <option value="3_sectionD">Section D</option>
+          </optgroup>
+          <optgroup label="Fourth year">
+            <option value="4_sectionA">Section A</option>
+            <option value="4_sectionB">Section B</option>
+            <option value="4_sectionC">Section C</option>
+            <option value="4_sectionD">Section D</option>
+          </optgroup>
+          <optgroup label="HOD's">
+            <option value="hodCSE">Jyoti mam (cse hod)</option>
+            <option value="hodISE">Audi</option>
+          </optgroup>
+        </select>
+        <div class="input-group-append">
+          <button type="button" id="closebtn"  class="btn btn-danger"  style="padding: 5px 10px; color:rgb(253, 253, 253);display: none;">Close</button>
+          <button type="button" id="getbtn" class="btn btn-info" onclick="loadAjax()" style="padding: 5px 10px; color:rgb(253, 253, 253);display: block;" >GET</button>
+      
+        </div>
       </div>
+        
+              
+              
     </div>
 
   </section>
   
   <style>
+    #get_students .input-group{
+      display: flex;
+      flex-direction: row;
+    }
+    #get_students .input-group select{
+    border-radius: 5px;
+    border-color: #a162b4;
+    }
    #cover-spin {
     position:fixed;
     width:100%;
@@ -179,6 +194,7 @@
     -webkit-animation: spin .8s linear infinite;
     animation: spin .8s linear infinite;
 }
+
 
   </style>
    <!-- for ajax  -->
@@ -458,12 +474,22 @@
   <script src="assets/vendor/purecounter/purecounter.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
   <script src="assets/js/admin-handler.js"  ></script>
  
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+  <script>
+    var el = document.getElementById('closebtn');
+  if(el){
+    el.addEventListener('click', ()=>{
+      document.getElementById('ajaxLoad').style.display='none';
+      document.getElementById("getbtn").style.display = "block";
+      document.getElementById("closebtn").style.display ="none";
+      console.log("ajax load is hidden");
+    }, false);
+  }
+  </script>
  
 </body>
 

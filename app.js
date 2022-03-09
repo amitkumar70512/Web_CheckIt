@@ -205,11 +205,11 @@ function checkPresent() {
 
 function get_section(sec) {
   var i, j;
-  console.log(sec);
   var section =
-    '<table class="table "data-aos="fade-up" date-aos-delay="300"><thead><tr><th scope="col">\'#\'</th><th scope="col">Name</th><th scope="col">USN</th><th scope="col">Email</th></tr></thead><tbody>';
-  console.log(Object.keys(sec).length);
+    '<table class="table" data-aos="fade-up" date-aos-delay="300"><thead><tr><th scope="col">\'#\'</th><th scope="col">Name</th><th scope="col">USN</th><th scope="col">Email</th></tr></thead><tbody>';
   len = Object.keys(sec).length;
+  console.log(sec);
+  console.log(len);
   for (i = 0; i < len; i++) {
     section +=
       '<tr><th scope="row">' +
@@ -223,7 +223,7 @@ function get_section(sec) {
       "</td></tr>";
   }
   section += "</tbody></table>";
-  console.log(section);
+
   return section;
 }
 
@@ -240,7 +240,7 @@ app.get("/check/:id", function (req, res) {
     res.send(get_section(collC));
   } else {
     res.send(
-      '<div class="container"> <span>invalid request for section</span></div>'
+      '<div class="container" "data-aos="fade-up" date-aos-delay="300"> <span style="background-color:#ff8080; color:white;text-align:center;justify-content:center;padding:5px 10px;font-size:15px"><i class="fa-solid fa-xmark"></i>  Requested not found </span></div>'
     );
   }
 });
