@@ -90,33 +90,48 @@
   <section class="breadcrumbs">
       <div class="container">
           <div class="d-flex justify-content-between align-items-center">
-            <h2></h2>
+            
             <ol>
-              <label for="data">Choose :</label>
+              
+              <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#feedback" style="margin:3px;"> Feedbacks</button>
+              <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#facultycrud" style="margin:3px;">CRUD Faculty <i class="fas fa-wrench" tyle="color: #ffffff;"></i></button>
+              <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#studentcrud" style="margin:3px;">CRUD Students <i class="fas fa-spinner fa-spin" style="color: #ffffff;"></i></button>
+              
+                        <!-- Trigger the modal with a button -->
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"style="margin:3px;">Find  <i class="fab fa-searchengin fa-lg fa-spin" style="color: #ffffff;"></i> </button>
+            </ol>
+          </div>
+      </div>
+  </section>
+  <!-- ////// -->
+  <section class="breadcrumbs">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <label for="data">Choose :</label>
               <select  name="get_data" id="get_ajax">
                 <optgroup label="First year">
-                  <option value="sectionA">Section A</option>
-                  <option value="sectionB">Section B</option>
-                  <option value="sectionC">Section C</option>
+                  <option value="1_sectionA">Section A</option>
+                  <option value="1_sectionB">Section B</option>
+                  <option value="1_sectionC">Section C</option>
                   <option value="sectionD">Section D</option>
                 </optgroup>
                 <optgroup label="Second year">
-                  <option value="sectionA">Section A</option>
-                  <option value="sectionB">Section B</option>
-                  <option value="sectionC">Section C</option>
-                  <option value="sectionD">Section D</option>
+                  <option value="2_sectionA">Section A</option>
+                  <option value="2_sectionB">Section B</option>
+                  <option value="2_sectionC">Section C</option>
+                  <option value="2_sectionD">Section D</option>
                 </optgroup>
                 <optgroup label="Third year">
-                  <option value="sectionA">Section A</option>
-                  <option value="sectionB">Section B</option>
-                  <option value="sectionC">Section C</option>
-                  <option value="sectionD">Section D</option>
+                  <option value="3_sectionA">Section A</option>
+                  <option value="3_sectionB">Section B</option>
+                  <option value="3_sectionC">Section C</option>
+                  <option value="3_sectionD">Section D</option>
                 </optgroup>
                 <optgroup label="Fourth year">
-                  <option value="sectionA">Section A</option>
-                  <option value="sectionB">Section B</option>
-                  <option value="sectionC">Section C</option>
-                  <option value="sectionD">Section D</option>
+                  <option value="4_sectionA">Section A</option>
+                  <option value="4_sectionB">Section B</option>
+                  <option value="4_sectionC">Section C</option>
+                  <option value="4_sectionD">Section D</option>
                 </optgroup>
                 <optgroup label="HOD's">
                   <option value="hodCSE">Jyoti mam (cse hod)</option>
@@ -124,18 +139,11 @@
                 </optgroup>
               </select>
               
-              <button type="button" class="btn btn-secondary" onclick="loadAjax()" style="padding: 10px; color:rgb(253, 253, 253)" >GET</button>
-              <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#feedback" style="margin:3px;"> Feedbacks</button>
-              <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#facultycrud" style="margin:3px;">CRUD Faculty <i class="fas fa-wrench" tyle="color: #ffffff;"></i></button>
-              <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#studentcrud" style="margin:3px;">CRUD Students <i class="fas fa-spinner fa-spin" style="color: #ffffff;"></i></button>
-              <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#allstudents"style="margin:3px;">Students  </button>
-                        <!-- Trigger the modal with a button -->
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"style="margin:3px;">Find  <i class="fab fa-searchengin fa-lg fa-spin" style="color: #ffffff;"></i> </button>
-            </ol>
-          </div>
+              <button type="button" class="btn btn-info" onclick="loadAjax()" style="padding: 10px; color:rgb(253, 253, 253)" >GET</button>
       </div>
-  </section>
+    </div>
 
+  </section>
   
   <style>
    #cover-spin {
@@ -194,162 +202,6 @@
         <% }) %>
     <% } %>
     </div>
-
-
-    <div id="allstudents" class="collapse">
-           
-      <section class="features" data-aos="fade-up" date-aos-delay="300">
-        <div class="container">
-          <div class="section-title">
-            <h2><i class="far fa-user-circle fa-lg"></i></h2>
-          </div>
-          <div class="btn-group-horizontal" >
-            <button id="amit" type="button" class="btn btn-primary" data-toggle="collapse" data-target="#5A">5A</button>
-            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#5B">5B</button>
-            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#5C">5C</button>
-          </div>
-        </div>
-      </section>
-    </div>
-    
-      <div class="container">
-       
-          <div id="5A" class="collapse">
-            
-            <table class="table "data-aos="fade-up" date-aos-delay="300">
-              <thead>
-                <tr>
-                  <th scope="col">'5A'</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">USN</th>
-                  <th scope="col">Email</th>
-                </tr>
-              </thead>
-              
-            <% for (var i =0; i <=countA;  i++ ) { %>
-    
-              <% if(typeof StudentsA[i] != 'undefined') { %>
-                  
-                  <tbody>
-                      <tr>
-                        <th scope="row">
-                          <%=i+1%>
-                        </th>
-                    <td>
-                    <%=  StudentsA[i].name%>
-                    </td>
-                    <td>
-                    <%=  StudentsA[i].usn%>
-                    </td>
-                    <td>
-                    <%=  StudentsA[i].email%>
-                    </td>
-                    </tr>
-                    
-                  </tbody>
-                   
-              <% } %>
-             
-            <%  }%>
-        
-
-            </table>
-      
-          </div> 
-    </div>
-    
-     <!-- for 5B  -->
-     <div class="container">
-       
-      <div id="5B" class="collapse">
-        
-        <table class="table "data-aos="fade-up" date-aos-delay="300">
-          <thead>
-            <tr>
-              <th scope="col">'5B'</th>
-              <th scope="col">Name</th>
-              <th scope="col">USN</th>
-              <th scope="col">Email</th>
-            </tr>
-          </thead>
-         
-        <% for (var i =0; i <=countB;  i++ ) { %>
-
-          <% if(typeof StudentsB[i] != 'undefined') { %>
-              
-              <tbody>
-                  <tr>
-                    <th scope="row">
-                      <%=i+1%>
-                    </th>
-                <td>
-                <%=  StudentsB[i].name%>
-                </td>
-                <td>
-                <%=  StudentsB[i].usn%>
-                </td>
-                <td>
-                <%=  StudentsB[i].email%>
-                </td>
-                </tr>
-                
-              </tbody>
-               
-          <% } %>
-         
-        <%  }%>
-    
-
-        </table>
-  
-      </div> 
-     </div>
-     <!-- for 5C  -->
-     <div class="container">
-       
-      <div id="5C" class="collapse">
-        
-        <table class="table "data-aos="fade-up" date-aos-delay="300">
-          <thead>
-            <tr>
-              <th scope="col">'5C'</th>
-              <th scope="col">Name</th>
-              <th scope="col">USN</th>
-              <th scope="col">Email</th>
-            </tr>
-          </thead>
-         
-        <% for (var i =0; i <=countC;  i++ ) { %>
-
-          <% if(typeof StudentsC[i] != 'undefined') { %>
-              
-              <tbody>
-                  <tr>
-                    <th scope="row">
-                      <%=i+1%>
-                    </th>
-                <td>
-                <%=  StudentsC[i].name%>
-                </td>
-                <td>
-                <%=  StudentsC[i].usn%>
-                </td>
-                <td>
-                <%=  StudentsC[i].email%>
-                </td>
-                </tr>
-                
-              </tbody>
-               
-          <% } %>
-         
-        <%  }%>
-    
-
-        </table>
-  
-      </div> 
-     </div>
 
   
 
@@ -435,8 +287,8 @@
 
         </table>
        
-          
-        <form action="/access_feedback" method="post"><button onclick="showfeedback()" type="submit" class="btn btn-success btn-block" style="width: 25%; text-align: center;">Acess database </button></form> 
+        <button type="button" class="btn btn-danger" style="text-align: center;">Close</button>  
+      <form action="/access_feedback" method="post"><button onclick="showfeedback()" type="submit" class="btn btn-success btn-block" style="width: 25%; text-align: center;">Acess database </button></form> 
         
       </div>
       
@@ -529,6 +381,7 @@
       </form>  
     </div>
   </div>
+
 <!-- collapse of students crud -->
 
 <div id="studentcrud" class="collapse">
@@ -584,13 +437,13 @@
     </form>  
   </div>
 </div>
-</section><!-- End Section -->
+</section>
 
       
      
  <br>
 
-  </main><!-- End #main -->
+  </main>
 
   <!-- ======= Footer ======= -->
   

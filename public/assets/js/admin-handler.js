@@ -4,7 +4,7 @@ function loadAjax()
 {
     var ddl = document.getElementById("get_ajax");
      selectedValue = ddl.options[ddl.selectedIndex].value;
-    console.log("ajax button is clicked");
+     
    
     var xhttp= new XMLHttpRequest();
     

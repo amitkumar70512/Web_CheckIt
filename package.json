@@ -1,8 +1,9 @@
 {
   "name": "webprojectwork",
   "version": "1.0.0",
-  "description": "",
+  "description": "checkit an automatic attendance app",
   "main": "app.js",
+  
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js"
