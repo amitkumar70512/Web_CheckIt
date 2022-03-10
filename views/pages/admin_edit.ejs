@@ -228,17 +228,19 @@
 
   </style>
    <!-- for ajax  -->
-   <div class="container">
+   <div class="container" data-aos="fade-left" date-aos-delay="300">
      <div id="ajaxLoad">
 
      </div>
    </div>
-  
+   <div class="container" data-aos="fade-up" date-aos-delay="400">
+    <div id="feedback_data" style="display: none;">
+      
+    </div>
+    
+  </div>
+
 <div id="cover-spin"></div>
-
-   
-
-  
 
 <!-- /// -->
 <section class="features">
@@ -451,9 +453,16 @@
       document.getElementById('ajaxLoad').style.display='none';
       document.getElementById("getbtn").style.display = "block";
       document.getElementById("closebtn").style.display ="none";
-      console.log("ajax load is hidden");
+  
     }, false);
   }
+  // if closebtn is pressed , disapper feedbacks
+ 
+  function close_feed()
+  {
+    document.getElementById('feedback_data').style.display = 'none';
+  }
+
   </script>
  
 </body>

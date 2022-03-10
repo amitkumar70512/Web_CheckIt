@@ -20,7 +20,6 @@ function loadAjax() {
       spin.style.display = "none";
       document.getElementById("ajaxLoad").style.display = "block";
       document.getElementById("ajaxLoad").innerHTML = this.responseText;
-      console.log(this.responseText);
       console.log("close btn is displayed and get btn is none");
       document.getElementById("closebtn").style.display = "block";
       document.getElementById("getbtn").style.display = "none";
@@ -39,15 +38,16 @@ function get_feedback() {
   var xhttp = new XMLHttpRequest();
 
   xhttp.onreadystatechange = function () {
-    if (this.readyState == 3) {
+    if (this.readyState == 1) {
       //loading
       spin.style.display = "block";
-      console.log("inside get_feedback fun ,loading", this.readyState);
+      console.log("inside get_feedback fun ,opended", this.readyState);
     }
     if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("ajaxLoad").style.display = "block";
-      document.getElementById("ajaxLoad").innerHTML = this.responseText;
-      console.log(this.responseText);
+      spin.style.display = "none";
+      document.getElementById("feedback_data").style.display = "block";
+      document.getElementById("feedback_data").innerHTML = this.responseText;
+      console.log("inside ready state 4, done");
     }
   };
 

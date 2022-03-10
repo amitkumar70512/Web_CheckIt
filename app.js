@@ -246,18 +246,6 @@ app.get("/check/:id", function (req, res) {
   }
 });
 
-///
-app.get("/faculty_check", authenticateToken, function (req, res) {
-  checkStudent(res);
-  //checkPresent();  // should be called by  get method
-});
-
-app.get("/home", authenticateToken, (req, res) => {
-  updateCurrClass(uid, fname, res);
-});
-app.get("/", authenticateToken, function (req, res) {
-  updateCurrClass(uid, fname, res);
-});
 app.get("/login", function (req, res) {
   res.render("pages/login");
 });
@@ -281,9 +269,7 @@ app.get("/logout", authenticateToken, async (req, res) => {
     return res.status(500).send(error);
   }
 });
-app.get("/:id", authenticateToken, function (req, res) {
-  res.render(`pages/${req.params.id}`);
-});
+
 //////token/////
 function generateAccessToken(username) {
   console.log("token is geneerated");
@@ -793,9 +779,7 @@ app.post("/verify", (req, res) => {
       } else {
         // block for password matching and others
         db_pass = doc.data().password;
-        //console.log(doc.data());
 
-        console.log(db_pass);
         bcrypt.compare(password, db_pass, function (err, result) {
           if (!result) {
             // password mismatch
@@ -1208,28 +1192,41 @@ app.post("/addStudent", (req, res) => {
 app.get("/get_feedback", async (req, res) => {
   const feed = await admin.firestore().collection("feedback").get();
   feedbacks = feed.docs.map((doc) => doc.data());
-  console.log(feedbacks);
   lenfeed = Object.keys(feedbacks).length;
   var i, feed_data;
   feed_data =
-    '<div id="feedback" class="collapse"><div class="container" data-aos="fade-up" date-aos-delay="300"><div class="form-outline" id="feedbacks" style="visibility: visible;"><label class="form-label" for="textAreaExample">Queries :</label><table class="table "data-aos="fade-up" date-aos-delay="300"><thead><tr><th scope="col">\'\'</th><th scope="col">Name</th><th scope="col">Email</th><th scope="col">Subject</th><th scope="col">Message</th></tr></thead><tbody>';
+    '<div class="form-outline"><label class="form-label" for="textAreaExample">Queries :</label><table class="table "data-aos="fade-up" date-aos-delay="300"><thead><tr><th scope="col">\'\'</th><th scope="col">Name</th><th scope="col">Email</th><th scope="col">Subject</th><th scope="col">Message</th></tr></thead><tbody>';
   for (i = 0; i < lenfeed; i++) {
     feed_data +=
       '<tr><th scope="row">' +
       (i + 1) +
       "</th><td>" +
-      feed[i].name +
+      feedbacks[i].name +
       "</td><td>" +
-      feed[i].email +
+      feedbacks[i].email +
       " </td><td>" +
-      feed[i].subject +
+      feedbacks[i].subject +
       "</td><td>" +
-      feed[i].message +
-      "</td></tr>";
+      feedbacks[i].message +
+      '</td> <td><button type="button" class="btn btn-danger" style="text-align:center";>delete</button></td></tr>';
   }
   feed_data +=
-    '</tbody></table><button type="button" class="btn btn-danger" style="text-align: center;">Close</button></div></div></div>';
-  console.log(feed);
-  console.log(feed_data);
+    '</tbody></table><button type="button" onclick="close_feed()"  class="btn btn-danger" style="text-align: center;" >Close</button></div>';
   res.send(feed_data);
+});
+
+app.get("/faculty_check", authenticateToken, function (req, res) {
+  checkStudent(res);
+  //checkPresent();  // should be called by  get method
+});
+
+app.get("/home", authenticateToken, (req, res) => {
+  updateCurrClass(uid, fname, res);
+});
+app.get("/", authenticateToken, function (req, res) {
+  updateCurrClass(uid, fname, res);
+});
+
+app.get("/:id", authenticateToken, function (req, res) {
+  res.render(`pages/${req.params.id}`);
 });
