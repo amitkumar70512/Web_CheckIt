@@ -136,9 +136,7 @@
               <div class="d-flex justify-content-between align-items-center">
                 <h2></h2>
                 <ol>
-                  <li>
-                  <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#" style="margin:3px;">Check</button>
-                </li>
+                 
                 <li>
                   <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#" style="margin:3px;">Absent</button>
                 </li>
@@ -146,16 +144,66 @@
                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#presentModal" style="margin:3px;">Present</button>
                 </li>
                 <li>
-                  <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#allstudents"style="margin:3px;">Students</button>
-                </li>
-                <li>
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"style="margin:3px;">Find</button>
+                  <div class="input-group">
+                    <div class="form-outline">
+                      <input type="search" id="form1" class="form-control" />
+                      <label class="form-label" for="form1">Search</label>
+                    </div>
+                    <button type="button" class="btn btn-primary">
+                      <i class="fas fa-search"></i>
+                    </button>
+                  </div>
                 </li>           
                 </ol>
               </div>
           </div>
       </section>
+      
+
+      <section class="breadcrumbs" id="get_students">
+        <div class="container">
+         
+          <div class="input-group">
+            <select class="custom-select" name="get_data" id="get_ajax">
+              <optgroup label="First year">
+                <option value="1_sectionA">Section A</option>
+                <option value="1_sectionB">Section B</option>
+                <option value="1_sectionC">Section C</option>
+                <option value="sectionD">Section D</option>
+              </optgroup>
+              <optgroup label="Second year">
+                <option value="2_sectionA">Section A</option>
+                <option value="2_sectionB">Section B</option>
+                <option value="2_sectionC">Section C</option>
+                <option value="2_sectionD">Section D</option>
+              </optgroup>
+              <optgroup label="Third year">
+                <option value="3_sectionA">Section A</option>
+                <option value="3_sectionB">Section B</option>
+                <option value="3_sectionC">Section C</option>
+                <option value="3_sectionD">Section D</option>
+              </optgroup>
+              <optgroup label="Fourth year">
+                <option value="4_sectionA">Section A</option>
+                <option value="4_sectionB">Section B</option>
+                <option value="4_sectionC">Section C</option>
+                <option value="4_sectionD">Section D</option>
+              </optgroup>
+              <optgroup label="HOD's">
+                <option value="hodCSE">Jyoti mam (cse hod)</option>
+                <option value="hodISE">Audi</option>
+              </optgroup>
+            </select>
+            <div class="input-group-append">
+              <button type="button" id="closebtn"  class="btn btn-danger"  style="padding: 5px 10px; color:rgb(253, 253, 253);display: none;">Close</button>
+              <button type="button" id="getbtn" class="btn btn-info" onclick="loadAjax()" style="padding: 5px 10px; color:rgb(253, 253, 253);display: block;" >GET</button>
+            </div>
     
+          </div>
+                  
+        </div>
+    
+      </section>
       
         <div class="container">
           <% if(typeof alert != 'undefined') { %>
@@ -170,166 +218,9 @@
         <% } %>
         </div>
     
-    
-     <div id="allstudents" class="collapse">
-           
-      <section class="features" data-aos="fade-up" date-aos-delay="300">
-        <div class="container">
-          <div class="section-title">
-            <h2><i class="far fa-user-circle fa-lg"></i></h2>
-            </div>
-          <div class="btn-group-horizontal" >
-            <button id="amit" type="button" class="btn btn-primary" data-toggle="collapse" data-target="#5A">5A</button>
-            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#5B">5B</button>
-            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#5C">5C</button>
-          </div>
-        </div>
-      </section>
-    </div>
-    
-      <div class="container">
-       
-          <div id="5A" class="collapse">
-            
-            <table class="table "data-aos="fade-up" date-aos-delay="300">
-              <thead>
-                <tr>
-                  <th scope="col">'5A'</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">USN</th>
-                  <th scope="col">Email</th>
-                </tr>
-              </thead>
-              
-            <% for (var i =0; i <=countA;  i++ ) { %>
-    
-              <% if(typeof StudentsA[i] != 'undefined') { %>
-                  
-                  <tbody>
-                      <tr>
-                        <th scope="row">
-                          <%=i+1%>
-                        </th>
-                    <td>
-                    <%=  StudentsA[i].name%>
-                    </td>
-                    <td>
-                    <%=  StudentsA[i].usn%>
-                    </td>
-                    <td>
-                    <%=  StudentsA[i].email%>
-                    </td>
-                    </tr>
-                    
-                  </tbody>
-                   
-              <% } %>
-             
-            <%  }%>
-        
-
-            </table>
-      
-          </div> 
-    </div>
-    
-     <!-- for 5B  -->
-     <div class="container">
-       
-      <div id="5B" class="collapse">
-        
-        <table class="table "data-aos="fade-up" date-aos-delay="300">
-          <thead>
-            <tr>
-              <th scope="col">'5B'</th>
-              <th scope="col">Name</th>
-              <th scope="col">USN</th>
-              <th scope="col">Email</th>
-            </tr>
-          </thead>
-         
-        <% for (var i =0; i <=countB;  i++ ) { %>
-
-          <% if(typeof StudentsB[i] != 'undefined') { %>
-              
-              <tbody>
-                  <tr>
-                    <th scope="row">
-                      <%=i+1%>
-                    </th>
-                <td>
-                <%=  StudentsB[i].name%>
-                </td>
-                <td>
-                <%=  StudentsB[i].usn%>
-                </td>
-                <td>
-                <%=  StudentsB[i].email%>
-                </td>
-                </tr>
-                
-              </tbody>
-               
-          <% } %>
-         
-        <%  }%>
-    
-
-        </table>
-  
-      </div> 
-     </div>
-     <!-- for 5C  -->
-     <div class="container">
-       
-      <div id="5C" class="collapse">
-        
-        <table class="table "data-aos="fade-up" date-aos-delay="300">
-          <thead>
-            <tr>
-              <th scope="col">'5C'</th>
-              <th scope="col">Name</th>
-              <th scope="col">USN</th>
-              <th scope="col">Email</th>
-            </tr>
-          </thead>
-         
-        <% for (var i =0; i <=countC;  i++ ) { %>
-
-          <% if(typeof StudentsC[i] != 'undefined') { %>
-              
-              <tbody>
-                  <tr>
-                    <th scope="row">
-                      <%=i+1%>
-                    </th>
-                <td>
-                <%=  StudentsC[i].name%>
-                </td>
-                <td>
-                <%=  StudentsC[i].usn%>
-                </td>
-                <td>
-                <%=  StudentsC[i].email%>
-                </td>
-                </tr>
-                
-              </tbody>
-               
-          <% } %>
-         
-        <%  }%>
-    
-
-        </table>
-  
-      </div> 
-     </div>
-
-    <!-- /// -->
    
     
-      <!-- Modal -->
+      <!-- Modal for present students -->
       <div id="presentModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
     
@@ -422,10 +313,6 @@
       </div>
       <!-- end of modal -->
     
-      
-    
-    
-      </div><!-- end of modal-body -->
         <!-- Modal -->
         <div id="myModal" class="modal fade" role="dialog">
           <div class="modal-dialog">
@@ -455,14 +342,14 @@
       </div><!-- end of modal-body -->
     
    
-</main><!-- End #main -->
+</main>
     
   
 
   
-   <!-- ======= Footer =======
+   
 
-   <%- include('../partials/footer') %>-->
+   <%- include('../partials/footer') %> 
    
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
@@ -478,9 +365,20 @@
 
   <!--  Main JS File -->
   <script src="assets/js/main.js"></script>
-  <script src="assets/js/script_sign.js"></script>
+  <script src="assets/js/ajax_handlerjs"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
   <script src="https://kit.fontawesome.com/b51d5e4e6a.js" crossorigin="anonymous"></script>
+  <script>
+    var el = document.getElementById('closebtn');
+  if(el){
+    el.addEventListener('click', ()=>{
+      document.getElementById('ajaxLoad').style.display='none';
+      document.getElementById("getbtn").style.display = "block";
+      document.getElementById("closebtn").style.display ="none";
+      console.log("ajax load is hidden");
+    }, false);
+  }
+  </script>
 </body>
 
 </html>

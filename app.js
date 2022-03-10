@@ -88,6 +88,7 @@ var fname = "",
   femail = "",
   uid = ""; // to be used in dynamic ejs
 var today = date_ob.toDateString();
+
 var collA = {};
 var collB = {};
 var collC = {};
@@ -330,6 +331,7 @@ let scan_valid = 0;
 let start_time = 0,
   end_time = 0,
   s_time = "085500";
+
 async function updateCurrClass(uid, fname, res) {
   get_time();
   console.log("inside update uid=" + uid);
@@ -702,7 +704,7 @@ app.post("/feedback", async function (req, res) {
       }); // end of catch
   }
 });
-// working fine
+// this post is replaced by above ajax
 
 app.post(
   "/feed",
@@ -1096,7 +1098,7 @@ function deletekey() {
 }
 
 /////////////////////////// for admin page ///////////
-var feeds = {};
+
 ////
 app.post("/firedb", (req, res) => {
   fireuid = req.body.uid;
@@ -1203,86 +1205,31 @@ app.post("/addStudent", (req, res) => {
 
 /// for accessing feedbacks
 
-app.post("/access_feedback", async (req, res) => {
+app.get("/get_feedback", async (req, res) => {
   const feed = await admin.firestore().collection("feedback").get();
   feedbacks = feed.docs.map((doc) => doc.data());
   console.log(feedbacks);
   lenfeed = Object.keys(feedbacks).length;
-  /////
-  var collA = {};
-  var collB = {};
-  var collC = {};
-  var i = 0,
-    j = 0,
-    k = 0;
-  var lenA = 0;
-  var lenB = 0;
-  var lenC = 0;
-  admin
-    .firestore()
-    .collection("students_list")
-    .doc("5A")
-    .collection("list")
-    .get()
-    .then((val) => {
-      val.forEach((doc) => {
-        collA[i] = {
-          email: doc.id,
-          name: doc.data().name,
-          usn: doc.data().usn,
-        };
-        i++;
-      });
-      lenA = Object.keys(collA).length;
-      ////////
-
-      admin
-        .firestore()
-        .collection("students_list")
-        .doc("5B")
-        .collection("list")
-        .get()
-        .then((val2) => {
-          val2.forEach((doc) => {
-            collB[j] = {
-              email: doc.id,
-              name: doc.data().name,
-              usn: doc.data().usn,
-            };
-            j++;
-          });
-          lenB = Object.keys(collB).length;
-
-          admin
-            .firestore()
-            .collection("students_list")
-            .doc("5C")
-            .collection("list")
-            .get()
-            .then((val3) => {
-              val3.forEach((doc) => {
-                collC[k] = {
-                  email: doc.id,
-                  name: doc.data().name,
-                  usn: doc.data().usn,
-                };
-                k++;
-              });
-              lenC = Object.keys(collC).length;
-              /////
-              /////
-              res.render("pages/admin_edit", {
-                admin_name,
-                lenfeed: lenfeed,
-                feeds: feedbacks,
-                countA: lenA,
-                StudentsA: collA,
-                countB: lenB,
-                StudentsB: collB,
-                countC: lenC,
-                StudentsC: collC,
-              });
-            }); // end of 5C
-        }); // end of 5B
-    }); // end of  5
+  var i, feed_data;
+  feed_data =
+    '<div id="feedback" class="collapse"><div class="container" data-aos="fade-up" date-aos-delay="300"><div class="form-outline" id="feedbacks" style="visibility: visible;"><label class="form-label" for="textAreaExample">Queries :</label><table class="table "data-aos="fade-up" date-aos-delay="300"><thead><tr><th scope="col">\'\'</th><th scope="col">Name</th><th scope="col">Email</th><th scope="col">Subject</th><th scope="col">Message</th></tr></thead><tbody>';
+  for (i = 0; i < lenfeed; i++) {
+    feed_data +=
+      '<tr><th scope="row">' +
+      (i + 1) +
+      "</th><td>" +
+      feed[i].name +
+      "</td><td>" +
+      feed[i].email +
+      " </td><td>" +
+      feed[i].subject +
+      "</td><td>" +
+      feed[i].message +
+      "</td></tr>";
+  }
+  feed_data +=
+    '</tbody></table><button type="button" class="btn btn-danger" style="text-align: center;">Close</button></div></div></div>';
+  console.log(feed);
+  console.log(feed_data);
+  res.send(feed_data);
 });

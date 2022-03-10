@@ -1,6 +1,9 @@
+// handling faculty_check and admin_edit pages
+
 var spin = document.getElementById("cover-spin");
 var selectedValue;
 function loadAjax() {
+  //loading all students details
   var ddl = document.getElementById("get_ajax");
   selectedValue = ddl.options[ddl.selectedIndex].value;
 
@@ -25,4 +28,29 @@ function loadAjax() {
   };
   xhttp.open("GET", `check/${selectedValue}`, true);
   setInterval(xhttp.send(), 5000);
+}
+
+// this is for feedbacks through ajax
+var feedbtn = document
+  .getElementById("get_feedback")
+  .addEventListener("click", get_feedback);
+
+function get_feedback() {
+  var xhttp = new XMLHttpRequest();
+
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 3) {
+      //loading
+      spin.style.display = "block";
+      console.log("inside get_feedback fun ,loading", this.readyState);
+    }
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("ajaxLoad").style.display = "block";
+      document.getElementById("ajaxLoad").innerHTML = this.responseText;
+      console.log(this.responseText);
+    }
+  };
+
+  xhttp.open("GET", "/get_feedback", true);
+  xhttp.send();
 }
