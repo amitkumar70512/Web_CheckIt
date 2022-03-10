@@ -1087,7 +1087,6 @@ function deletekey() {
 }
 
 /////////////////////////// for admin page ///////////
-
 //// inserting faculty data using ajax
 app.post("/firedb", (req, res) => {
   fireuid = req.query.uid;
