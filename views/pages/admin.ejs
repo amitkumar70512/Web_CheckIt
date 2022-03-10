@@ -27,7 +27,6 @@
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-  <link href="assets/css/admin_welcome.css" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
  
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -38,6 +37,43 @@
 </head>
 
 <body>
+<style>
+   #cover-spin {
+    position:fixed;
+    width:100%;
+    left:0;right:0;top:0;bottom:0;
+    background-color: rgba(191, 225, 248, 0.7);
+    z-index:9999;
+    display:none;
+}
+
+@-webkit-keyframes spin {
+	from {-webkit-transform:rotate(0deg);}
+	to {-webkit-transform:rotate(360deg);}
+}
+
+@keyframes spin {
+	from {transform:rotate(0deg);}
+	to {transform:rotate(360deg);}
+}
+
+#cover-spin::after {
+    content:'';
+    display:block;
+    position:absolute;
+    left:48%;top:40%;
+    width:45px;height:45px;
+    border-style:solid;
+    border-color:rgb(26, 126, 126);
+    border-top-color:transparent;
+    border-width: 3px;
+    border-radius:50%;
+    -webkit-animation: spin .7s linear infinite;
+    animation: spin .7s linear infinite;
+}
+
+
+  </style>
 
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center ">
@@ -103,7 +139,7 @@
       </section><!-- End Features Section -->
       
       
-      
+      <div id="cover-spin"></div>
 
     <!-- ======= Contact Section ======= -->
     <section class="contact" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
@@ -121,7 +157,7 @@
             <% if(typeof alert != 'undefined') { %>
               <% alert.forEach(function(error) { %>
                   <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                      <%= error.msg %>
+                    <%= error.msg %>
                       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                        
                       </button>
@@ -151,7 +187,7 @@
                                
                 <br>
                 <div class="form-group">
-                    <button  type="submit" class="btn btn-primary btn-block"> Proceed  </button>
+                    <button  type="submit" onclick="showspin()" class="btn btn-primary btn-block"> Proceed  </button>
                 </div> <!-- form-group// -->      
                
             </form>
@@ -186,7 +222,13 @@
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
   
-
+<script>
+  function showspin()
+  {
+    
+    document.getElementById('cover-spin').style.display='block';
+  }
+</script>
 </body>
 
 </html>

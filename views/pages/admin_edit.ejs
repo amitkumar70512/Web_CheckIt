@@ -69,41 +69,32 @@
   </header><!-- End Header -->
 
 <main id="main">
-<!-- ======= breadcrumbs Section c======= -->
   <section class="breadcrumbs">
     <div class="container">
         <div class="d-flex justify-content-between align-items-center">
          <ol>
           <li><a class="" href="admin">Checkit</a></li>
          </ol>
-
           <ol>
-  
             <li>
               <a href="#" data-toggle="popover"  data-placement="bottom" title="Administrator" data-content="Some content inside the popover"><%= admin_name %></a>
             </li>
                 <li>Administrator</li>
           </ol>
         </div>
-        
-      </div>
-  </section><!-- End breadscrumbs Section -->
+    </div>
+  </section>
 
   <section class="breadcrumbs">
       <div class="container">
           <div class="d-flex justify-content-between align-items-center">
-            
             <ol>
-              
               <button type="button" class="btn btn-primary" id="get_feedback" style="margin:3px;"> Feedbacks</button>
-              <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#facultycrud" style="margin:3px;">CRUD Faculty <i class="fas fa-wrench" tyle="color: #ffffff;"></i></button>
+              <button type="button" class="btn btn-primary"id="faculty-btn" data-toggle="collapse" data-target="#facultycrud" style="margin:3px;">CRUD Faculty <i class="fas fa-wrench" tyle="color: #ffffff;"></i></button>
               <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#studentcrud" style="margin:3px;">CRUD Students <i class="fas fa-spinner fa-spin" style="color: #ffffff;"></i></button>
-              
               <form   class="form-inline">
-                  
                 <input class="form-control mr-sm-2" type="search" placeholder="Search keywords" name="id" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                  
               </form>
             </ol>
           </div>
@@ -235,11 +226,14 @@
    </div>
    <div class="container" data-aos="fade-up" date-aos-delay="400">
     <div id="feedback_data" style="display: none;">
-      
     </div>
     
   </div>
-
+  <div class="container" data-aos="fade-up" date-aos-delay="400">
+    <div id="notification" style="display: none;">
+    </div>
+    <button type="button" id="close_notification" class="btn btn-danger" style="display:none;text-align:center;justify-content:center;margin:4px 0">close</button>
+  </div>
 <div id="cover-spin"></div>
 
 <!-- /// -->
@@ -278,22 +272,22 @@
 
   <!-- feedback collapse -->
 
-  <div id="facultycrud" class="collapse">
+  <div id="facultycrud" class="collapse" style="display:none">
     <div class="container"  data-aos="fade-up" date-aos-delay="300">
 
       <div class="section-title"><h2>Firestore CRUD  </h2></div>
     
-      <form action="/firedb" method="POST" class="form" data-aos="fade-up" date-aos-delay="300">
+      <form  class="form" data-aos="fade-up" date-aos-delay="300">
         <div class="row">    
           <div class="form-group col-md-6">
             <label for="inputEmail4">Faculty id</label>
-            <input type="text" class="form-control" name="uid" placeholder="1bm19fa000">
+            <input type="text" class="form-control" id="uid" placeholder="1bm19fa000">
           </div>
                 
          <div class="row">
           <div class="form-group col-md-2">
             <label for="inputAddress">Start time</label>
-            <select id="start_time" class="form-control"   onchange="droplist()">
+            <select id="start_time" class="form-control"  >
             <option selected> select start time</option>
             <option>080000</option>
             <option>085500</option>
@@ -306,15 +300,13 @@
             <option>145500</option>
           </select>
           </div>
-            <div class="form-group col-md-4">
-            <input type="text"  id="stime" class="form-control" name="s_time" > 
-          </div>
+            
         </div>        
                 
               
           <div class="form-group col-md-2">
             <label for="inputState">Day</label>
-            <select id="list_day" class="form-control" onchange="getday()">
+            <select id="day" class="form-control" >
               <option selected>select day</option>
               <option>Monday</option>
               <option>Tuesday</option>
@@ -325,24 +317,22 @@
               <option>Sunday</option>
             </select>
           </div>
-          <div class="form-group col-md-4">
-            <input type="text"  id="day" class="form-control" name="day" > 
-          </div>
+          
               
           <br>
           <div class="form-group col-md-2">
             <label for="inputZip">Class</label>
-            <input type="text" class="form-control" name="class">
+            <input type="text" class="form-control" id="class">
           </div>
               
           <div class="form-group col-md-2">
             <label for="inputZip">Section</label>
-            <input type="text" class="form-control" name="section" >
+            <input type="text" class="form-control" id="section" >
           </div>
             
           <div class="form-group col-md-2">
               <label for="inputState">Timing</label>
-              <select id="list_time" class="form-control" onchange="list_timing()">
+              <select id="timing" class="form-control" >
               <option selected> select timing</option>
               <option>08:55 am to 09:50 am</option>
               <option>09:50 am to 10:45 am</option>
@@ -354,12 +344,10 @@
               <option>02:55 pm to 03:50 pm</option>
               <option>(Tutorial class) 02:00 pm to 03:55 pm</option>
               </select>
-              <div class="form-group col-md-4">
-                <input type="text"  id="timing" class="form-control" name="timing" > 
-              </div>
+              
           </div>
           
-          <button type="submit" class="btn btn-primary">Proceed</button>
+          <button type="button" id="faculty-crud-btn" class="btn btn-primary">Proceed</button>
       </div>
       </form>  
     </div>
@@ -422,10 +410,6 @@
 </div>
 </section>
 
-      
-     
- <br>
-
   </main>
 
   <!-- ======= Footer ======= -->
@@ -456,12 +440,16 @@
   
     }, false);
   }
-  // if closebtn is pressed , disapper feedbacks
- 
-  function close_feed()
-  {
-    document.getElementById('feedback_data').style.display = 'none';
+  // if faculty-btn is pressed , show faculty crud
+  var fac = document.getElementById('faculty-btn');
+  if(fac){
+    fac.addEventListener('click', ()=>{
+      document.getElementById('facultycrud').style.display='block';
+      
+    }, false);
   }
+ 
+  
 
   </script>
  

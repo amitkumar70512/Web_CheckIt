@@ -691,7 +691,6 @@ app.post("/feedback", async function (req, res) {
   }
 });
 // this post is replaced by above ajax
-
 app.post(
   "/feed",
   [
@@ -754,131 +753,137 @@ app.post(
 
 // for admin login
 var admin_name = "admin";
-
 var collA = {};
 var collB = {};
 var collC = {};
 app.post("/verify", (req, res) => {
   const key = String(req.body.admin_key);
   const password = String(req.body.passkey);
+  console.log(key);
+  if (key == "" || password == "") {
+    const errors = [{ msg: "please fill all fields" }];
+    const alert = errors;
+    res.render("pages/admin", {
+      alert,
+    });
+  } else {
+    const firestore_con = admin.firestore();
+    const writeResult = firestore_con
+      .collection("admins")
+      .doc(key)
+      .get()
+      .then((doc) => {
+        if (!doc.exists) {
+          // entered uid doesnt registered
+          console.log("No such document!");
+          const errors = [{ msg: " Failed!  Invalid Crudentials.." }];
+          const alert = errors;
+          res.render("pages/login", {
+            alert,
+          });
+        } else {
+          // block for password matching and others
+          db_pass = doc.data().password;
 
-  const firestore_con = admin.firestore();
-  const writeResult = firestore_con
-    .collection("admins")
-    .doc(req.body.admin_key)
-    .get()
-    .then((doc) => {
-      if (!doc.exists) {
-        // entered uid doesnt registered
-        console.log("No such document!");
-        const errors = [{ msg: " Failed!  Invalid Crudentials.." }];
+          bcrypt.compare(password, db_pass, function (err, result) {
+            if (!result) {
+              // password mismatch
+
+              const errors = [{ msg: "Failed! crudentials not matched" }];
+              const alert = errors;
+              res.render("pages/admin", {
+                alert,
+              });
+            } // end of password mismatch
+            else {
+              // password matched
+
+              console.log("password matched");
+              admin_name = doc.data().name;
+
+              ////////////////////////
+
+              var i = 0,
+                j = 0,
+                k = 0;
+
+              admin
+                .firestore()
+                .collection("students_list")
+                .doc("5A")
+                .collection("list")
+                .get()
+                .then((val) => {
+                  val.forEach((doc) => {
+                    collA[i] = {
+                      email: doc.id,
+                      name: doc.data().name,
+                      usn: doc.data().usn,
+                    };
+                    i++;
+                  });
+                  ////////
+
+                  admin
+                    .firestore()
+                    .collection("students_list")
+                    .doc("5B")
+                    .collection("list")
+                    .get()
+                    .then((val2) => {
+                      val2.forEach((doc) => {
+                        collB[j] = {
+                          email: doc.id,
+                          name: doc.data().name,
+                          usn: doc.data().usn,
+                        };
+                        j++;
+                      });
+
+                      admin
+                        .firestore()
+                        .collection("students_list")
+                        .doc("5C")
+                        .collection("list")
+                        .get()
+                        .then((val3) => {
+                          val3.forEach((doc) => {
+                            collC[k] = {
+                              email: doc.id,
+                              name: doc.data().name,
+                              usn: doc.data().usn,
+                            };
+                            k++;
+                          });
+                          lenC = Object.keys(collC).length;
+                          /////
+
+                          /////
+                          res.render("pages/admin_edit", {
+                            admin_name,
+                            lenfeed: 0,
+                            feeds: "",
+                            StudentsA: collA,
+                            StudentsB: collB,
+                            StudentsC: collC,
+                          });
+                        }); // end of 5C
+                    }); // end of 5B
+                }); // end of  5A
+            } // end of password matched
+          });
+        } // end of  block for password matching and others
+      }) // end of then
+
+      .catch((err) => {
+        console.log("Error getting document", err);
+        const errors = [{ msg: " Invalid admin crudentials   : " + err }];
         const alert = errors;
-        res.render("pages/login", {
+        res.render("pages/admin", {
           alert,
         });
-      } else {
-        // block for password matching and others
-        db_pass = doc.data().password;
-
-        bcrypt.compare(password, db_pass, function (err, result) {
-          if (!result) {
-            // password mismatch
-
-            console.log("password not matched");
-            const errors = [{ msg: "Failed! crudentials not matched" }];
-            const alert = errors;
-            res.render("pages/admin", {
-              alert,
-            });
-          } // end of password mismatch
-          else {
-            // password matched
-
-            console.log("password matched");
-            admin_name = doc.data().name;
-
-            ////////////////////////
-
-            var i = 0,
-              j = 0,
-              k = 0;
-
-            admin
-              .firestore()
-              .collection("students_list")
-              .doc("5A")
-              .collection("list")
-              .get()
-              .then((val) => {
-                val.forEach((doc) => {
-                  collA[i] = {
-                    email: doc.id,
-                    name: doc.data().name,
-                    usn: doc.data().usn,
-                  };
-                  i++;
-                });
-                ////////
-
-                admin
-                  .firestore()
-                  .collection("students_list")
-                  .doc("5B")
-                  .collection("list")
-                  .get()
-                  .then((val2) => {
-                    val2.forEach((doc) => {
-                      collB[j] = {
-                        email: doc.id,
-                        name: doc.data().name,
-                        usn: doc.data().usn,
-                      };
-                      j++;
-                    });
-
-                    admin
-                      .firestore()
-                      .collection("students_list")
-                      .doc("5C")
-                      .collection("list")
-                      .get()
-                      .then((val3) => {
-                        val3.forEach((doc) => {
-                          collC[k] = {
-                            email: doc.id,
-                            name: doc.data().name,
-                            usn: doc.data().usn,
-                          };
-                          k++;
-                        });
-                        lenC = Object.keys(collC).length;
-                        /////
-
-                        /////
-                        res.render("pages/admin_edit", {
-                          admin_name,
-                          lenfeed: 0,
-                          feeds: "",
-                          StudentsA: collA,
-                          StudentsB: collB,
-                          StudentsC: collC,
-                        });
-                      }); // end of 5C
-                  }); // end of 5B
-              }); // end of  5A
-          } // end of password matched
-        });
-      } // end of  block for password matching and others
-    }) // end of then
-
-    .catch((err) => {
-      console.log("Error getting document", err);
-      const errors = [{ msg: " Invalid admin crudentials   : " + err }];
-      const alert = errors;
-      res.render("pages/admin", {
-        alert,
-      });
-    }); // end of catch
+      }); // end of catch
+  }
 });
 
 ///////firestore////
@@ -1083,58 +1088,44 @@ function deletekey() {
 
 /////////////////////////// for admin page ///////////
 
-////
+//// inserting faculty data using ajax
 app.post("/firedb", (req, res) => {
-  fireuid = req.body.uid;
-  fires_time = req.body.s_time;
-  fireday = req.body.day;
-  fireclass = req.body.class;
-  firesection = req.body.section;
-  firetiming = req.body.timing;
-
-  const writeResult = admin
-    .firestore()
-    .collection("faculty")
-    .doc(fireuid)
-    .collection(fireday)
-    .doc(fires_time)
-    .set({
-      class: fireclass,
-      section: firesection,
-      timing: firetiming,
-    })
-    .then(function () {
-      console.log("Document successfully written!");
-      const errors = [{ msg: ` Successfully inserted data of ${fireuid}` }];
-      const alert = errors;
-      res.render("pages/admin_edit", {
-        admin_name,
-        lenfeed: 0,
-        feeds: "",
-        countA: lenA,
-        StudentsA: collA,
-        countB: lenB,
-        StudentsB: collB,
-        countC: lenC,
-        StudentsC: collC,
+  fireuid = req.query.uid;
+  fires_time = req.query.s_time;
+  fireday = req.query.day;
+  fireclass = req.query.class;
+  firesection = req.query.section;
+  firetiming = req.query.timing;
+  console.log(fireuid + " " + fires_time);
+  try {
+    const writeResult = admin
+      .firestore()
+      .collection("faculty")
+      .doc(fireuid)
+      .collection(fireday)
+      .doc(fires_time)
+      .set({
+        class: fireclass,
+        section: firesection,
+        timing: firetiming,
+      })
+      .then(function () {
+        console.log("Document successfully written!");
+        res.send(
+          `<div class="container" "data-aos="fade-up" date-aos-delay="300"> <span style="background-color:rgb(167, 171, 176); color:white;text-align:center;justify-content:center;padding:5px 10px;margin:20px 0;font-size:18px"><i class="fa-solid fa-face-grin"></i> Successfully inserted data of ${req.query.uid} </span></div>`
+        );
+      })
+      .catch(function (error) {
+        console.error("Error writing document: ", error);
+        res.send(
+          '<div class="container" "data-aos="fade-up" date-aos-delay="300"> <span style="background-color:#ff8080; color:white;text-align:center;justify-content:center;padding:5px 10px;margin:10px 0;font-size:15px"><i class="fa-solid fa-xmark"></i>  Requested not found </span></div>'
+        );
       });
-    })
-    .catch(function (error) {
-      console.error("Error writing document: ", error);
-      const errors = [{ msg: "Failed to insert into database" }];
-      const alert = errors;
-      res.render("pages/admin_edit", {
-        admin_name,
-        lenfeed: 0,
-        feeds: "",
-        countA: lenA,
-        StudentsA: collA,
-        countB: lenB,
-        StudentsB: collB,
-        countC: lenC,
-        StudentsC: collC,
-      });
-    });
+  } catch (err) {
+    res.send(
+      '<div class="container" "data-aos="fade-up" date-aos-delay="300"> <span style="background-color:#ff8080; color:white;text-align:center;justify-content:center;padding:5px 10px;margin:10px 0;font-size:15px"><i class="fa-solid fa-xmark"></i> Some fields are incorrect </span></div>'
+    );
+  }
 });
 
 app.post("/addStudent", (req, res) => {
@@ -1187,7 +1178,7 @@ app.post("/addStudent", (req, res) => {
     });
 });
 
-/// for accessing feedbacks
+/// for accessing feedbacks (using ajax)
 
 app.get("/get_feedback", async (req, res) => {
   const feed = await admin.firestore().collection("feedback").get();
