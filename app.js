@@ -489,7 +489,6 @@ async function updateCurrClass(uid, fname, res) {
             current_time: c_time,
           });
         } catch (error) {
-          res.status(500).send(error);
           const errors = [{ msg: error }];
           const alert = errors;
           res.render("pages/login", {
