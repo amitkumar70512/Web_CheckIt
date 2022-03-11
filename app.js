@@ -1146,33 +1146,13 @@ app.post("/addStudent", (req, res) => {
       console.log("Document successfully written!");
       const errors = [{ msg: ` Successfully inserted data of ${fireusn}` }];
       const alert = errors;
-      res.render("pages/admin_edit", {
-        admin_name,
-        lenfeed: 0,
-        feeds: "",
-        countA: lenA,
-        StudentsA: collA,
-        countB: lenB,
-        StudentsB: collB,
-        countC: lenC,
-        StudentsC: collC,
-      });
+      res.render("pages/admin_edit");
     })
     .catch(function (error) {
       console.error("Error writing document: ", error);
       const errors = [{ msg: "Failed to insert into database" }];
       const alert = errors;
-      res.render("pages/admin_edit", {
-        admin_name,
-        lenfeed: 0,
-        feeds: "",
-        countA: lenA,
-        StudentsA: collA,
-        countB: lenB,
-        StudentsB: collB,
-        countC: lenC,
-        StudentsC: collC,
-      });
+      res.render("pages/admin_edit");
     });
 });
 
