@@ -209,8 +209,6 @@ function get_section(sec) {
   var section =
     '<table class="table" data-aos="fade-up" date-aos-delay="300"><thead><tr><th scope="col">\'#\'</th><th scope="col">Name</th><th scope="col">USN</th><th scope="col">Email</th></tr></thead><tbody>';
   len = Object.keys(sec).length;
-  console.log(sec);
-  console.log(len);
   for (i = 0; i < len; i++) {
     section +=
       '<tr><th scope="row">' +
@@ -648,8 +646,6 @@ app.post(
 );
 
 app.post("/feedback", async function (req, res) {
-  console.log(req.query);
-  console.log("i am inside feedback ajax post method");
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -1087,7 +1083,7 @@ function deletekey() {
 
 /////////////////////////// for admin page ///////////
 //// inserting faculty data using ajax
-app.post("/firedb", (req, res) => {
+app.post("/addFaculty", (req, res) => {
   fireuid = req.query.uid;
   fires_time = req.query.s_time;
   fireday = req.query.day;
@@ -1110,7 +1106,7 @@ app.post("/firedb", (req, res) => {
       .then(function () {
         console.log("Document successfully written!");
         res.send(
-          `<div class="container" "data-aos="fade-up" date-aos-delay="300"> <span style="background-color:rgb(167, 171, 176); color:white;text-align:center;justify-content:center;padding:5px 10px;margin:20px 0;font-size:18px"><i class="fa-solid fa-face-grin"></i> Successfully inserted data of ${req.query.uid} </span></div>`
+          `<div class="notify" "data-aos="fade-up" date-aos-delay="300"> <i class="fa-solid fa-face-grin"></i> Successfully inserted data of ${req.query.uid}</div>`
         );
       })
       .catch(function (error) {
@@ -1127,11 +1123,10 @@ app.post("/firedb", (req, res) => {
 });
 
 app.post("/addStudent", (req, res) => {
-  fireusn = req.body.usn.toUpperCase();
-  fireemail = req.body.email;
-  firename = req.body.name.toUpperCase();
-  firesection = req.body.section.toUpperCase();
-
+  fireusn = req.query.usn.toUpperCase();
+  fireemail = req.query.email;
+  firename = req.query.name.toUpperCase();
+  firesection = req.query.section.toUpperCase();
   const writeResult = admin
     .firestore()
     .collection("students_list")
@@ -1144,15 +1139,16 @@ app.post("/addStudent", (req, res) => {
     })
     .then(function () {
       console.log("Document successfully written!");
-      const errors = [{ msg: ` Successfully inserted data of ${fireusn}` }];
-      const alert = errors;
-      res.render("pages/admin_edit");
+      res.send(
+        `<div class="notify" "data-aos="fade-up" date-aos-delay="300"> <i class="fa-solid fa-face-grin"></i> Successfully inserted data of ${req.query.usn} </div>`
+      );
     })
     .catch(function (error) {
       console.error("Error writing document: ", error);
-      const errors = [{ msg: "Failed to insert into database" }];
-      const alert = errors;
-      res.render("pages/admin_edit");
+
+      res.send(
+        '<div class="container" "data-aos="fade-up" date-aos-delay="300"> <span style="background-color:#ff8080; color:white;text-align:center;justify-content:center;padding:5px 10px;margin:10px 0;font-size:15px"><i class="fa-solid fa-xmark"></i> Some fields are incorrect </span></div>'
+      );
     });
 });
 

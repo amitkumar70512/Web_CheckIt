@@ -1,458 +1,608 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Admin- edit</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
 
-  <title>Admin- edit</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon" />
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
 
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet" />
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet" />
+    <link
+      href="assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link
+      href="assets/vendor/glightbox/css/glightbox.min.css"
+      rel="stylesheet"
+    />
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="assets/vendor/admin_welcome.css" rel="stylesheet" />
 
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
-  <link href="assets/vendor/admin_welcome.css" rel="stylesheet">
-  
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
 
-  <!-- jQuery library -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  
-  <!-- Latest compiled JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
-  <script src="https://kit.fontawesome.com/b51d5e4e6a.js" crossorigin="anonymous"></script>
-  
-</head>
-<body>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top d-flex align-items-center ">
-    <div class="container d-flex justify-content-between align-items-center">
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/b51d5e4e6a.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center">
+      <div class="container d-flex justify-content-between align-items-center">
+        <div class="logo">
+          <h1 class="text-light">
+            <a href="#"><span> admin </span></a>
+          </h1>
 
-      <div class="logo">
-        <h1 class="text-light"><a href="#"><span>
-            admin
-        </span></a></h1>
-      
-        <!-- <a href="index"><img src="assets/img/logo.png" alt="" class="img-fluid"></a> -->
-      </div>
-
-      <nav id="navbar" class="navbar">
-      
-          
-            <ul>
-               
-                <li><a class="" href="admin">Home</a></li>
-               
-            </ul>
-        
-      </nav><!-- .navbar -->
-
-    </div>
-  </header><!-- End Header -->
-
-<main id="main">
-  <section class="breadcrumbs">
-    <div class="container">
-        <div class="d-flex justify-content-between align-items-center">
-         <ol>
-          <li><a class="" href="admin">Checkit</a></li>
-         </ol>
-          <ol>
-            <li>
-              <a href="#" data-toggle="popover"  data-placement="bottom" title="Administrator" data-content="Some content inside the popover"><%= admin_name %></a>
-            </li>
-                <li>Administrator</li>
-          </ol>
+          <!-- <a href="index"><img src="assets/img/logo.png" alt="" class="img-fluid"></a> -->
         </div>
-    </div>
-  </section>
 
-  <section class="breadcrumbs">
-      <div class="container">
+        <nav id="navbar" class="navbar">
+          <ul>
+            <li><a class="" href="admin">Home</a></li>
+          </ul>
+        </nav>
+        <!-- .navbar -->
+      </div>
+    </header>
+    <!-- End Header -->
+
+    <main id="main">
+      <section class="breadcrumbs">
+        <div class="container">
           <div class="d-flex justify-content-between align-items-center">
             <ol>
-              <button type="button" class="btn btn-primary" id="get_feedback" style="margin:3px;"> Feedbacks</button>
-              <button type="button" class="btn btn-primary"id="faculty-btn" data-toggle="collapse" data-target="#facultycrud" style="margin:3px;">CRUD Faculty <i class="fas fa-wrench" tyle="color: #ffffff;"></i></button>
-              <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#studentcrud" style="margin:3px;">CRUD Students <i class="fas fa-spinner fa-spin" style="color: #ffffff;"></i></button>
-              <form   class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search keywords" name="id" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              <li><a class="" href="admin">Checkit</a></li>
+            </ol>
+            <ol>
+              <li>
+                <a
+                  href="#"
+                  data-toggle="popover"
+                  data-placement="bottom"
+                  title="Administrator"
+                  data-content="Some content inside the popover"
+                  ><%= admin_name %></a
+                >
+              </li>
+              <li>Administrator</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section class="breadcrumbs">
+        <div class="container">
+          <div class="d-flex justify-content-between align-items-center">
+            <ol>
+              <button
+                type="button"
+                class="btn btn-primary"
+                id="get_feedback"
+                style="margin: 3px"
+              >
+                Feedbacks
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                id="faculty-btn"
+                data-toggle="collapse"
+                data-target="#facultycrud"
+                style="margin: 3px"
+              >
+                CRUD Faculty
+                <i class="fas fa-wrench" tyle="color: #ffffff;"></i>
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                id="student-btn"
+                data-toggle="collapse"
+                data-target="#studentcrud"
+                style="margin: 3px"
+              >
+                CRUD Students
+                <i class="fas fa-spinner fa-spin" style="color: #ffffff"></i>
+              </button>
+              <form class="form-inline">
+                <input
+                  class="form-control mr-sm-2"
+                  type="search"
+                  placeholder="Search keywords"
+                  name="id"
+                  aria-label="Search"
+                />
+                <button
+                  class="btn btn-outline-success my-2 my-sm-0"
+                  type="submit"
+                >
+                  Search
+                </button>
               </form>
             </ol>
           </div>
-      </div>
-  </section>
-  <!-- ////// -->
-  <section class="breadcrumbs" id="get_students">
-    <div class="container">
-     
-      <div class="input-group">
-        <select class="custom-select" name="get_data" id="get_ajax">
-          <optgroup label="First year">
-            <option value="1_sectionA">Section A</option>
-            <option value="1_sectionB">Section B</option>
-            <option value="1_sectionC">Section C</option>
-            <option value="sectionD">Section D</option>
-          </optgroup>
-          <optgroup label="Second year">
-            <option value="2_sectionA">Section A</option>
-            <option value="2_sectionB">Section B</option>
-            <option value="2_sectionC">Section C</option>
-            <option value="2_sectionD">Section D</option>
-          </optgroup>
-          <optgroup label="Third year">
-            <option value="3_sectionA">Section A</option>
-            <option value="3_sectionB">Section B</option>
-            <option value="3_sectionC">Section C</option>
-            <option value="3_sectionD">Section D</option>
-          </optgroup>
-          <optgroup label="Fourth year">
-            <option value="4_sectionA">Section A</option>
-            <option value="4_sectionB">Section B</option>
-            <option value="4_sectionC">Section C</option>
-            <option value="4_sectionD">Section D</option>
-          </optgroup>
-          <optgroup label="HOD's">
-            <option value="hodCSE">Jyoti mam (cse hod)</option>
-            <option value="hodISE">Audi</option>
-          </optgroup>
-        </select>
-        <div class="input-group-append">
-          <button type="button" id="closebtn"  class="btn btn-danger"  style="padding: 5px 10px; color:rgb(253, 253, 253);display: none;">Close</button>
-          <button type="button" id="getbtn" class="btn btn-info" onclick="loadAjax()" style="padding: 5px 10px; color:rgb(253, 253, 253);display: block;" >GET</button>
         </div>
-
-      </div>
-              
-    </div>
-
-  </section>
-  
-  <style>
-    
-    .input-group input[type=text] {
-  float: right;
-  padding: 6px;
-  border: none;
-  margin-top: 8px;
-  margin-right: 16px;
-  font-size: 17px;
-}
-
-/* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
-@media screen and (max-width: 600px) {
-   .input-group input[type=text] {
-    float: none;
-    display: block;
-    text-align: left;
-    width: 100%;
-    margin: 0;
-    padding: 14px;
-  }
-  .input-group input[type=text] {
-    border: 1px solid #ccc;
-  }
-}
-    #get_students .input-group{
-      display: inline-flex;
-    }
-    #get_students .input-group select{
-    border-radius: 5px;
-    border-color: #6283b4;
-    overflow: hidden;
-    }
-    #get_students .input-group option{
-      font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    }
-   #cover-spin {
-    position:fixed;
-    width:100%;
-    left:0;right:0;top:0;bottom:0;
-    background-color: rgba(255,255,255,0.7);
-    z-index:9999;
-    display:none;
-}
-
-@-webkit-keyframes spin {
-	from {-webkit-transform:rotate(0deg);}
-	to {-webkit-transform:rotate(360deg);}
-}
-
-@keyframes spin {
-	from {transform:rotate(0deg);}
-	to {transform:rotate(360deg);}
-}
-
-#cover-spin::after {
-    content:'';
-    display:block;
-    position:absolute;
-    left:48%;top:40%;
-    width:40px;height:40px;
-    border-style:solid;
-    border-color:rgb(15, 79, 138);
-    border-top-color:transparent;
-    border-width: 4px;
-    border-radius:50%;
-    -webkit-animation: spin .8s linear infinite;
-    animation: spin .8s linear infinite;
-}
-
-
-  </style>
-   <!-- for ajax  -->
-   <div class="container" data-aos="fade-left" date-aos-delay="300">
-     <div id="ajaxLoad">
-
-     </div>
-   </div>
-   <div class="container" data-aos="fade-up" date-aos-delay="400">
-    <div id="feedback_data" style="display: none;">
-    </div>
-    
-  </div>
-  <div class="container" data-aos="fade-up" date-aos-delay="400">
-    <div id="notification" style="display: none;">
-    </div>
-    <button type="button" id="close_notification" class="btn btn-danger" style="display:none;text-align:center;justify-content:center;margin:4px 0">close</button>
-  </div>
-<div id="cover-spin"></div>
-
-<!-- /// -->
-<section class="features">
-
-  <!-- Modal -->
-  <div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Enter Keywords..</h4>
-        </div>
-        <div class="modal-body">
-          <form  action="/search" method = "post" class="form-inline">
-                  
-            <input class="form-control mr-sm-2" type="search" placeholder="Search keywords" name="id" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-              
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-
-    </div>
-  
-  <!-- end of modal -->
-
-  </div><!-- end of modal-body -->
-
-
-
-  <!-- feedback collapse -->
-
-  <div id="facultycrud" class="collapse" style="display:none">
-    <div class="container"  data-aos="fade-up" date-aos-delay="300">
-
-      <div class="section-title"><h2>Firestore CRUD  </h2></div>
-    
-      <form  class="form" data-aos="fade-up" date-aos-delay="300">
-        <div class="row">    
-          <div class="form-group col-md-6">
-            <label for="inputEmail4">Faculty id</label>
-            <input type="text" class="form-control" id="uid" placeholder="1bm19fa000">
-          </div>
-                
-         <div class="row">
-          <div class="form-group col-md-2">
-            <label for="inputAddress">Start time</label>
-            <select id="start_time" class="form-control"  >
-            <option selected> select start time</option>
-            <option>080000</option>
-            <option>085500</option>
-            <option>095000</option>
-            <option>104500</option>
-            <option>111500</option>
-            <option>121000</option>
-            <option>130500</option>
-            <option>140000</option>
-            <option>145500</option>
-          </select>
-          </div>
-            
-        </div>        
-                
-              
-          <div class="form-group col-md-2">
-            <label for="inputState">Day</label>
-            <select id="day" class="form-control" >
-              <option selected>select day</option>
-              <option>Monday</option>
-              <option>Tuesday</option>
-              <option>Wednesday</option>
-              <option>Thursday</option>
-              <option>Friday</option>
-              <option>Saturday</option>
-              <option>Sunday</option>
+      </section>
+      <!-- ////// -->
+      <section class="breadcrumbs" id="get_students">
+        <div class="container">
+          <div class="input-group">
+            <select class="custom-select" name="get_data" id="get_ajax">
+              <optgroup label="First year">
+                <option value="1_sectionA">Section A</option>
+                <option value="1_sectionB">Section B</option>
+                <option value="1_sectionC">Section C</option>
+                <option value="sectionD">Section D</option>
+              </optgroup>
+              <optgroup label="Second year">
+                <option value="2_sectionA">Section A</option>
+                <option value="2_sectionB">Section B</option>
+                <option value="2_sectionC">Section C</option>
+                <option value="2_sectionD">Section D</option>
+              </optgroup>
+              <optgroup label="Third year">
+                <option value="3_sectionA">Section A</option>
+                <option value="3_sectionB">Section B</option>
+                <option value="3_sectionC">Section C</option>
+                <option value="3_sectionD">Section D</option>
+              </optgroup>
+              <optgroup label="Fourth year">
+                <option value="4_sectionA">Section A</option>
+                <option value="4_sectionB">Section B</option>
+                <option value="4_sectionC">Section C</option>
+                <option value="4_sectionD">Section D</option>
+              </optgroup>
+              <optgroup label="HOD's">
+                <option value="hodCSE">Jyoti mam (cse hod)</option>
+                <option value="hodISE">Audi</option>
+              </optgroup>
             </select>
+            <div class="input-group-append">
+              <button
+                type="button"
+                id="closebtn"
+                class="btn btn-danger"
+                style="
+                  padding: 5px 10px;
+                  color: rgb(253, 253, 253);
+                  display: none;
+                "
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                id="getbtn"
+                class="btn btn-info"
+                onclick="loadAjax()"
+                style="
+                  padding: 5px 10px;
+                  color: rgb(253, 253, 253);
+                  display: block;
+                "
+              >
+                GET
+              </button>
+            </div>
           </div>
-          
-              
-          <br>
-          <div class="form-group col-md-2">
-            <label for="inputZip">Class</label>
-            <input type="text" class="form-control" id="class">
-          </div>
-              
-          <div class="form-group col-md-2">
-            <label for="inputZip">Section</label>
-            <input type="text" class="form-control" id="section" >
-          </div>
-            
-          <div class="form-group col-md-2">
-              <label for="inputState">Timing</label>
-              <select id="timing" class="form-control" >
-              <option selected> select timing</option>
-              <option>08:55 am to 09:50 am</option>
-              <option>09:50 am to 10:45 am</option>
-              <option>10:45 am to 11:15 am</option>
-              <option>11:15 am to 12:10 pm</option>
-              <option>12:10 pm to 01:05 pm</option>
-              <option>01:05 pm to 02:00 pm</option>
-              <option>02:00 pm to 02:55 pm</option>
-              <option>02:55 pm to 03:50 pm</option>
-              <option>(Tutorial class) 02:00 pm to 03:55 pm</option>
-              </select>
-              
-          </div>
-          
-          <button type="button" id="faculty-crud-btn" class="btn btn-primary">Proceed</button>
+        </div>
+      </section>
+
+      <style>
+        .input-group input[type="text"] {
+          float: right;
+          padding: 6px;
+          border: none;
+          margin-top: 8px;
+          margin-right: 16px;
+          font-size: 17px;
+        }
+
+        /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
+        @media screen and (max-width: 600px) {
+          .input-group input[type="text"] {
+            float: none;
+            display: block;
+            text-align: left;
+            width: 100%;
+            margin: 0;
+            padding: 14px;
+          }
+          .input-group input[type="text"] {
+            border: 1px solid #ccc;
+          }
+        }
+        #get_students .input-group {
+          display: inline-flex;
+        }
+        #get_students .input-group select {
+          border-radius: 5px;
+          border-color: #6283b4;
+          overflow: hidden;
+        }
+        #get_students .input-group option {
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+            Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+        }
+        #cover-spin {
+          position: fixed;
+          width: 100%;
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          background-color: rgba(255, 255, 255, 0.7);
+          z-index: 9999;
+          display: none;
+        }
+
+        @-webkit-keyframes spin {
+          from {
+            -webkit-transform: rotate(0deg);
+          }
+          to {
+            -webkit-transform: rotate(360deg);
+          }
+        }
+
+        @keyframes spin {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+
+        #cover-spin::after {
+          content: "";
+          display: block;
+          position: absolute;
+          left: 48%;
+          top: 40%;
+          width: 40px;
+          height: 40px;
+          border-style: solid;
+          border-color: rgb(15, 79, 138);
+          border-top-color: transparent;
+          border-width: 4px;
+          border-radius: 50%;
+          -webkit-animation: spin 0.8s linear infinite;
+          animation: spin 0.8s linear infinite;
+        }
+
+        .notify {
+          position: absolute;
+          top: 0;
+          right: 0;
+          margin: 10px 5px;
+          display: block;
+          width: 40%;
+          text-align: center;
+          border: 2px solid rgba(42, 69, 185, 0.685);
+          background-color: rgba(19, 49, 184, 0.726);
+          box-shadow: 8px 6px rgba(154, 169, 218, 0.555);
+          color: white;
+          padding: 5px 10px;
+          font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+      </style>
+      <!-- for ajax  -->
+      <div class="container" data-aos="fade-left" date-aos-delay="300">
+        <div id="ajaxLoad"></div>
       </div>
-      </form>  
-    </div>
-  </div>
+      <div class="container" data-aos="fade-up" date-aos-delay="400">
+        <div id="feedback_data" style="display: none"></div>
+      </div>
+      <div class="container" data-aos="fade-up" date-aos-delay="400">
+        <div id="notification" style="display: none"></div>
+      </div>
+      <div id="cover-spin"></div>
 
-<!-- collapse of students crud -->
-
-<div id="studentcrud" class="collapse">
-  <div class="container"  data-aos="fade-up" date-aos-delay="300">
-
-    <div class="section-title"><h2>Students CRUD  </h2></div>
-    
-    <form action="/addStudent" method="POST" class="form" data-aos="fade-up" date-aos-delay="300">
-     
-        <div class="form-group col-md-6">
-          <label for="inputEmail4">Student id</label>
-          <input type="text" class="form-control" name="usn" placeholder="1bm19cs000">
-          <div class="row">
-          <div class="form-group col-md-4">
-            <label for="inputAddress">Section</label>
-            <select id="select_section" class="form-control"   onchange="dropsection()">
-            <option selected> select section</option>
-            <optgroup label="5th semester">
-            <option>5A</option>
-            <option>5B</option>
-            <option>5C</option>
-            <option>5D</option>
-          </optgroup>
-          <optgroup label="4th semester">
-            <option>4A</option>
-            <option>4B</option>
-            <option>4C</option>
-            <option>4D</option>
-          </optgroup>
-          </select>
+      <section class="features">
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                  &times;
+                </button>
+                <h4 class="modal-title">Enter Keywords..</h4>
+              </div>
+              <div class="modal-body">
+                <form action="/search" method="post" class="form-inline">
+                  <input
+                    class="form-control mr-sm-2"
+                    type="search"
+                    placeholder="Search keywords"
+                    name="id"
+                    aria-label="Search"
+                  />
+                  <button
+                    class="btn btn-outline-success my-2 my-sm-0"
+                    type="submit"
+                  >
+                    Search
+                  </button>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-default"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
           </div>
-          
-            <div class="form-group col-md-4">
-              <br><br>
-            <input type="text"  id="section" class="form-control" name="section" > 
+
+          <!-- end of modal -->
+        </div>
+        <!-- end of modal-body -->
+
+        <!-- feedback collapse -->
+
+        <div id="facultycrud" class="collapse" style="display: none">
+          <div class="container" data-aos="fade-up" date-aos-delay="300">
+            <div class="section-title"><h2>Firestore CRUD</h2></div>
+
+            <form class="form" data-aos="fade-up" date-aos-delay="300">
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label for="inputEmail4">Faculty id</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="uid"
+                    placeholder="1bm19fa000"
+                  />
+                </div>
+
+                <div class="row">
+                  <div class="form-group col-md-2">
+                    <label for="inputAddress">Start time</label>
+                    <select id="start_time" class="form-control">
+                      <option selected>select start time</option>
+                      <option>080000</option>
+                      <option>085500</option>
+                      <option>095000</option>
+                      <option>104500</option>
+                      <option>111500</option>
+                      <option>121000</option>
+                      <option>130500</option>
+                      <option>140000</option>
+                      <option>145500</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-2">
+                  <label for="inputState">Day</label>
+                  <select id="day" class="form-control">
+                    <option selected>select day</option>
+                    <option>Monday</option>
+                    <option>Tuesday</option>
+                    <option>Wednesday</option>
+                    <option>Thursday</option>
+                    <option>Friday</option>
+                    <option>Saturday</option>
+                    <option>Sunday</option>
+                  </select>
+                </div>
+
+                <br />
+                <div class="form-group col-md-2">
+                  <label for="inputZip">Class</label>
+                  <input type="text" class="form-control" id="class" />
+                </div>
+
+                <div class="form-group col-md-2">
+                  <label for="inputZip">Section</label>
+                  <input type="text" class="form-control" id="section" />
+                </div>
+
+                <div class="form-group col-md-2">
+                  <label for="inputState">Timing</label>
+                  <select id="timing" class="form-control">
+                    <option selected>select timing</option>
+                    <option>08:55 am to 09:50 am</option>
+                    <option>09:50 am to 10:45 am</option>
+                    <option>10:45 am to 11:15 am</option>
+                    <option>11:15 am to 12:10 pm</option>
+                    <option>12:10 pm to 01:05 pm</option>
+                    <option>01:05 pm to 02:00 pm</option>
+                    <option>02:00 pm to 02:55 pm</option>
+                    <option>02:55 pm to 03:50 pm</option>
+                    <option>(Tutorial class) 02:00 pm to 03:55 pm</option>
+                  </select>
+                </div>
+
+                <button
+                  type="button"
+                  id="faculty-crud-btn"
+                  class="btn btn-primary"
+                >
+                  Proceed
+                </button>
+              </div>
+            </form>
           </div>
-        </div>   
-              
-       <div class="row">
-        <div class="form-group col-md-4">
-          <label for="inputZip">Name</label>
-          <input type="text" class="form-control" name="name">
         </div>
-            
-        <div class="form-group col-md-6">
-          <label for="inputZip">Email</label>
-          <input type="email" class="form-control" name="email" >
+
+        <!-- collapse of students crud -->
+
+        <div id="studentcrud" class="collapse" style="display: none">
+          <div class="container" data-aos="fade-up" date-aos-delay="300">
+            <div class="section-title"><h2>Students CRUD</h2></div>
+
+            <form class="form" data-aos="fade-up" date-aos-delay="300">
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label for="inputid">Student USN</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="usn"
+                    placeholder="1bm19cs000"
+                  />
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label for="inputSection">Section</label>
+                  <select id="select_section" class="form-control">
+                    <option selected>Select section</option>
+                    <optgroup label="5th floor ">
+                      <option>5A</option>
+                      <option>5B</option>
+                      <option>5C</option>
+                      <option>5D</option>
+                    </optgroup>
+                    <optgroup label="4th floor ">
+                      <option>4A</option>
+                      <option>4B</option>
+                      <option>4C</option>
+                      <option>4D</option>
+                    </optgroup>
+                    <optgroup label="3rd floor ">
+                      <option>3A</option>
+                      <option>3B</option>
+                      <option>3C</option>
+                      <option>3D</option>
+                    </optgroup>
+                    <optgroup label="2nd floor">
+                      <option>2A</option>
+                      <option>2B</option>
+                      <option>2C</option>
+                      <option>2D</option>
+                    </optgroup>
+                  </select>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label for="inputName">Name</label>
+                  <input type="text" class="form-control" id="name" />
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label for="inputEmail">Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    placeholder="username@bmsce.ac.in"
+                  />
+                </div>
+              </div>
+
+              <div class="col">
+                <button
+                  type="button"
+                  id="student-crud-btn"
+                  class="btn btn-primary"
+                >
+                  Proceed
+                </button>
+                <button
+                  type="button"
+                  id="close_student_crud"
+                  class="btn btn-warning"
+                >
+                  Dismiss
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>  
-        
-        <button type="submit" class="btn btn-primary">Proceed</button>
-    
-    </form>  
-  </div>
-</div>
-</section>
+      </section>
+    </main>
 
-  </main>
+    <!-- ======= Footer ======= -->
 
-  <!-- ======= Footer ======= -->
-  
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <a
+      href="#"
+      class="back-to-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/purecounter/purecounter.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
-  <script src="assets/js/ajax_handler.js"  ></script>
- 
-  <script>
-    var el = document.getElementById('closebtn');
-  if(el){
-    el.addEventListener('click', ()=>{
-      document.getElementById('ajaxLoad').style.display='none';
-      document.getElementById("getbtn").style.display = "block";
-      document.getElementById("closebtn").style.display ="none";
-  
-    }, false);
-  }
-  // if faculty-btn is pressed , show faculty crud
-  var fac = document.getElementById('faculty-btn');
-  if(fac){
-    fac.addEventListener('click', ()=>{
-      document.getElementById('facultycrud').style.display='block';
-      
-    }, false);
-  }
- 
-  
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="assets/vendor/purecounter/purecounter.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.0.8/css/all.css"
+    />
+    <!-- Template Main JS File -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/ajax_handler.js"></script>
 
-  </script>
- 
-</body>
-
+    <script>
+      var el = document.getElementById("closebtn");
+      if (el) {
+        el.addEventListener(
+          "click",
+          () => {
+            document.getElementById("ajaxLoad").style.display = "none";
+            document.getElementById("getbtn").style.display = "block";
+            document.getElementById("closebtn").style.display = "none";
+          },
+          false
+        );
+      }
+      // if faculty-btn is pressed , show faculty crud
+      var fac = document.getElementById("faculty-btn");
+      if (fac) {
+        fac.addEventListener(
+          "click",
+          () => {
+            document.getElementById("facultycrud").style.display = "block";
+          },
+          false
+        );
+      }
+    </script>
+  </body>
 </html>

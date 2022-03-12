@@ -83,23 +83,83 @@ document.getElementById("faculty-crud-btn").addEventListener("click", () => {
       spin.style.display = "none";
       document.getElementById("notification").style.display = "block";
       document.getElementById("notification").innerHTML = this.responseText;
-      document.getElementById("close_notification").style.display = "block";
+      fade_notification();
       document.getElementById("facultycrud").style.display = "none";
     }
   };
 
   xhttp.open(
     "POST",
-    `firedb?uid=${data.uid}&s_time=${data.s_time}&day=${data.day}&class=${data.class}&section=${data.section}&timing=${data.timing}`,
+    `addFaculty?uid=${data.uid}&s_time=${data.s_time}&day=${data.day}&class=${data.class}&section=${data.section}&timing=${data.timing}`,
     true
   );
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.send();
 });
 
-// an event listener to close notifications
-var not = document.getElementById("close_notification");
-not.addEventListener("click", () => {
-  document.getElementById("notification").style.display = "none";
-  document.getElementById("close_notification").style.display = "none";
+// for student cruds
+document.getElementById("student-crud-btn").addEventListener("click", () => {
+  console.log("i am inside student crud");
+  var select = document.getElementById("select_section");
+  const data = {
+    usn: document.getElementById("usn").value,
+    section: select.options[select.selectedIndex].value,
+    name: document.getElementById("name").value,
+    email: document.getElementById("email").value,
+  };
+  console.log(data.section);
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 1) {
+      //opened
+      spin.style.display = "block";
+    } else if (this.readyState == 2) {
+      //header received
+    }
+    if (this.readyState == 3) {
+      //loading
+    }
+    if (this.readyState == 4 && this.status == 200) {
+      spin.style.display = "none";
+      document.getElementById("notification").style.display = "block";
+      document.getElementById("notification").innerHTML = this.responseText;
+
+      fade_notification();
+    }
+  };
+
+  xhttp.open(
+    "POST",
+    `addStudent?usn=${data.usn}&email=${data.email}&name=${data.name}&section=${data.section}`,
+    true
+  );
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send();
+});
+
+function fade_notification() {
+  console.log("fade notification started");
+  setInterval(() => {
+    document.getElementById("notification").style.opacity = 0.8;
+  }, 2500);
+  setInterval(() => {
+    document.getElementById("notification").style.opacity = 0.6;
+  }, 5000);
+  setInterval(() => {
+    document.getElementById("notification").style.opacity = 0.4;
+  }, 7500);
+  setInterval(() => {
+    document.getElementById("notification").style.display = "none";
+  }, 10000);
+  console.log("fadeed");
+}
+
+// close btn on studetns crud modal ==display kar none for modal
+document.getElementById("close_student_crud").addEventListener("click", () => {
+  document.getElementById("studentcrud").style.display = "none";
+});
+
+// |upar aala |  display block kari udd
+document.getElementById("student-btn").addEventListener("click", () => {
+  document.getElementById("studentcrud").style.display = "block";
 });
