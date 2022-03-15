@@ -33,7 +33,7 @@ var feedbtn = document
 
 function get_feedback() {
   var xhttp = new XMLHttpRequest();
-
+  console.log("inside get feedback");
   xhttp.onreadystatechange = function () {
     if (this.readyState == 1) {
       //loading

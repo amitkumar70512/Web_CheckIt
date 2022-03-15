@@ -135,15 +135,48 @@
           <div class="container">
               <div class="d-flex justify-content-between align-items-center">
                 <h2></h2>
-                <ol>
-                 
-                <li>
+                <div class="input-group">
+                  <select class="custom-select" name="get_data" id="get_ajax">
+                    <optgroup label="First year">
+                      <option value="1_sectionA">Section A</option>
+                      <option value="1_sectionB">Section B</option>
+                      <option value="1_sectionC">Section C</option>
+                      <option value="sectionD">Section D</option>
+                    </optgroup>
+                    <optgroup label="Second year">
+                      <option value="2_sectionA">Section A</option>
+                      <option value="2_sectionB">Section B</option>
+                      <option value="2_sectionC">Section C</option>
+                      <option value="2_sectionD">Section D</option>
+                    </optgroup>
+                    <optgroup label="Third year">
+                      <option value="3_sectionA">Section A</option>
+                      <option value="3_sectionB">Section B</option>
+                      <option value="3_sectionC">Section C</option>
+                      <option value="3_sectionD">Section D</option>
+                    </optgroup>
+                    <optgroup label="Fourth year">
+                      <option value="4_sectionA">Section A</option>
+                      <option value="4_sectionB">Section B</option>
+                      <option value="4_sectionC">Section C</option>
+                      <option value="4_sectionD">Section D</option>
+                    </optgroup>
+                    <optgroup label="HOD's">
+                      <option value="hodCSE">Jyoti mam (cse hod)</option>
+                      <option value="hodISE">Audi</option>
+                    </optgroup>
+                  </select>
+                  <div class="input-group-append">
+                    <button type="button" id="closebtn"  class="btn btn-danger"  style="padding: 5px 10px; color:rgb(253, 253, 253);display: none;">Close</button>
+                    <button type="button" id="getbtn" class="btn btn-info" onclick="loadAjax()" style="padding: 5px 10px; color:rgb(253, 253, 253);display: block;" >GET</button>
+                  </div>
+          
+                </div>
+                        
                   <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#" style="margin:3px;">Absent</button>
-                </li>
-                <li>
+                
                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#presentModal" style="margin:3px;">Present</button>
-                </li>
-                <li>
+                
                   <div class="input-group">
                     <div class="form-outline">
                       <input type="search" id="form1" class="form-control" />
@@ -153,57 +186,12 @@
                       <i class="fas fa-search"></i>
                     </button>
                   </div>
-                </li>           
-                </ol>
+                
               </div>
           </div>
       </section>
       
 
-      <section class="breadcrumbs" id="get_students">
-        <div class="container">
-         
-          <div class="input-group">
-            <select class="custom-select" name="get_data" id="get_ajax">
-              <optgroup label="First year">
-                <option value="1_sectionA">Section A</option>
-                <option value="1_sectionB">Section B</option>
-                <option value="1_sectionC">Section C</option>
-                <option value="sectionD">Section D</option>
-              </optgroup>
-              <optgroup label="Second year">
-                <option value="2_sectionA">Section A</option>
-                <option value="2_sectionB">Section B</option>
-                <option value="2_sectionC">Section C</option>
-                <option value="2_sectionD">Section D</option>
-              </optgroup>
-              <optgroup label="Third year">
-                <option value="3_sectionA">Section A</option>
-                <option value="3_sectionB">Section B</option>
-                <option value="3_sectionC">Section C</option>
-                <option value="3_sectionD">Section D</option>
-              </optgroup>
-              <optgroup label="Fourth year">
-                <option value="4_sectionA">Section A</option>
-                <option value="4_sectionB">Section B</option>
-                <option value="4_sectionC">Section C</option>
-                <option value="4_sectionD">Section D</option>
-              </optgroup>
-              <optgroup label="HOD's">
-                <option value="hodCSE">Jyoti mam (cse hod)</option>
-                <option value="hodISE">Audi</option>
-              </optgroup>
-            </select>
-            <div class="input-group-append">
-              <button type="button" id="closebtn"  class="btn btn-danger"  style="padding: 5px 10px; color:rgb(253, 253, 253);display: none;">Close</button>
-              <button type="button" id="getbtn" class="btn btn-info" onclick="loadAjax()" style="padding: 5px 10px; color:rgb(253, 253, 253);display: block;" >GET</button>
-            </div>
-    
-          </div>
-                  
-        </div>
-    
-      </section>
       
         
     
@@ -248,7 +236,8 @@
                       <%=  StudentsA[i].name%>
                       </td>
                       <td>
-                        <i class="fa-solid fa-circle-xmark"></i>
+                        absent
+                        <!-- <i class="fa-solid fa-circle-xmark"></i> -->
                       </td>
                       </tr>
                       
@@ -278,7 +267,8 @@
                       <%=  StudentsA[i].name%>
                       </td>
                       <td>
-                        <i class="fa-solid fa-check-double"></i>
+                        present
+                        <!-- <i class="fa-solid fa-check-double"></i> -->
                       </td>
                       </tr>
                       
