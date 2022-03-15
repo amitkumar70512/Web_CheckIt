@@ -14,7 +14,6 @@ function sendFeedback() {
     subject: document.getElementById("subject"),
     message: document.getElementById("message"),
   };
-
   var xhttp = new XMLHttpRequest();
   // 0 means UNOPENED.
   // 1 means OPENED.
