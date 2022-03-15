@@ -1180,6 +1180,12 @@ app.get("/get_feedback", async (req, res) => {
   res.send(feed_data);
 });
 
+app.get("/attendance", (req, res) => {
+  console.log("inside get attendance");
+
+  res.render("pages/attendance");
+});
+
 app.get("/faculty_check", authenticateToken, function (req, res) {
   checkStudent(res);
   //checkPresent();  // should be called by  get method

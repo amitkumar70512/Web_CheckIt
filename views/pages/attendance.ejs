@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>attendance </title>
+  <title>checkit-attendance </title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -24,10 +24,18 @@
   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+   <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-
+  <link href="assets/vendor/admin_welcome.css" rel="stylesheet">
   
 </head>
 
@@ -38,33 +46,25 @@
     <div class="container d-flex justify-content-between align-items-center">
 
       <div class="logo">
-        <h1 class="text-light"><a href="index"><span>Codofilia</span></a></h1>
+        <h1 class="text-light"><a href="#"><span>CheckIt</span></a></h1>
+       
+    
         <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+        <!-- <a href="index"><img src="assets/img/logo.jpeg" alt="" class="img-fluid"></a> -->
+        <a href="#"> <img src="assets\img\animations\qr_one.gif" class="img-fluid" alt="qr animated" id="qr" ></a>
       </div>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a  href="index">Home</a></li>
+          <li><a  href="home">Home</a></li>
+        
           
-          <li><a class="active " href="about">About</a></li>
-          <li><a href="team">Team</a></li>
           <li><a href="contact">Contact</a></li>
-          <li><a href="register" id="signin">Sign in</a></li>
+          
 
-          <li class="dropdown" id="profile"><a href="#"><span>Profile</span> <i class="far fa-user"></i></a>
-            <ul>
-              <img src="assets/img/user.jpg"  width="40" height="40" style="margin-left: 40px; margin-top: 20px; align-items: center;"> </br>
-              <li style="align-items: center;"><a href="#"><i class="fas fa-user-edit">  edit profile </i></a></li>
-              <br>
-              <li><a href="#">user details</a></li>
-              <li><a href="#">reset password</a></li> <br>
-              <li onclick="logout()"><a style="font-size: 20px;"><i class="fas fa-power-off"  >   Log out </i></a></li>
-              
+               
             </ul>
           </li>
-
-
 
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -73,168 +73,300 @@
 
     </div>
   </header><!-- End Header -->
+   <style>
+     .prog{
+       padding:20px;
+     }
+     
 
-  <main id="main">
+     .far.fa-user-circle:hover {  
+        transform: rotate(180deg);
+    }
+    .far.fa-user-circle {
+        transition: transform 0.5s ease 0s;
+        color:rgb(65, 144, 180);
+        
+    }
+    .table .fa-solid:hover{
+      transform: rotate(180deg);
+    }
+    .table .fa-solid{
+      transition: transform 0.5s ease 0s;
+        color:rgb(2, 197, 28);
+    }
+    .table .fa-solid.fa-circle-xmark{
+      color:rgb(153, 26, 4);
+    }
+    .fa-solid.fa-calendar-check{
+      color:rgb(34, 93, 128);
+      font-size: medium;
+    }
+    .btn-group-horizontal.btn.btn-primary:hover{
+    color:black;
+   }
+   section.breadcrumbs button:hover{
+      transform: translateY(5px);
+     
+    }
+   section.breadcrumbs button{
+    transition: transform 0.5s ease 0.1s;
+   }
+   #presentModal{
+    position: absolute;
+    
+    padding:5px;
+    overflow:auto;
+    align-items: center;
+   }
+   @media (max-width: 991px) {
+  #presentModal{
+    position:absolute;
+    width:95%;
+    padding:5px;
+    overflow: auto; 
+  }
 
-    <!-- ======= About Us Section ======= -->
-    <section class="breadcrumbs">
-      <div class="container">
+  #qr_animated #qr{
+    position:fixed;
+    left:0;right:0;top:0;bottom:0;
+    background-color: rgba(191, 225, 248, 0.7);
+    z-index:9999;
+    border-top-color:transparent;
+    
+}
 
-        <div class="d-flex justify-content-between align-items-center">
-          <h2>About Us</h2>
-          <ol>
-            <li><a href="index">Home</a></li>
-            <li>About Us</li>
-          </ol>
-        </div>
+#cover-spin::after {
+    content:'';
+    display:block;
+    position:absolute;
+    left:48%;top:40%;
+    width:45px;height:45px;
+    border-style:solid;
+    border-color:rgb(26, 126, 126);
+    border-top-color:transparent;
+    border-width: 3px;
+    border-radius:50%;
+    -webkit-animation: spin .7s linear infinite;
+    animation: spin .7s linear infinite;
+}
 
-      </div>
-    </section><!-- End About Us Section -->
 
-    <!-- ======= About Section ======= -->
-    <section class="about" data-aos="fade-up">
-      <div class="container">
 
-        <div class="row">
-          <div class="col-lg-6">
-            <img src="assets/img/about.jpg" class="img-fluid" alt="">
-          </div>
-          <div class="col-lg-6 pt-4 pt-lg-0">
-            <h3>What made Codofilia exceptional?</h3>
-            <p class="fst-italic">
-              Codofilia
-            </p>
-            <ul>
-              <li><i class="bi bi-check2-circle"></i> Html and Css for handling Frontend </li>
-              <li><i class="bi bi-check2-circle"></i> MySql database is used for storing data in the server-side </li>
-              <li><i class="bi bi-check2-circle"></i> Node.js handling connection between frontend and backend mysql</li>
-            </ul>
-            <p>
-              Auto attendance system , here we will display qr code , then using dynamic java and ejs , refresh page after attendance is taken.
-            </p>
-          </div>
-        </div>
 
-      </div>
-    </section>
+}
+   </style>
 
-    <!-- ======= Facts Section ======= -->
-    <!-- <section class="facts section-bg" data-aos="fade-up">
-      <div class="container">
-
-        <div class="row counters">
-
-         
-
-          <div class="col-lg-3 col-6 text-center">
-            <span data-purecounter-start="0" data-purecounter-end="21" data-purecounter-duration="1" class="purecounter"></span>
-            <p>Ebooks</p>
-          </div>
-
-          <div class="col-lg-3 col-6 text-center">
-            <span data-purecounter-start="0" data-purecounter-end="146" data-purecounter-duration="1" class="purecounter"></span>
-            <p>Hours Of work</p>
-          </div>
-
-          <div class="col-lg-3 col-6 text-center">
-            <span data-purecounter-start="0" data-purecounter-end="24" data-purecounter-duration="1" class="purecounter"></span>
-            <p>Help and Support<i class="fas fa-user"></i></p>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-     ======= Our Skills Section ======= -->
-    <section class="skills" data-aos="fade-up">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>Student stats</h2>
-          <p> it will display the list of students who were present and absent</p>
-        </div>
-
-        <div class="skills-content">
-
-          <div class="progress">
-            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-              <span class="skill">Present <i class="val">56</i></span>
-            </div>
-          </div>
-
-          <div class="progress">
-            <div class="progress-bar bg-info" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
-              <span class="skill">Absent <i class="val">9</i></span>
-            </div>
-          </div>
-
+<main id="main">
+    <!-- ======= breadcrumbs Section c======= -->
+    
+      <section class="breadcrumbs">
+          <div class="container">
+              <div class="d-flex justify-content-between align-items-center">
+                <h2></h2>
+                <div class="input-group-append">
+                  <select class="custom-select" name="get_data" id="get_ajax">
+                    <optgroup label="First year">
+                      <option value="1_sectionA">Section A</option>
+                      <option value="1_sectionB">Section B</option>
+                      <option value="1_sectionC">Section C</option>
+                      <option value="sectionD">Section D</option>
+                    </optgroup>
+                    <optgroup label="Second year">
+                      <option value="2_sectionA">Section A</option>
+                      <option value="2_sectionB">Section B</option>
+                      <option value="2_sectionC">Section C</option>
+                      <option value="2_sectionD">Section D</option>
+                    </optgroup>
+                    <optgroup label="Third year">
+                      <option value="3_sectionA">Section A</option>
+                      <option value="3_sectionB">Section B</option>
+                      <option value="3_sectionC">Section C</option>
+                      <option value="3_sectionD">Section D</option>
+                    </optgroup>
+                    <optgroup label="Fourth year">
+                      <option value="4_sectionA">Section A</option>
+                      <option value="4_sectionB">Section B</option>
+                      <option value="4_sectionC">Section C</option>
+                      <option value="4_sectionD">Section D</option>
+                    </optgroup>
+                    <optgroup label="HOD's">
+                      <option value="hodCSE">Jyoti mam (cse hod)</option>
+                      <option value="hodISE">Audi</option>
+                    </optgroup>
+                  </select>
+                  
+                    <button type="button" id="closebtn"  class="btn btn-danger"  style="padding: 5px 10px; color:rgb(253, 253, 253);display: none;">Close</button>
+                    <button type="button" id="getbtn" class="btn btn-info" onclick="loadAjax()" style="padding: 5px 10px; color:rgb(253, 253, 253);display: block;" >GET</button>
+                 
           
-
-        </div>
-
-      </div>
-    </section><!-- End Our Skills Section -->
-
-    <!-- ======= Tetstimonials Section ======= -->
-    <section class="testimonials" data-aos="fade-up">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>Your Classes</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-        </div>
-
-        <div class="testimonials-carousel swiper-container">
-          <div class="swiper-wrapper">
-            <div class="testimonial-item swiper-slide">
-              <img src="#" class="testimonial-img" alt="">
-              <h3>Tfcs </h3>
-              <h4> 5A </h4>
-              <p>
-                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                 assignment: ------
-                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-              </p>
-            </div>
-
-            <div class="testimonial-item swiper-slide">
-              <img src="#" class="testimonial-img" alt="">
-              <h3>CN</h3>
-              <h4>4B</h4>
-              <p>
-                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                assignment: --
-                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-              </p>
-            </div>
-
-            <div class="testimonial-item swiper-slide">
-              <img src="#" class="testimonial-img" alt="">
-              <h3>Java</h3>
-              <h4>5C</h4>
-              <p>
-                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                assignment:=----
-                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-              </p>
-            </div>
-
-           
-
-            
+               
+                        
+                  <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#" style="margin:3px;">Absent</button>
+                
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#presentModal" style="margin:3px;">Present</button>
+                
+                  
+                    <div class="form-outline">
+                      <input type="search" id="form1" class="form-control"  placeholder="search "/>
+                      <!-- <label class="form-label" for="form1">Search</label> -->
+                    </div>
+                    <button type="button"  id="search" class="btn btn-primary">
+                      <i class="fas fa-search"></i>
+                    </button>
+                  </div>
+                
+              </div>
           </div>
-          <div class="swiper-pagination"></div>
+      </section>
+      
+
+      
+        
+    
+   
+    
+      <!-- Modal for present students -->
+      <div id="presentModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+    
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              
+              <h4 class="modal-title">List of present Students  <i class="fa-solid fa-calendar-check"></i></h4>
+            </div>
+            <div class="modal-body">
+              <i class="fa-regular fa-qrcode"></i>
+              
+              <table class="table "data-aos="fade-up" date-aos-delay="300">
+                <thead>
+                  <tr>
+                    <th scope="col">''</th>
+                    <th scope="col">USN</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <% if(typeof countA != 'undefined') { %>
+                
+              <% for (var i =0; i <=countA;  i++ ) { %>
+      
+                <% if(typeof StudentsA[i] != 'undefined') { %>
+                    
+                    <tbody>
+                        <tr>
+                          <th scope="row">
+                            <%=i+1%>
+                          </th>
+                      <td>
+                      <%=  StudentsA[i].usn%>
+                      </td>
+                      <td>
+                      <%=  StudentsA[i].name%>
+                      </td>
+                      <td>
+                        absent
+                        <!-- <i class="fa-solid fa-circle-xmark"></i> -->
+                      </td>
+                      </tr>
+                      
+                    </tbody>
+                     
+                <% } %>
+               
+              <%  }%>
+          
+                  
+
+
+                
+              <% for (var i =0; i <=countA;  i++ ) { %>
+      
+                <% if(typeof StudentsA[i] != 'undefined') { %>
+                    
+                    <tbody>
+                        <tr>
+                          <th scope="row">
+                            <%=i+1%>
+                          </th>
+                      <td>
+                      <%=  StudentsA[i].usn%>
+                      </td>
+                      <td>
+                      <%=  StudentsA[i].name%>
+                      </td>
+                      <td>
+                        present
+                        <!-- <i class="fa-solid fa-check-double"></i> -->
+                      </td>
+                      </tr>
+                      
+                    </tbody>
+                     
+                <% } %>
+               
+              <%  }%>
+              <%  }%>
+              
+              </table>
+              
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" onclick="exportTableCSV('checkit-attendance.csv')">Download</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+    
         </div>
-
       </div>
-    </section><!-- End Ttstimonials Section -->
+      <!-- end of modal -->
+    
+        <!--  search find Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+      
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Enter Keywords..</h4>
+              </div>
+              <div class="modal-body">
+                <form  action="/search" method = "post" class="form-inline">
+                        
+                  <input class="form-control mr-sm-2" type="search" placeholder="Search usn.." name="id" aria-label="Search">
+                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+      
+          </div>
+        
+        <!-- end of modal -->
+      
+      </div><!-- end of modal-body -->
+    <div class="container">
+      <button type="button" id="click_loading" class="btn btn-dark">click</button>
+    </div>
+    <div class="container" id="qr_animated" style="display: flex; justify-content: space-between; display: none;">
+      <img src="assets\img\animations\qr_animated.gif" class="img-fluid" alt="qr animated" id="qr" >
+    </div>
+     
+  
 
-  </main><!-- End #main -->
+</main>
+    
+  
 
-  <!-- ======= Footer ======= -->
-  <%- include('../partials/footer') %><!-- End Footer -->
+  
+   
 
+   <%- include('../partials/footer') %> 
+   
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
@@ -247,9 +379,23 @@
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
 
-  <!-- Template Main JS File -->
+  <!--  Main JS File -->
   <script src="assets/js/main.js"></script>
-
+  <script src="assets/js/ajax_handler.js"></script>
+  <script src="assets/js/table_excel.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+  <script src="https://kit.fontawesome.com/b51d5e4e6a.js" crossorigin="anonymous"></script>
+  <script>
+    var el = document.getElementById('closebtn');
+  if(el){
+    el.addEventListener('click', ()=>{
+      document.getElementById('ajaxLoad').style.display='none';
+      document.getElementById("getbtn").style.display = "block";
+      document.getElementById("closebtn").style.display ="none";
+      console.log("ajax load is hidden");
+    }, false);
+  }
+  </script>
 </body>
 
 </html>

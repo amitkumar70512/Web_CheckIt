@@ -30,3 +30,10 @@ function exportTableCSV(filename) {
   downloadCSV(csv.join("\n"), filename);
   console.log("insie export tablecsb");
 }
+
+///////
+
+document.getElementById("click_loading").addEventListener("click", () => {
+  console.log("click btn is clicked");
+  document.getElementById("qr_animated").style.display = "block";
+});
