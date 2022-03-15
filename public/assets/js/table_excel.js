@@ -26,6 +26,7 @@ function exportTableCSV(filename) {
     csv.push(row.join(","));
   }
   // download csv file
+  console.log(csv);
   downloadCSV(csv.join("\n"), filename);
   console.log("insie export tablecsb");
 }
