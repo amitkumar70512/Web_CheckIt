@@ -51,7 +51,9 @@
     
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index"><img src="assets/img/logo.jpeg" alt="" class="img-fluid"></a> -->
-        <a href="home"> <img src="assets\img\animations\qr_one.gif" class="img-fluid" alt="qr animated" id="qr" ></a>
+        <a href="home"> <img src="assets\img\animations\qr_header.gif" class="img-fluid" alt="qr animated" id="qr" ></a>
+        
+
       </div>
 
       <nav id="navbar" class="navbar">
@@ -356,7 +358,7 @@
       <img src="assets\img\animations\qr_animated.gif" class="img-fluid" alt="qr animated" id="qr" >
     </div>
      
-  
+    
 
 </main>
     
@@ -385,6 +387,20 @@
   <script src="assets/js/table_excel.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
   <script src="https://kit.fontawesome.com/b51d5e4e6a.js" crossorigin="anonymous"></script>
+  
+  <script>
+    LottieInteractivity.create({
+      mode: 'scroll',
+      player: '#firstLottie',
+      actions: [
+          {
+            visibility: [0,1],
+            type: 'seek',
+            frames: [0, 150],
+          },
+        ],
+    });
+    </script>
   <script>
     var el = document.getElementById('closebtn');
   if(el){
