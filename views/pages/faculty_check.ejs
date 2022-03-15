@@ -112,7 +112,7 @@
    }
    #presentModal{
     position: absolute;
-    width: 70%;
+    
     padding:5px;
     overflow:auto;
     align-items: center;
@@ -205,18 +205,7 @@
     
       </section>
       
-        <div class="container">
-          <% if(typeof alert != 'undefined') { %>
-            <% alert.forEach(function(error) { %>
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <%= error.msg %>
-                    <button  type="submit" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    
-                    </button>
-                  </div>
-            <% }) %>
-        <% } %>
-        </div>
+        
     
    
     
@@ -299,12 +288,13 @@
                
               <%  }%>
           
-  
+              
               </table>
-        
+              
 
             </div>
             <div class="modal-footer">
+              <button type="button" class="btn btn-primary" onclick="exportTableCSV('checkit-attendance.csv')">Download</button>
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
           </div>
@@ -365,7 +355,8 @@
 
   <!--  Main JS File -->
   <script src="assets/js/main.js"></script>
-  <script src="assets/js/ajax_handlerjs"></script>
+  <script src="assets/js/ajax_handler.js"></script>
+  <script src="assets/js/table_excel.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
   <script src="https://kit.fontawesome.com/b51d5e4e6a.js" crossorigin="anonymous"></script>
   <script>
