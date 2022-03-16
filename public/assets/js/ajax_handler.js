@@ -1,4 +1,4 @@
-// handling faculty_check and admin_edit pages(loading feedback,students,cruds)
+// handling faculty_check, getting feedback from db, admin_edit pages(loading feedback,students,cruds)
 
 var spin = document.getElementById("cover-spin");
 var selectedValue;
