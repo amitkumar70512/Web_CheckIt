@@ -303,20 +303,23 @@
           animation: spin 0.8s linear infinite;
         }
 
-        .notify {
-          position: absolute;
-          top: 0;
-          right: 0;
-          margin: 10px 5px;
-          display: block;
-          width: 40%;
+        #notification {
+          display: none;
+          color: #fff;
+          background: #088b6ba8;
           text-align: center;
-          border: 2px solid rgba(42, 69, 185, 0.685);
-          background-color: rgba(19, 49, 184, 0.726);
-          box-shadow: 8px 6px rgba(154, 169, 218, 0.555);
-          color: white;
-          padding: 5px 10px;
-          font-family: Verdana, Geneva, Tahoma, sans-serif;
+          padding: 18px;
+          font-weight: 800;
+          animation: fadeOut 8s linear infinite;
+        }
+        #error-message {
+          display: none;
+          color: #fff;
+          background: #ed3e0da9;
+          text-align: center;
+          padding: 15px;
+          font-weight: 600;
+          animation: fadeOut 5s linear infinite;
         }
       </style>
       <!-- for ajax  -->
@@ -329,6 +332,7 @@
       <div class="container" data-aos="fade-up" date-aos-delay="400">
         <div id="notification" style="display: none"></div>
       </div>
+      <div id="error-message"></div>
       <div id="cover-spin"></div>
 
       <section class="features">
@@ -394,7 +398,7 @@
                   />
                 </div>
 
-                <div class="row">
+                
                   <div class="form-group col-md-2">
                     <label for="inputAddress">Start time</label>
                     <select id="start_time" class="form-control">
@@ -410,30 +414,28 @@
                       <option>145500</option>
                     </select>
                   </div>
-                </div>
 
-                <div class="form-group col-md-2">
-                  <label for="inputState">Day</label>
-                  <select id="day" class="form-control">
-                    <option selected>select day</option>
-                    <option>Monday</option>
-                    <option>Tuesday</option>
-                    <option>Wednesday</option>
-                    <option>Thursday</option>
-                    <option>Friday</option>
-                    <option>Saturday</option>
-                    <option>Sunday</option>
-                  </select>
-                </div>
+                  <div class="form-group col-md-2">
+                    <label for="inputState">Day</label>
+                    <select id="day" class="form-control">
+                      <option selected>select day</option>
+                      <option>Monday</option>
+                      <option>Tuesday</option>
+                      <option>Wednesday</option>
+                      <option>Thursday</option>
+                      <option>Friday</option>
+                      <option>Saturday</option>
+                      <option>Sunday</option>
+                    </select>
+                  </div>
 
-                <br />
+                  <div class="form-group col-md-2">
+                    <label for="inputClass">Class</label>
+                    <input type="text" class="form-control" id="class" />
+                  </div>
+                
                 <div class="form-group col-md-2">
-                  <label for="inputZip">Class</label>
-                  <input type="text" class="form-control" id="class" />
-                </div>
-
-                <div class="form-group col-md-2">
-                  <label for="inputZip">Section</label>
+                  <label for="inputSection">Section</label>
                   <input type="text" class="form-control" id="section" />
                 </div>
 
@@ -452,19 +454,30 @@
                     <option>(Tutorial class) 02:00 pm to 03:55 pm</option>
                   </select>
                 </div>
+              </div>
 
-                <button
-                  type="button"
-                  id="faculty-crud-btn"
-                  class="btn btn-primary"
-                >
-                  Proceed
-                </button>
+                <div class="col-md-4">
+                  <button
+                    type="button"
+                    id="faculty-crud-btn"
+                    class="btn btn-primary"
+                  >
+                    Proceed
+                  </button>
+                  <button
+                    type="button"
+                    id="close_faculty_crud"
+                    class="btn btn-warning"
+                  >
+                    Dismiss
+                  </button>
+                </div>
               </div>
             </form>
           </div>
         </div>
-
+      </section>
+      <section>
         <!-- collapse of students crud -->
 
         <div id="studentcrud" class="collapse" style="display: none">
@@ -592,17 +605,7 @@
           false
         );
       }
-      // if faculty-btn is pressed , show faculty crud
-      var fac = document.getElementById("faculty-btn");
-      if (fac) {
-        fac.addEventListener(
-          "click",
-          () => {
-            document.getElementById("facultycrud").style.display = "block";
-          },
-          false
-        );
-      }
+     
     </script>
   </body>
 </html>

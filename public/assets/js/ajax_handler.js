@@ -68,33 +68,48 @@ document.getElementById("faculty-crud-btn").addEventListener("click", () => {
     section: document.getElementById("section").value,
     timing: select3.options[select3.selectedIndex].value,
   };
-  console.log(data);
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 1) {
-      //opened
-      spin.style.display = "block";
-    } else if (this.readyState == 2) {
-      //header received
-    }
-    if (this.readyState == 3) {
-      //loading
-    }
-    if (this.readyState == 4 && this.status == 200) {
-      spin.style.display = "none";
-      document.getElementById("notification").style.display = "block";
-      document.getElementById("notification").innerHTML = this.responseText;
-      fade_notification();
-      document.getElementById("facultycrud").style.display = "none";
-    }
-  };
+  if (
+    data.uid == "" ||
+    data.s_time == "" ||
+    data.day == "" ||
+    data.class == "" ||
+    data.section == "" ||
+    data.timing == ""
+  ) {
+    document.getElementById("error-message").innerHTML =
+      "Please fill all the faculty information";
+    document.getElementById("error-message").style.display = "block";
 
-  xhttp.open(
-    "POST",
-    `addFaculty?uid=${data.uid}&s_time=${data.s_time}&day=${data.day}&class=${data.class}&section=${data.section}&timing=${data.timing}`,
-    true
-  );
-  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhttp.send();
+    fade_message("error-message");
+  } else {
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 1) {
+        //opened
+        spin.style.display = "block";
+      } else if (this.readyState == 2) {
+        //header received
+      }
+      if (this.readyState == 3) {
+        //loading
+      }
+      if (this.readyState == 4 && this.status == 200) {
+        spin.style.display = "none";
+        document.getElementById("notification").style.display = "block";
+        document.getElementById("notification").innerHTML = this.responseText;
+        // fade_notification();
+        fade_message("notification");
+        document.getElementById("facultycrud").style.display = "none";
+      }
+    };
+
+    xhttp.open(
+      "POST",
+      `addFaculty?uid=${data.uid}&s_time=${data.s_time}&day=${data.day}&class=${data.class}&section=${data.section}&timing=${data.timing}`,
+      true
+    );
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send();
+  } //endof else
 });
 
 // for student cruds
@@ -107,59 +122,77 @@ document.getElementById("student-crud-btn").addEventListener("click", () => {
     name: document.getElementById("name").value,
     email: document.getElementById("email").value,
   };
-  console.log(data.section);
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 1) {
-      //opened
-      spin.style.display = "block";
-    } else if (this.readyState == 2) {
-      //header received
-    }
-    if (this.readyState == 3) {
-      //loading
-    }
-    if (this.readyState == 4 && this.status == 200) {
-      spin.style.display = "none";
-      document.getElementById("notification").style.display = "block";
-      document.getElementById("notification").innerHTML = this.responseText;
+  if (
+    data.usn == "" ||
+    data.section == "" ||
+    data.name == "" ||
+    data.email == ""
+  ) {
+    document.getElementById("error-message").innerHTML =
+      "Please fill all the fields";
+    document.getElementById("error-message").style.display = "block";
+    console.log("inside if , student details not sufficient");
+    fade_message("error-message");
+  } else {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 1) {
+        //opened
+        spin.style.display = "block";
+      } else if (this.readyState == 2) {
+        //header received
+      }
+      if (this.readyState == 3) {
+        //loading
+      }
+      if (this.readyState == 4 && this.status == 200) {
+        spin.style.display = "none";
+        document.getElementById("notification").style.display = "block";
+        document.getElementById("notification").innerHTML = this.responseText;
+        fade_message("notification");
+      }
+    };
 
-      fade_notification();
-    }
-  };
-
-  xhttp.open(
-    "POST",
-    `addStudent?usn=${data.usn}&email=${data.email}&name=${data.name}&section=${data.section}`,
-    true
-  );
-  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhttp.send();
+    xhttp.open(
+      "POST",
+      `addStudent?usn=${data.usn}&email=${data.email}&name=${data.name}&section=${data.section}`,
+      true
+    );
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send();
+  } //endof else
 });
-
-function fade_notification() {
-  console.log("fade notification started");
-  setInterval(() => {
-    document.getElementById("notification").style.opacity = 0.8;
-  }, 2500);
-  setInterval(() => {
-    document.getElementById("notification").style.opacity = 0.6;
-  }, 5000);
-  setInterval(() => {
-    document.getElementById("notification").style.opacity = 0.4;
-  }, 7500);
-  setInterval(() => {
-    document.getElementById("notification").style.display = "none";
-  }, 10000);
-  console.log("fadeed");
-}
 
 // close btn on studetns crud modal ==display kar none for modal
 document.getElementById("close_student_crud").addEventListener("click", () => {
   document.getElementById("studentcrud").style.display = "none";
 });
 
-// |upar aala |  display block kari udd
+// close btn on faculty crud modal ==display kar none for modal
+document.getElementById("close_faculty_crud").addEventListener("click", () => {
+  document.getElementById("facultycrud").style.display = "none";
+});
+// |upar aala student |  display block kari udd
 document.getElementById("student-btn").addEventListener("click", () => {
   document.getElementById("studentcrud").style.display = "block";
+  document.getElementById("facultycrud").style.display = "none";
 });
+
+// if faculty-btn is pressed , show faculty crud
+var fac = document.getElementById("faculty-btn");
+if (fac) {
+  fac.addEventListener(
+    "click",
+    () => {
+      document.getElementById("studentcrud").style.display = "none";
+      document.getElementById("facultycrud").style.display = "block";
+    },
+    false
+  );
+}
+
+function fade_message(id) {
+  setInterval(() => {
+    document.getElementById(id).style.display = "none";
+  }, 4500);
+}

@@ -1105,9 +1105,7 @@ app.post("/addFaculty", (req, res) => {
       })
       .then(function () {
         console.log("Document successfully written!");
-        res.send(
-          `<div class="notify" "data-aos="fade-up" date-aos-delay="300"> <i class="fa-solid fa-face-grin"></i> Successfully inserted data of ${req.query.uid}</div>`
-        );
+        res.send(`Successfully inserted data of Faculty  ${req.query.uid}`);
       })
       .catch(function (error) {
         console.error("Error writing document: ", error);
@@ -1139,9 +1137,7 @@ app.post("/addStudent", (req, res) => {
     })
     .then(function () {
       console.log("Document successfully written!");
-      res.send(
-        `<div class="notify" "data-aos="fade-up" date-aos-delay="300"> <i class="fa-solid fa-face-grin"></i> Successfully inserted data of ${req.query.usn} </div>`
-      );
+      res.send(`Successfully inserted data of  ${rename}`);
     })
     .catch(function (error) {
       console.error("Error writing document: ", error);
