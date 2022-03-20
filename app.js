@@ -6,12 +6,16 @@ const qrcode = require("qrcode");
 
 const express = require("express");
 const port = process.env.PORT || 3000;
+var app = express();
+const http=require('http');
+const server= http.createServer(app);
 
+const {Server}=require("socket.io");
+const io=new Server(server);
 
 const bodyParser = require("body-parser");
 const { check, validationResult, checkSchema } = require("express-validator");
 
-const ejs = require("ejs");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
 // get config vars
@@ -20,10 +24,6 @@ process.env.TOKEN_SECRET;
 // for encryption
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
-
-let date_ob = new Date();
-
-var app = express();
 
 const { join } = require("path");
 const { start } = require("repl");
@@ -39,13 +39,14 @@ app.use(express.static("public"));
 app.set("view engine", "ejs");
 
 // To Run the server with Port Number
-app.listen(port, () =>
+server.listen(port, () =>
   console.log(`Express server is running at port no :${port}`)
 );
 
 //      for date
 
-let date, month, year, current_day, c_time; // global
+let date_ob = new Date();
+let  current_day, c_time; // global
 
 let c_day = date_ob.getDay();
 
@@ -56,7 +57,7 @@ function get_time() {
   ////
   utcMinute = (date_ob.getUTCMinutes() + 30) % 60;
   ///
-  let x = 0;
+  
   if (date_ob.getUTCMinutes() > 29) {
     utcHour = utcHour + 1;
   }
