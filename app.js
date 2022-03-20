@@ -7,10 +7,10 @@ const qrcode = require("qrcode");
 const express = require("express");
 const port = process.env.PORT || 3000;
 
-const path = require("path");
+
 const bodyParser = require("body-parser");
 const { check, validationResult, checkSchema } = require("express-validator");
-const { Console } = require("console");
+
 const ejs = require("ejs");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
