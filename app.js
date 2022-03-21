@@ -21,12 +21,12 @@ io.on('connection', function (socket) {
   var x=0;
   setInterval(function (){
     
-    if(collA[0]!=undefined)
+    if(collB[0]!=undefined)
     {
     
-    lensec = Object.keys(collA).length;
+    lensec = Object.keys(collB).length;
     
-    if(x<lensec){socket.emit('ServerEvent',collA[x]);}
+    if(x<lensec){socket.emit('ServerEvent',collB[x]);}
     x++;
 
     }
