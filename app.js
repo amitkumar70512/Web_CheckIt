@@ -334,7 +334,10 @@ function authenticateToken(req, res, next) {
           alert,
         });
       } // if error occurs
-      next();
+      else{
+        next();
+      }
+      
     });
   }
 }
