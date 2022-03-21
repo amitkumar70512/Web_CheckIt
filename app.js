@@ -23,11 +23,12 @@ io.on('connection', function (socket) {
     
     if(collA[0]!=undefined)
     {
-    console.log("server has started passing data ");
+    
     lensec = Object.keys(collA).length;
-    console.log(lensec)
+    
     if(x<lensec){socket.emit('ServerEvent',collA[x]);}
     x++;
+
     }
     else{
      
