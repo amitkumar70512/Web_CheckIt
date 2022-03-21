@@ -12,7 +12,37 @@ const server= http.createServer(app);
 
 const {Server}=require("socket.io");
 const io=new Server(server);
+io.on('connection', function (socket) {
+  console.log('connected:', socket.client.id);
 
+  socket.on('client_message', function (data) {
+      console.log('new message from client:', data);
+  })
+  var x=0;
+  setInterval(function (){
+    
+    if(collA[0]!=undefined)
+    {
+    console.log("server has started passing data ");
+    lensec = Object.keys(collA).length;
+    console.log(lensec)
+    if(x<lensec){socket.emit('ServerEvent',collA[x]);}
+    x++;
+    }
+    else{
+     
+    }
+
+  },5000);
+  
+  socket.on('disconnect', function() {
+    console.log('Client disconnected.');
+    });
+  });
+ 
+
+
+///
 const bodyParser = require("body-parser");
 const { check, validationResult, checkSchema } = require("express-validator");
 
@@ -90,9 +120,6 @@ var fname = "",
   uid = ""; // to be used in dynamic ejs
 var today = date_ob.toDateString();
 
-var collA = {};
-var collB = {};
-var collC = {};
 function checkStudent(res) {
   var c_section = rows[0].section;
   console.log(c_section);
@@ -856,12 +883,8 @@ app.post("/verify", (req, res) => {
 
                           /////
                           res.render("pages/admin_edit", {
-                            admin_name,
-                            lenfeed: 0,
-                            feeds: "",
-                            StudentsA: collA,
-                            StudentsB: collB,
-                            StudentsC: collC,
+                            admin_name
+                            
                           });
                         }); // end of 5C
                     }); // end of 5B
