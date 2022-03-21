@@ -487,8 +487,9 @@ async function updateCurrClass(uid, fname, res) {
             console.log("Error getting document", err);
           });
       } else {
+
         if (c_time < 0800 && c_time > 0001) {
-          console.log("inside else block");
+          console.log("inside else c_time < 0800 && c_time > 0001 block");
           rows[0].timing = "";
           scan_valid = 0;
           console.log(typeof classes[0]);
