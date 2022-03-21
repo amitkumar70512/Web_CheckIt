@@ -582,12 +582,12 @@ app.post("/login", function (req, res, next) {
             console.log("token is created");
             console.log(token);
 
-            res.cookie("jwt_authentication", token, {
+            res.cookie("ajwt_authentication", token, {
               maxAge: 15 * 24 * 60 * 60 * 1000,
               httpOnly: true,
             });
 
-            res.cookie("uid", uid, {
+            res.cookie("buid", uid, {
               maxAge: 15 * 24 * 60 * 60 * 1000,
               httpOnly: true,
             });
