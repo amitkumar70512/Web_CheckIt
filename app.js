@@ -520,9 +520,7 @@ async function updateCurrClass(uid, fname, res) {
         } catch (error) {
           const errors = [{ msg: " Failed!  server error.." }];
           const alert = errors;
-          res.render("pages/login", {
-            alert,
-          });
+         console.log(alert)
         }
       }
 
