@@ -475,8 +475,8 @@ async function updateCurrClass(uid, fname, res) {
                 current_time: c_time,
               });
             } catch (error) {
-              res.status(500).send(error);
-              const errors = [{ msg: error }];
+              
+              const errors = [{ msg: " Failed!  server error.." }];
               const alert = errors;
               res.render("pages/login", {
                 alert,
@@ -504,6 +504,7 @@ async function updateCurrClass(uid, fname, res) {
         } else {
           rows[0].timing = "04:00 pm   till 08:55 am  next day";
         }
+
         try {
           res.render("pages/faculty_welcome", {
             uid,
@@ -517,7 +518,7 @@ async function updateCurrClass(uid, fname, res) {
             current_time: c_time,
           });
         } catch (error) {
-          const errors = [{ msg: error }];
+          const errors = [{ msg: " Failed!  server error.." }];
           const alert = errors;
           res.render("pages/login", {
             alert,
