@@ -536,7 +536,10 @@ app.post("/login", function (req, res, next) {
   uid = String(req.body.uid);
   const password = String(req.body.passkey);
   uid = req.body.uid;
+  if(uid!='')
+  {
 
+  
   const firestore_con = admin.firestore();
   const writeResult = firestore_con
     .collection("faculty")
@@ -604,6 +607,8 @@ app.post("/login", function (req, res, next) {
         alert,
       });
     }); // end of catch
+
+  }
 });
 
 // for register.ejs
