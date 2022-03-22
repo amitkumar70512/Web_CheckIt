@@ -304,6 +304,16 @@ function generateAccessToken(username) {
 }
 function authenticateToken(req, res, next) {
   console.log("inside authentication token function");
+
+
+  var match = document.cookie.match(new RegExp('(^| )' + A_uid + '=([^;]+)'));
+  if (match) {
+    console.log(match[2]);
+  }
+  else{
+       console.log('--something went wrong---');
+  }
+  ///
   const token = req.headers.cookie;
   console.log(token);
   //// for reading uid
