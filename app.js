@@ -11,6 +11,7 @@ const http=require('http');
 const server= http.createServer(app);
 
 // handling sockets
+var presentList='';
 const {Server}=require("socket.io");
 const io=new Server(server);
 io.on('connection', function (socket) {
@@ -20,6 +21,7 @@ io.on('connection', function (socket) {
       console.log('new message from client:', data);
   })
   socket.on('client_attendance',function(data){
+    presentList+=data;
     console.log(data +' is present')
   })
   var x=0;
@@ -590,12 +592,12 @@ app.post("/login", function (req, res, next) {
             console.log("token is created");
             console.log(token);
 
-            res.cookie("tjwt_authentication", token, {
+            res.cookie("1jwt_authentication", token, {
               maxAge: 15 * 24 * 60 * 60 * 1000,
               httpOnly: true,
             });
 
-            res.cookie("tuid", uid, {
+            res.cookie("1uid", uid, {
               maxAge: 15 * 24 * 60 * 60 * 1000,
               httpOnly: true,
             });
