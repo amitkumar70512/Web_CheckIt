@@ -10,6 +10,7 @@ var app = express();
 const http=require('http');
 const server= http.createServer(app);
 
+// handling sockets
 const {Server}=require("socket.io");
 const io=new Server(server);
 io.on('connection', function (socket) {
@@ -17,6 +18,9 @@ io.on('connection', function (socket) {
 
   socket.on('client_message', function (data) {
       console.log('new message from client:', data);
+  })
+  socket.on('client_attendance',function(data){
+    console.log(data +' is present')
   })
   var x=0;
   setInterval(function (){
@@ -41,7 +45,7 @@ io.on('connection', function (socket) {
     });
   });
  
-
+/// end of sockets
 
 ///
 const bodyParser = require("body-parser");
