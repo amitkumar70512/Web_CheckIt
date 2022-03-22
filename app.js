@@ -310,21 +310,23 @@ function generateAccessToken(username) {
 }
 function authenticateToken(req, res, next) {
   console.log("inside authentication token function");
-
-
-  
   ///
   const token = req.headers.cookie;
   console.log(token);
-  //// for reading uid
-  const uidtoken = token && token.split("=")[3];
-  uid = uidtoken;
-  ////
+  
+  ////jwt authentication
   const first_token = token && token.split(";")[1];
   console.log(first_token);
   const finaltoken = first_token && first_token.split("=")[1];
   console.log("finaltokenis ::");
   console.log(finaltoken);
+// for reading uid
+  const uid_token = token && token.split(";")[2];
+  console.log(uid_token);
+  const final_uid = uid_token && uid_token.split("=")[2];
+  console.log("final uid is ::");
+  console.log(final_uid);
+  uid=final_uid
 
   if (finaltoken == null) {
     const errors = [{ msg: "Session Expired!" }];
