@@ -196,3 +196,17 @@ function fade_message(id) {
     document.getElementById(id).style.display = "none";
   }, 4500);
 }
+
+
+
+function getCookie()
+{
+  console.log('i am inside get cookie in ext js');
+  var match = document.cookie.match(new RegExp('(^| )' + A_uid + '=([^;]+)'));
+  if (match) {
+    console.log(match[2]);
+  }
+  else{
+       console.log('--something went wrong---');
+  }
+}
