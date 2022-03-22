@@ -323,7 +323,7 @@ function authenticateToken(req, res, next) {
 // for reading uid
   const uid_token = token && token.split(";")[2];
   console.log(uid_token);
-  const final_uid = uid_token && uid_token.split("=")[2];
+  const final_uid = uid_token && uid_token.split("=")[1];
   console.log("final uid is ::");
   console.log(final_uid);
   uid=final_uid
