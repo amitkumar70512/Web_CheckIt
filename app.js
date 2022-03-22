@@ -317,13 +317,13 @@ function authenticateToken(req, res, next) {
   ////jwt authentication
   const first_token = token && token.split(";")[1];
   console.log(first_token);
-  const finaltoken = first_token && first_token.split("=")[1];
+  const finaltoken = first_token && first_token.split("=")[1];/// here splitting taking place 1authentication= #h;lhahfa...     ( token will be extracted to final_token )
   console.log("finaltokenis ::");
   console.log(finaltoken);
 // for reading uid
   const uid_token = token && token.split(";")[2];
   console.log(uid_token);
-  const final_uid = uid_token && uid_token.split("=")[1];
+  const final_uid = uid_token && uid_token.split("=")[1]; /// here splitting taking place 1uid= 1bm190000     ( 1bm19000 will be extracted to final_uid )
   console.log("final uid is ::");
   console.log(final_uid);
   uid=final_uid
