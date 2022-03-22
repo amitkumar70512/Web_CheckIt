@@ -317,10 +317,10 @@ function authenticateToken(req, res, next) {
   const token = req.headers.cookie;
   console.log(token);
   //// for reading uid
-  const uidtoken = token && token.split("=")[2];
+  const uidtoken = token && token.split("=")[3];
   uid = uidtoken;
   ////
-  const first_token = token && token.split(";")[0];
+  const first_token = token && token.split(";")[1];
   console.log(first_token);
   const finaltoken = first_token && first_token.split("=")[1];
   console.log("finaltokenis ::");
