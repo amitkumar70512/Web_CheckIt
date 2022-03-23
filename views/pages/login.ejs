@@ -61,7 +61,7 @@
             background-color: rgb(255, 253, 250);
             opacity:1;
             cursor: pointer;
-            border-left: 4px solid green;
+            border-left: 4px solid rgb(0, 150, 219);
             border-radius: 4px;
             max-width: 40%;
             max-height: 15%;
@@ -97,7 +97,7 @@
             
         }
         #toast_login span{
-            color:rgb(24, 134, 30);
+            color:rgb(12, 160, 31);
             font-size: 20px;
             display: flex;
             justify-content: space-around;
@@ -155,9 +155,10 @@
 
       </div>
     </section><!-- End Contact Section -->
+
+       <!-- toast  -->
     <% if(typeof toast_message!= 'undefined') { %>
-    <div id="toast_login">
-      <i class="fa-solid fa-check-to-slot"></i><span ><%= toast_message.header %> </span>
+    <div id="toast_login"><span ><i class="fa-solid fa-check-to-slot"></i>  <%= toast_message.header %> </span>
       <message_body> 
          <%= toast_message.body %> 
       </message_body>
