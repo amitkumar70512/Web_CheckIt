@@ -67,8 +67,10 @@
        FB.login(function(response) {
       if (response.status === 'connected') {
         // Logged into your webpage and Facebook.
+        console.log("user is logged in fb")
       } else {
         // The person is not logged into your webpage or we are unable to tell. 
+        console.log("The person is not logged into your webpage or we are unable to tell. ")
       }
     });
 
@@ -228,10 +230,6 @@
                 <i class="fab fa-twitter me-2"></i>Continue with Twitter</a>
               <div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>
 
-              <fb:login-button 
-              scope="public_profile,email"
-              onlogin="checkLoginState();">
-              </fb:login-button>
 
             </form>
           </div>
