@@ -57,7 +57,7 @@
             flex-direction: column;
             position: absolute;
             top:10%;
-            left:50%;
+            left:40%;
             background-color: rgb(255, 253, 250);
             opacity:1;
             cursor: pointer;
@@ -98,17 +98,16 @@
         }
         #toast_login span{
             color:rgb(24, 134, 30);
-            font-size: 18px;
+            font-size: 20px;
             display: flex;
             justify-content: space-around;
         }
         #toast_login message_body{
-            
             margin-top: 20px;
-            
-            padding:4px 20px;
+            padding:5px 20px;
             text-align: left;
-            color:rgb(95, 84, 84);
+            font-size: 18px;
+            color:rgb(0, 121, 151);
             overflow-x: hidden;
             overflow-y: auto;
         }
@@ -158,7 +157,7 @@
     </section><!-- End Contact Section -->
     <% if(typeof toast_message!= 'undefined') { %>
     <div id="toast_login">
-      <span ><%= toast_message.header %> </span>
+      <i class="fa-solid fa-check-to-slot"></i><span ><%= toast_message.header %> </span>
       <message_body> 
          <%= toast_message.body %> 
       </message_body>
@@ -252,7 +251,10 @@
     setInterval(() => {
       document.getElementById("toast_login").addEventListener('click',fade_message('toast_login'));
     }, 3000);   
-  
+    document.getElementById('main').addEventListener('click',close_toast);
+    function close_toast(){
+      document.getElementById("toast_login").style.display='none';
+    }
     
     function fade_message(id) {
     document.getElementById("toast_login").style.animation='fadeOut 6s linear infinite';
