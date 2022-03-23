@@ -678,7 +678,10 @@ app.post(
         })
         .then(function () {
           console.log("Document successfully written!");
-          res.render("pages/login");
+          const toast_message=[{header:`Welcome ${req.body.name}`},{body:"You have been Registered on CHECKIT"}];
+          res.render("pages/login",{
+            toast_message,
+          });
         })
         .catch(function (error) {
           console.error("Error writing document: ", error);

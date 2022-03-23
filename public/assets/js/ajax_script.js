@@ -72,10 +72,9 @@ function sendFeedback() {
 } // endof sendfeedback fun
 
 function fade_message(id) {
-  console.log("inside fade message " + id);
 
   setInterval(() => {
     document.getElementById(id).style.display = "none";
   }, 4500);
-  console.log("fadeed");
+ 
 }

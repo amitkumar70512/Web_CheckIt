@@ -28,10 +28,10 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
- 
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://kit.fontawesome.com/b51d5e4e6a.js" crossorigin="anonymous"></script>
   <!--Start of Tawk.to Script-->
 <script type="text/javascript">
   var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
@@ -51,40 +51,69 @@
 <body>
 
  <style>
-   #cover-spin {
-    position:fixed;
-    width:100%;
-    left:0;right:0;top:0;bottom:0;
-    background-color: rgba(255,255,255,0.7);
-    z-index:9999;
-    display:none;
-}
-
-@-webkit-keyframes spin {
-	from {-webkit-transform:rotate(0deg);}
-	to {-webkit-transform:rotate(360deg);}
-}
-
-@keyframes spin {
-	from {transform:rotate(0deg);}
-	to {transform:rotate(360deg);}
-}
-
-#cover-spin::after {
-    content:'';
-    display:block;
-    position:absolute;
-    left:48%;top:40%;
-    width:40px;height:40px;
-    border-style:solid;
-    border-color:rgb(15, 79, 138);
-    border-top-color:transparent;
-    border-width: 4px;
-    border-radius:50%;
-    -webkit-animation: spin .8s linear infinite;
-    animation: spin .8s linear infinite;
-}
-
+  
+      #toast_login{
+            display:flex;
+            flex-direction: column;
+            position: absolute;
+            top:10%;
+            left:50%;
+            background-color: rgb(255, 253, 250);
+            opacity:1;
+            cursor: pointer;
+            border-left: 4px solid green;
+            border-radius: 4px;
+            max-width: 40%;
+            max-height: 15%;
+            animation-name: toast_logindisplay;
+            overflow: hidden;
+            animation-duration: 2s;
+            animation-timing-function: ease-in-out;
+     
+            box-shadow: 3px 3px 5px black;
+            -webkit-box-shadow: -19px 3px 31px -11px rgba(181,181,181,1);
+            -moz-box-shadow: -19px 3px 31px -11px rgba(181,181,181,1);
+            box-shadow: -19px 3px 31px -11px rgba(181,181,181,1);
+        }
+        @media screen and (max-width: 700px) {
+        #toast_login{
+          width: 100%;
+          
+        }
+      }
+        @keyframes toast_logindisplay {
+            0%{
+              transform: translateY(-200px);
+            }
+            50%{
+              transform: translateY(100px);
+            }
+            100%{
+              transform: translateY(0px);
+            }
+        }
+        #toast_login:hover{
+            opacity: 0.9;
+            
+        }
+        #toast_login span{
+            color:rgb(24, 134, 30);
+            font-size: 18px;
+            display: flex;
+            justify-content: space-around;
+        }
+        #toast_login message_body{
+            
+            margin-top: 20px;
+            
+            padding:4px 20px;
+            text-align: left;
+            color:rgb(95, 84, 84);
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        
+    
 
  </style>
   <!-- ======= Header ======= -->
@@ -127,10 +156,16 @@
 
       </div>
     </section><!-- End Contact Section -->
- 
-    
-   
+    <% if(typeof toast_message!= 'undefined') { %>
+    <div id="toast_login">
+      <span ><%= toast_message.header %> </span>
+      <message_body> 
+         <%= toast_message.body %> 
+      </message_body>
+  </div>
+  <% } %>
   
+
     <section class="contact " data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
       <div class="container py-5 h-100">
         <div class="row d-flex align-items-center justify-content-center h-100">
@@ -212,7 +247,19 @@
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
   <script src="assets/js/ajax_handler.js"></script>
-
+  <script>
+    
+    setInterval(() => {
+      document.getElementById("toast_login").addEventListener('click',fade_message('toast_login'));
+    }, 3000);   
+  
+    
+    function fade_message(id) {
+    document.getElementById("toast_login").style.animation='fadeOut 6s linear infinite';
+        setInterval(() => {
+      document.getElementById(id).style.display = "none";
+    }, 4500);   }
+  </script>
 </body>
 
 </html>
