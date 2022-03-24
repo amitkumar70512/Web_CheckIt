@@ -294,8 +294,8 @@ app.get("/contact", function (req, res) {
 
 app.get("/logout", authenticateToken, async (req, res) => {
   try {
-    res.clearCookie("jwt_authentication");
-    res.clearCookie("uid");
+    res.clearCookie("1jwt_authentication");
+    res.clearCookie("1uid");
     console.log("logout successfully");
     res.render("pages/register");
   } catch (error) {
