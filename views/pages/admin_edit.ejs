@@ -66,6 +66,8 @@
       s0.parentNode.insertBefore(s1,s0);
       })();
       </script>
+      <script src="/socket.io/socket.io.js"></script>
+      
   </head>
   <body>
     <!-- ======= Header ======= -->
@@ -82,6 +84,7 @@
         <nav id="navbar" class="navbar">
           <ul>
             <li><a class="" href="admin">Home</a></li>
+                           
           </ul>
         </nav>
         <!-- .navbar -->
@@ -108,6 +111,7 @@
                 >
               </li>
               <li>Administrator</li>
+              <li><button id="clickme" type="button">click me</button></li>
             </ol>
           </div>
         </div>
@@ -333,6 +337,7 @@
           animation: fadeOut 5s linear infinite;
         }
       </style>
+      
       <!-- for ajax  -->
       <div class="container" data-aos="fade-left" date-aos-delay="300">
         <div id="ajaxLoad"></div>
@@ -576,6 +581,16 @@
           </div>
         </div>
       </section>
+
+
+      <!-- for toast  -->
+      <div id="toast">
+        <span >message  header</span>
+        <div id="close-toast"><i  class="fa-solid fa-xmark"></i></div>
+        
+        
+        <message_body> message body Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus iure optio molestias. Iure eligendi, ex voluptatibus autem vitae odio veritatis eos quia ea neque repudiandae accusantium temporibus dicta vel ipsum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod beatae, ducimus omnis ipsa alias est dolor pariatur quidem quam neque nemo fugiat laborum magni dignissimit fugiat animi!</message_body>
+    </div>
     </main>
 
     <!-- ======= Footer ======= -->
@@ -602,7 +617,7 @@
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/ajax_handler.js"></script>
-
+    <script src="assets/js/toast_handler.js"></script>
     <script>
       var el = document.getElementById("closebtn");
       if (el) {
@@ -616,6 +631,25 @@
           false
         );
       }
+
+       //
+       var socket = io.connect();
+        socket.emit('admin_connection',"connection is made");
+     
+        socket.on('checkit_message',(data)=>{
+          console.log(data);
+        })
+       document.getElementById('clickme').addEventListener('click',()=>{
+          socket.emit('get',"amit");
+         
+        })
+
+        socket.on('send',(data)=>{
+          document.getElementById('toast').innerHTML=`  <span >${data.header}</span>
+        <div id="close-toast"><i  class="fa-solid fa-xmark"></i></div>
+        <message_body>${data.message}</message_body>`;
+        })
+
      
     </script>
   </body>

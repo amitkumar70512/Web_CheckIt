@@ -2032,13 +2032,14 @@ to {transform:rotate(360deg);}
 #toast span{
     color:rgb(24, 134, 30);
     font-size: 18px;
+    padding:5px 10px;
     display: flex;
     justify-content: space-around;
 }
 #toast message_body{
-    
+    margin:15px;
     margin-top: 20px;
-    
+    margin-bottom: 5px;
     padding:4px;
     text-align: left;
     color:rgb(95, 84, 84);
@@ -2049,6 +2050,7 @@ to {transform:rotate(360deg);}
 #toast i{
     position: absolute;
     top:10px;
+    margin-right: 5px;
     right:10px;
     color:rgb(255, 0, 34);
     font-size: 20px; 

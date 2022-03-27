@@ -17,33 +17,20 @@ const io=new Server(server);
 io.on('connection', function (socket) {
   console.log('connected:', socket.client.id);
 
-  socket.on('client_message', function (data) {
-      console.log('new message from client:', data);
-  })
-  socket.on('client_attendance',function(data){
-    presentList+=data;
-    console.log(data +' is present')
-  })
-  var x=0;
-  setInterval(function (){
-    
-    if(collB[0]!=undefined)
-    {
-    
-    lensec = Object.keys(collB).length;
-    
-    if(x<lensec){socket.emit('ServerEvent',collB[x]);}
-    x++;
-
-    }
-    else{
-     
-    }
-
-  },5000);
+  socket.on('client_attendance',function(obj){// if user scan qr using mob
   
+    socket.broadcast.emit('checkit_message',obj.usn);//message to admin_edit
+    console.log("present list "+obj.usn);
+  })
+  socket.on('admin_connection',(data)=>{
+    console.log(data);
+  })
+  socket.on('get',(data)=>{
+    const student={header:'usn',message:'usn is present'};
+    socket.emit('send',student);
+  })
   socket.on('disconnect', function() {
-    console.log('Client disconnected.');
+    console.log('Client disconnected.'+socket.client.id);
     });
   });
  
