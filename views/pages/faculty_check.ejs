@@ -36,6 +36,7 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
   <link href="assets/vendor/admin_welcome.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
   <script type="text/javascript">
     var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
     (function(){
@@ -66,28 +67,16 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a  href="home">Home</a></li>
-        
-          
           <li><a href="contact">Contact</a></li>
-          
-
-               
-            </ul>
-          </li>
-
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-
-
     </div>
   </header><!-- End Header -->
    <style>
      .prog{
        padding:20px;
      }
-     
-
      .far.fa-user-circle:hover {  
         transform: rotate(180deg);
     }
@@ -187,32 +176,15 @@
                 
                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#presentModal" style="margin:3px;">Present</button>
                 
-                  <div class="input-group">
-                    <div class="form-outline">
-                      <input type="search" id="form1" class="form-control" />
-                      <label class="form-label" for="form1">Search</label>
-                    </div>
-                    <button type="button"  id="search" class="btn btn-primary">
-                      <i class="fas fa-search"></i>
-                    </button>
-                  </div>
-                
+                 
               </div>
           </div>
       </section>
       
+    
+    
+    
 
-      
-        
-    
-      <div id="toast">
-        <span >message  header</span>
-        <div id="close-toast"><i  class="fa-solid fa-xmark"></i></div>
-        
-        
-        <message_body> message body Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus iure optio molestias. Iure eligendi, ex voluptatibus autem vitae odio veritatis eos quia ea neque repudiandae accusantium temporibus dicta vel ipsum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod beatae, ducimus omnis ipsa alias est dolor pariatur quidem quam neque nemo fugiat laborum magni dignissimos accusamus provident placeat quisquam deserunt. Magni impedit fugiat animi!</message_body>
-    </div>
-    
       <!-- Modal for present students -->
       <div id="presentModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -264,9 +236,7 @@
               <%  }%>
           
                   
-
-
-                
+     
               <% for (var i =0; i <=countA;  i++ ) { %>
       
                 <% if(typeof StudentsA[i] != 'undefined') { %>
@@ -297,7 +267,6 @@
               
               </table>
               
-
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-primary" onclick="exportTableCSV('checkit-attendance.csv')">Download</button>
@@ -312,7 +281,6 @@
         <!-- Modal -->
         <div id="myModal" class="modal fade" role="dialog">
           <div class="modal-dialog">
-      
             <!-- Modal content-->
             <div class="modal-content">
               <div class="modal-header">
@@ -342,12 +310,6 @@
    </div>
 
 </main>
-    
-  
-
-  
-   
-
    <%- include('../partials/footer') %> 
    
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

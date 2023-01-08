@@ -68,25 +68,13 @@ server.listen(port, () =>
 );
 
 //      for date
-
 let date_ob = new Date();
 let  current_day, c_time; // global
 
 let c_day = date_ob.getDay();
 
 function get_time() {
-  let ts = Date.now();
-  let date_ob = new Date(ts);
-  utcHour = (date_ob.getUTCHours() + 5) % 24;
-  ////
-  utcMinute = (date_ob.getUTCMinutes() + 30) % 60;
-  ///
-  
-  if (date_ob.getUTCMinutes() > 29) {
-    utcHour = utcHour + 1;
-  }
-  ///
-
+ 
   const weekday = [
     "Sunday",
     "Monday",
@@ -99,11 +87,20 @@ function get_time() {
   const d = new Date();
   current_day = weekday[d.getUTCDay()];
 
-  let c_hour = String(utcHour < 10 ? "0" : "") + utcHour;
-  let c_minutes = String(utcMinute < 10 ? "0" : "") + utcMinute;
-  c_time = c_hour + "" + c_minutes;
+ 
+  let date = new Date()
+  let hours = date.getHours();
+  hours = String(hours < 10 ? "0" : "") + hours;
+  let min = date.getMinutes();
+  min = String(min < 10 ? "0" : "") + min;
+
+  c_time = hours+ "" + min;
   console.log("printing time :" + c_time);
   ////
+
+ 
+console.log("UTC time " + date.getHours())
+
 }
 
 var classes = [];
@@ -307,6 +304,7 @@ function authenticateToken(req, res, next) {
   const finaltoken = first_token && first_token.split("=")[1];/// here splitting taking place 1authentication= #h;lhahfa...     ( token will be extracted to final_token )
   console.log("finaltokenis ::");
   console.log(finaltoken);
+
 // for reading uid
   const uid_token = token && token.split(";")[2];
   console.log(uid_token);
@@ -314,7 +312,7 @@ function authenticateToken(req, res, next) {
   console.log("final uid is ::");
   console.log(final_uid);
   uid=final_uid
-
+  console.log(uid);
   if (finaltoken == null) {
     const errors = [{ msg: "Session Expired!" }];
     const alert = errors;
@@ -322,22 +320,43 @@ function authenticateToken(req, res, next) {
       alert,
     });
   } else {
-    jwt.verify(finaltoken, process.env.TOKEN_SECRET, (err, user) => {
-      console.log("token matched");
 
-      if (err) {
-        console.log("an error has occurred");
-        const errors = [{ msg: "Session Expired!" }];
-        const alert = errors;
-        res.render("pages/login", {
-          alert,
-        });
-      } // if error occurs
-      else{
-        next();
-      }
+    try {
       
+
+      const verified = jwt.verify(finaltoken, process.env.TOKEN_SECRET);
+      if(verified){
+        next();
+      }else{
+          // Access Denied
+          return res.status(401).send(error);
+      }
+  } catch (error) {
+    console.log("an error has occurred"+error);
+     const errors = [{ msg: error }];
+    const alert = errors;
+    res.render("pages/login", {
+    alert,
     });
+  }
+
+    // jwt.verify(finaltoken, process.env.TOKEN_SECRET, (err, user) => {
+    //   console.log("token matched");
+
+    //   if (err) {
+    //     console.log("an error has occurred"+err);
+    //     const errors = [{ msg: err }];
+    //     const alert = errors;
+    //     res.render("pages/login", {
+    //       alert,
+    //     });
+    //   } 
+    //   else{
+    //     next();
+    //   }
+
+    // });
+
   }
 }
 
@@ -406,9 +425,20 @@ async function updateCurrClass(uid, fname, res) {
     start_time = "02:55 pm";
     s_time = "145500";
     end_time = "03:50 pm";
-  } else {
+  } 
+  else if (c_time > 1550 && c_time < 1645) {
+    start_time = "03:50 pm";
+    s_time = "155000";
+    end_time = "04:45 pm";
+  }
+  else if (c_time > 1645 && c_time < 1730) {
+    start_time = "04:45 pm pm";
+    s_time = "164500";
+    end_time = "05:30 pm";
+  }
+  else {
     s_time = "160000";
-    scan_valid = 0;
+    scan_valid = 1;
     (rows[0].timing = "04:00 pm to 08:55 am"),
       (rows[0].class = "classes are finished...");
   }
@@ -441,7 +471,7 @@ async function updateCurrClass(uid, fname, res) {
         rows[0].timing = "NO CLASSES TODAY";
         rows[0].class = "";
       }
-      if (c_time < 1600 && c_time > 0800 && c_day != 0) {
+      if (c_time < 1800 && c_time > 0800 && c_day != 0) {
         firestore_con
           .collection("faculty")
           .doc(uid)
@@ -614,10 +644,10 @@ app.post("/login", function (req, res, next) {
 app.post(
   "/register",
   [
-    check("name", "Please enter valid username without space..")
+    check("name", "Please enter valid username ")
       .exists()
       .isLength({ min: 3 })
-      .matches(/^[a-zA-Z]+(\s[a-zA-Z]+)?$/),
+      .matches(/^[a-zA-Z ]*$/),
     check("email", "Please provide valid email")
       .isEmail()
 
@@ -660,7 +690,6 @@ app.post(
         .set({
           name: req.body.name,
           email: req.body.email,
-
           password: encryptkey,
         })
         .then(function () {
@@ -1032,7 +1061,7 @@ function incrementClass(sec, sub) {
 app.post("/scan", (req, res, next) => {
   console.log(c_time);
   console.log("in /scan post method qr ");
-  deletekey();
+  
   if (c_time > 1730 || current_day == "Sunday" || scan_valid == 0) {
     console.log("no class so no qr");
     checkStudent(res);
@@ -1073,6 +1102,7 @@ app.post("/scan", (req, res, next) => {
         console.log("QR key successfully written!");
 
         incrementClass(currentsection, currentclass);
+        
       })
 
       .catch(function (error) {
@@ -1086,6 +1116,8 @@ app.post("/scan", (req, res, next) => {
       res.render("pages/scan", {
         qr_code: src,
       });
+      
+      setTimeout(deletekey, 10000);
     });
   }
 });
@@ -1230,6 +1262,6 @@ app.get("/", authenticateToken, function (req, res) {
   updateCurrClass(uid, fname, res);
 });
 
-app.get("/:id", authenticateToken, function (req, res) {
+app.get("/:id",  function (req, res) {
   res.render(`pages/${req.params.id}`);
 });
