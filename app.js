@@ -74,7 +74,15 @@ let  current_day, c_time; // global
 let c_day = date_ob.getDay();
 
 function get_time() {
- 
+ let ts = Date.now();
+ let date_ob = new Date(ts);
+ utcHour = (date_ob.getUTCHours() + 5) % 24;
+ utcMinute = (date_ob.getUTCMinutes() + 30) % 60;
+
+ if(date_ob.getUTCMinutes() > 29){
+  utcHour = utcHour + 1;
+ }
+
   const weekday = [
     "Sunday",
     "Monday",
@@ -87,14 +95,11 @@ function get_time() {
   const d = new Date();
   current_day = weekday[d.getUTCDay()];
 
- 
-  let date = new Date()
-  let hours = date.getHours();
-  hours = String(hours < 10 ? "0" : "") + hours;
-  let min = date.getMinutes();
-  min = String(min < 10 ? "0" : "") + min;
+  let c_hours = String(utcHour < 10 ? "0" : "") + utcHour;
+  
+  let c_minutes = String(utcMinute < 10 ? "0" : "") + utcMinute;
 
-  c_time = hours+ "" + min;
+  c_time = c_hours+ "" + c_minutes;
   console.log("printing time :" + c_time);
   ////
 
