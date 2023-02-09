@@ -1,5 +1,7 @@
-# Web_Site_CheckIt
-an Automatic Attendance checking system,CHECKIT , two way presence checking of a individual using qr scanner nd  bio-metrics( fingerprint,faceid)....
-<hr>
-url:
-https://checkit-bmsce.herokuapp.com/
+# [CHECKIT](https://checkit-bmsce.azurewebsites.net)
+an Automatic Attendance checking system
+<br>
+<i>CHECKIT , attendance taking system proposed using QR  and Bio-metrics( fingerprint,faceid)
+
+
+
